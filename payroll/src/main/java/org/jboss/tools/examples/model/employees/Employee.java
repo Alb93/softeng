@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="employees")
 public class Employee {
-	
+	//com è dura la vita
 	protected String name;
 	protected String surname;
 
