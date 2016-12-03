@@ -36,23 +36,23 @@
                 model class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newMember.name}" />
+                <h:inputText id="name" value="#{employee.name}" />
                 <h:message for="name" errorClass="invalid" />
 
                 <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{newMember.email}" />
+                <h:inputText id="email" value="#{employee.name}" />
                 <h:message for="email" errorClass="invalid" />
 
                 <h:outputLabel for="phoneNumber" value="Phone #:" />
                 <h:inputText id="phoneNumber"
-                    value="#{newMember.phoneNumber}" />
+                    value="#{employee.name}" />
                 <h:message for="phoneNumber" errorClass="invalid" />
             </h:panelGrid>
 
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{memberController.register}"
+                        action="#{payrollController.register}"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
@@ -64,7 +64,7 @@
         <h:panelGroup rendered="#{empty members}">
             <em>No registered members.</em>
         </h:panelGroup>
-        <h:dataTable var="_member" value="#{members}"
+     <!--    <h:dataTable var="_member" value="#{members}"
             rendered="#{not empty members}"
             styleClass="simpletablestyle">
             <h:column>
@@ -92,6 +92,6 @@
             REST URL for all members: <a
                     href="#{request.contextPath}/rest/members">/rest/members</a>
             </f:facet>
-        </h:dataTable>
+        </h:dataTable> -->
     </ui:define>
 </ui:composition>

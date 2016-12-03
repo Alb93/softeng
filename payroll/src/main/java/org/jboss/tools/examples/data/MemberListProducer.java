@@ -50,6 +50,6 @@ public class MemberListProducer {
 
     @PostConstruct
     public void retrieveAllMembersOrderedByName() {
-        members = memberRepository.findAllOrderedByName();
+        //members = memberRepository.findAllOrderedByName();
     }
 }

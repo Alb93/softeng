@@ -2,8 +2,10 @@ package org.jboss.tools.examples.model.employees;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="employees")
 public class Employee {
 	
 	protected String name;
