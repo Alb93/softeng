@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee {
-	
+	//com è dura la vita
 	protected String name;
 	protected String surname;
 
