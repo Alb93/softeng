@@ -78,6 +78,21 @@ public class PayrollController {
             System.err.println(errorMessage);
         }
     }
+    
+    public void registerUsernameAndPassword() throws Exception {
+        try {
+        	memberRegistration.setUsernameAndPassword(d_employee);
+          //  FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
+         //   facesContext.addMessage(null, m);
+            initNewMember();
+        } catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
+            facesContext.addMessage(null, m);
+            System.err.println(errorMessage);
+        }
+    }
 
     private String getRootErrorMessage(Exception e) {
         // Default to general error message that registration failed.

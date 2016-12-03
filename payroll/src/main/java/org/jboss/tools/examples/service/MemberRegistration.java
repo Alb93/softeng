@@ -44,4 +44,8 @@ public class MemberRegistration {
         em.persist(employee);
   //      memberEventSrc.fire(employee);
     }
+    
+    public void setUsernameAndPassword(Employee employee) throws Exception{
+    	
+    }
 }
