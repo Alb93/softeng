@@ -3,6 +3,9 @@ package org.jboss.tools.examples.model.employees;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
+@Entity
+@Table(name="employees")
 public class DailyEmployee extends Employee {
 	
 	private float hourlyRate;

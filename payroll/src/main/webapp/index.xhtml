@@ -36,17 +36,35 @@
                 model class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{employee.name}" />
+                <h:inputText id="name" value="#{d_employee.name}" />
                 <h:message for="name" errorClass="invalid" />
 
-                <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{employee.name}" />
-                <h:message for="email" errorClass="invalid" />
+                <h:outputLabel for="surname" value="Surname:" />
+                <h:inputText id="surname" value="#{d_employee.surname}" />
+                <h:message for="surname" errorClass="invalid" />
+                
+                 <h:outputLabel for="paymentMethod" value="Payment method:" />
+                <h:inputText id="paymentMethod"
+                    value="#{d_employee.paymentMethod}" />
+                <h:message for="paymentMethod" errorClass="paymentMethod" />
+                
+                 <h:outputLabel for="hourlyRate" value="Hourly rate:" />
+                <h:inputText id="hourlyRate"
+                    value="#{d_employee.hourlyRate}" />
+                <h:message for="password" errorClass="password" />
+                
 
-                <h:outputLabel for="phoneNumber" value="Phone #:" />
-                <h:inputText id="phoneNumber"
-                    value="#{employee.name}" />
-                <h:message for="phoneNumber" errorClass="invalid" />
+               <!--  <h:outputLabel for="username" value="Username:" />
+                <h:inputText id="username"
+                    value="#{d_employee.username}" />
+                <h:message for="username" errorClass="invalid" />
+                
+                 <h:outputLabel for="password" value="Password:" />
+                <h:inputText id="password"
+                    value="#{d_employee.password}" />
+                <h:message for="password" errorClass="password" /> -->
+                
+                
             </h:panelGrid>
 
             <p>
@@ -60,10 +78,10 @@
                 </h:panelGrid>
             </p>
         </h:form>
-        <h2>Members</h2>
+       <!--  <h2>Members</h2>
         <h:panelGroup rendered="#{empty members}">
             <em>No registered members.</em>
-        </h:panelGroup>
+        </h:panelGroup> -->
      <!--    <h:dataTable var="_member" value="#{members}"
             rendered="#{not empty members}"
             styleClass="simpletablestyle">

@@ -24,7 +24,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
+import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.tools.examples.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -42,17 +44,29 @@ public class PayrollController {
     
     @Produces
     @Named
-    private Employee employee;
+    private MonthlyEmployeeWithSales m_employee;
+    
+    @Produces
+    @Named
+    private DailyEmployee d_employee;
+    
+    
     
    
     @PostConstruct
     public void initNewMember() {
-    	employee = new Employee();
+    	m_employee = new MonthlyEmployeeWithSales();
+    	d_employee = new DailyEmployee();
+    	
     }
 
     public void register() throws Exception {
         try {
-            memberRegistration.register(employee);
+        	if(m_employee.getUsername()!=null && m_employee.getUsername().length()!=0) {
+                memberRegistration.register(m_employee);
+        	}else{
+                memberRegistration.register(d_employee);
+        	}
           //  FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
          //   facesContext.addMessage(null, m);
             initNewMember();
