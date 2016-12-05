@@ -16,6 +16,8 @@
  */
 package org.jboss.tools.examples.controller;
 
+import java.math.BigInteger;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
@@ -27,6 +29,7 @@ import javax.inject.Named;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.tools.examples.service.LoggerManager;
 import org.jboss.tools.examples.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -38,6 +41,9 @@ public class PayrollController {
 
     @Inject
     private MemberRegistration memberRegistration;
+    
+    @Inject
+    private LoggerManager loggerManager;
 
     @Inject
     private FacesContext facesContext;
@@ -60,37 +66,43 @@ public class PayrollController {
     	
     }
 
-    public void register() throws Exception {
+    public String login() throws Exception {
         try {
-        	if(m_employee.getUsername()!=null && m_employee.getUsername().length()!=0) {
-                memberRegistration.register(m_employee);
-        	}else{
-                memberRegistration.register(d_employee);
-        	}
+        	String usn = d_employee.getUsername();
+        	String psw = d_employee.getPassword();
+        	
           //  FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
          //   facesContext.addMessage(null, m);
-            initNewMember();
+        	initNewMember();
+        	return loggerManager.checkLogin(usn, psw);
+            
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
             facesContext.addMessage(null, m);
             System.err.println(errorMessage);
+            return "";
         }
     }
     
-    public void registerUsernameAndPassword() throws Exception {
+    public String registerUsernameAndPassword() throws Exception {
         try {
-        	memberRegistration.setUsernameAndPassword();
+        	long id = d_employee.getId();
+        	String usn = d_employee.getUsername();
+        	String pwd = d_employee.getPassword();
+        	initNewMember();
+        	return memberRegistration.setUsernameAndPassword(id, usn, pwd);
           //  FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
          //   facesContext.addMessage(null, m);
-            initNewMember();
+            
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
             facesContext.addMessage(null, m);
             System.err.println(errorMessage);
+            return "";
         }
     }
 

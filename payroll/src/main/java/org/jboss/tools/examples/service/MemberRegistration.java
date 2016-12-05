@@ -46,14 +46,15 @@ public class MemberRegistration {
   //      memberEventSrc.fire(employee);
     }
     
-    public void setUsernameAndPassword() throws Exception{
-    	//per ora vengono definite qua. Successivamente verranno passate a questa funzione
-    	long id = 3;
+    public String setUsernameAndPassword(long id, String usn, String pwd) throws Exception{
+
     	DailyEmployee emp = em.find(DailyEmployee.class, id);
-    	emp.setUsername("lmic");
-    	emp.setPassword("Aranzulla");
+    	emp.setUsername(usn);
+    	emp.setPassword(pwd);
     	em.persist(emp);
     	//DailyEmployee empl = em.find(DailyEmployee.class, Long.valueOf(2));
     	log.info(emp.getUsername() + emp.getPassword());
+    	return "success";
     }
+    
 }
