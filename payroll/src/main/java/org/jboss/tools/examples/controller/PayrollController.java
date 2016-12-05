@@ -81,7 +81,7 @@ public class PayrollController {
     
     public void registerUsernameAndPassword() throws Exception {
         try {
-        	memberRegistration.setUsernameAndPassword(d_employee);
+        	memberRegistration.setUsernameAndPassword();
           //  FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
          //   facesContext.addMessage(null, m);
             initNewMember();

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employees")
+@Table(name="monthlyEmployees")
 public class MonthlyEmployeeWithSales extends MonthlyEmployee {
 	
 	private float commissionRate;

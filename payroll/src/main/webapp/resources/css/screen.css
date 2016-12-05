@@ -43,6 +43,12 @@ body {
   width: 500px;
   margin: 20px;
 }
+
+.loginForm{
+  width: 500px;
+  margin: 20px;
+ 
+}
 #aside {
   font-size: 0.9em;
   width: 275px;

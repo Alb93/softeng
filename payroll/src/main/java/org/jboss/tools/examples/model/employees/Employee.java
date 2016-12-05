@@ -19,6 +19,16 @@ public class Employee {
 	
 	protected String paymentMethod;
 	
+	protected float dueRate;
+	
+	public float getDueRate() {
+		return dueRate;
+	}
+	
+	public void setDueRate(float dueRate) {
+		this.dueRate = dueRate;
+	}
+	
 	public String getName() {
 		return name;
 	}

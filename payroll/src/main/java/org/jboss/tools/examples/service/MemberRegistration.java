@@ -19,12 +19,13 @@ package org.jboss.tools.examples.service;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import org.jboss.tools.examples.model.Member;
+import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
+import org.jboss.tools.examples.model.employees.MonthlyEmployee;
+import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
@@ -45,7 +46,14 @@ public class MemberRegistration {
   //      memberEventSrc.fire(employee);
     }
     
-    public void setUsernameAndPassword(Employee employee) throws Exception{
-    	
+    public void setUsernameAndPassword() throws Exception{
+    	//per ora vengono definite qua. Successivamente verranno passate a questa funzione
+    	long id = 3;
+    	DailyEmployee emp = em.find(DailyEmployee.class, id);
+    	emp.setUsername("lmic");
+    	emp.setPassword("Aranzulla");
+    	em.persist(emp);
+    	//DailyEmployee empl = em.find(DailyEmployee.class, Long.valueOf(2));
+    	log.info(emp.getUsername() + emp.getPassword());
     }
 }
