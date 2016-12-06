@@ -12,6 +12,8 @@ import org.jboss.tools.examples.model.employees.DailyEmployee;
 @ManagedBean
 public class LoggerManager {
 	
+	private String usn;
+	
 	@Inject
     private Logger log;
 
@@ -23,6 +25,7 @@ public class LoggerManager {
     		DailyEmployee emp = (DailyEmployee) em.createQuery("SELECT e FROM DailyEmployee e where e.username = :usnValue")
         			.setParameter("usnValue", usn).getSingleResult();
     		log.info(emp.getName());
+    		this.usn = usn;
     		return "success"; 
     	} catch (NoResultException e) {
     		return "failure";  
