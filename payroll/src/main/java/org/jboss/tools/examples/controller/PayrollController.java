@@ -17,27 +17,42 @@
 package org.jboss.tools.examples.controller;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
+import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
+import javax.persistence.NoResultException;
 
+import org.jboss.logging.Logger;
+import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
-import org.jboss.tools.examples.service.LoggerManager;
-import org.jboss.tools.examples.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
-@Model
+@Stateless
 public class PayrollController {
+
+	@Inject
+	PayrollDAO payrollDAO;
 	
-	@Produces
-	@Named
+	Logger logger = Logger.getLogger(PayrollController.class);
+	
+	public String checkLogin(String username, String password){
+		
+		try {
+    		
+			DailyEmployee emp = payrollDAO.doLogin(username, password);
+    		logger.info(emp.getName());
+    		return "success"; 
+    	} catch (NoResultException e) {
+    		return "failure";  
+    	}
+	}
+
+    /*@Inject
+>>>>>>> branch 'master' of https://github.com/Alb93/softeng.git
     private MemberRegistration memberRegistration;
     
     @Inject
@@ -52,20 +67,20 @@ public class PayrollController {
     
     @Produces
     @Named
-    private DailyEmployee d_employee;
+    private DailyEmployee d_employee;*/
     
     
     
    
-    @PostConstruct
+   /* @PostConstruct
     public void initNewMember() {
     	m_employee = new MonthlyEmployeeWithSales();
     	d_employee = new DailyEmployee();
     	memberRegistration = new MemberRegistration();
     	
-    }
+    }*/
 
-    public String login() throws Exception {
+   /* public String login() throws Exception {
         try {
         	String usn = d_employee.getUsername();
         	String psw = d_employee.getPassword();
@@ -83,9 +98,9 @@ public class PayrollController {
             System.err.println(errorMessage);
             return "";
         }
-    }
+    }*/
     
-    public String registerUsernameAndPassword() throws Exception {
+    /*public String registerUsernameAndPassword() throws Exception {
         try {
         	long id = d_employee.getId();
         	String usn = d_employee.getUsername();
@@ -122,6 +137,6 @@ public class PayrollController {
         }
         // This is the root cause message
         return errorMessage;
-    }
+    }*/
 
 }
