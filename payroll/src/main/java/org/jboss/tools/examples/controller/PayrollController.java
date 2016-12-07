@@ -16,8 +16,6 @@
  */
 package org.jboss.tools.examples.controller;
 
-import java.math.BigInteger;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
@@ -27,7 +25,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.tools.examples.model.employees.DailyEmployee;
-import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.tools.examples.service.LoggerManager;
 import org.jboss.tools.examples.service.MemberRegistration;
@@ -38,8 +35,9 @@ import org.jboss.tools.examples.service.MemberRegistration;
 // http://www.cdi-spec.org/faq/#accordion6
 @Model
 public class PayrollController {
-
-    @Inject
+	
+	@Produces
+	@Named
     private MemberRegistration memberRegistration;
     
     @Inject
@@ -63,6 +61,7 @@ public class PayrollController {
     public void initNewMember() {
     	m_employee = new MonthlyEmployeeWithSales();
     	d_employee = new DailyEmployee();
+    	memberRegistration = new MemberRegistration();
     	
     }
 
