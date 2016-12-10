@@ -16,16 +16,14 @@
  */
 package org.jboss.tools.examples.controller;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
 import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
-import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.tools.examples.model.employees.Employee;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
@@ -49,6 +47,10 @@ public class PayrollController {
     	} catch (NoResultException e) {
     		return "failure";  
     	}
+	}
+	
+	public void registerEmployee(Employee emp) {
+		payrollDAO.registerEmployee(emp);
 	}
 
     /*@Inject

@@ -48,10 +48,10 @@
                     value="#{registerBean.empl.paymentMethod}" />
                 <h:message for="paymentMethod" errorClass="paymentMethod" />
                 
-                 <h:outputLabel for="hourlyRate" value="Hourly rate:" />
-                <h:inputText id="hourlyRate"
-                    value="#{registerBean.empl.hourlyRate}" />
-                <h:message for="hourlyRate" errorClass="hourlyRate" />
+                 <h:outputLabel for="salary" value="Salary:" />
+                <h:inputText id="salary"
+                    value="#{registerBean.empl.salary}" />
+                <h:message for=salary errorClass="salary" />
                 
   				<h:outputLabel for="duesRate" value="Dues rate:" />
                 <h:inputText id="duesRate"
@@ -74,7 +74,7 @@
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{registerBean.register()}"
+                        action="#{iRegistrator.register()}"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"

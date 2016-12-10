@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.tools.examples.model.employees.DailyEmployee;
+import org.jboss.tools.examples.model.employees.Employee;
 
 
 
@@ -21,6 +22,12 @@ public class PayrollDAO {
     			.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
 		
 		return emp;
+		
+	}
+	
+	public void registerEmployee(Employee emp){
+		
+		em.persist(emp);
 		
 	}
 
