@@ -16,24 +16,32 @@
  */
 package org.jboss.tools.examples.controller;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
 import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
-import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
-@Stateless
+@Stateful
 public class PayrollController {
 
 	@Inject
 	PayrollDAO payrollDAO;
+	
+	public static String SUCCESS = "success";
+
+	public static String SUCCESS_D = "success_d";
+	public static String SUCCESS_M = "success_m";
+
+	public static String FAILURE = "failure";
+	
+	private Employee emp;
 	
 	Logger logger = Logger.getLogger(PayrollController.class);
 	
@@ -41,11 +49,12 @@ public class PayrollController {
 		
 		try {
     		
-			DailyEmployee emp = payrollDAO.doLogin(username, password);
+			emp = payrollDAO.doLogin(username, password);
+			System.out.println("EMP dao = "+emp);
     		logger.info(emp.getName());
-    		return "success"; 
+    		return SUCCESS; 
     	} catch (NoResultException e) {
-    		return "failure";  
+    		return FAILURE;  
     	}
 	}
 	
@@ -53,92 +62,9 @@ public class PayrollController {
 		payrollDAO.registerEmployee(emp);
 	}
 
-    /*@Inject
->>>>>>> branch 'master' of https://github.com/Alb93/softeng.git
-    private MemberRegistration memberRegistration;
+	public Employee getEmp() {
+		return emp;
+	}
     
-    @Inject
-    private LoggerManager loggerManager;
-
-    @Inject
-    private FacesContext facesContext;
-    
-    @Produces
-    @Named
-    private MonthlyEmployeeWithSales m_employee;
-    
-    @Produces
-    @Named
-    private DailyEmployee d_employee;*/
-    
-    
-    
-   
-   /* @PostConstruct
-    public void initNewMember() {
-    	m_employee = new MonthlyEmployeeWithSales();
-    	d_employee = new DailyEmployee();
-    	memberRegistration = new MemberRegistration();
-    	
-    }*/
-
-   /* public String login() throws Exception {
-        try {
-        	String usn = d_employee.getUsername();
-        	String psw = d_employee.getPassword();
-        	
-          //  FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
-         //   facesContext.addMessage(null, m);
-        	initNewMember();
-        	return loggerManager.checkLogin(usn, psw);
-            
-        } catch (Exception e) {
-            String errorMessage = getRootErrorMessage(e);
-            
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
-            facesContext.addMessage(null, m);
-            System.err.println(errorMessage);
-            return "";
-        }
-    }*/
-    
-    /*public String registerUsernameAndPassword() throws Exception {
-        try {
-        	long id = d_employee.getId();
-        	String usn = d_employee.getUsername();
-        	String pwd = d_employee.getPassword();
-        	initNewMember();
-        	return memberRegistration.setUsernameAndPassword(id, usn, pwd);
-          //  FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
-         //   facesContext.addMessage(null, m);
-            
-        } catch (Exception e) {
-            String errorMessage = getRootErrorMessage(e);
-            
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
-            facesContext.addMessage(null, m);
-            System.err.println(errorMessage);
-            return "";
-        }
-    }
-
-    private String getRootErrorMessage(Exception e) {
-        // Default to general error message that registration failed.
-        String errorMessage = "Registration failed. See server log for more information";
-        if (e == null) {
-            // This shouldn't happen, but return the default messages
-            return errorMessage;
-        }
-
-        // Start with the exception and recurse to find the root cause
-        Throwable t = e;
-        while (t != null) {
-            // Get the message from the Throwable class instance
-            errorMessage = t.getLocalizedMessage();
-            t = t.getCause();
-        }
-        // This is the root cause message
-        return errorMessage;
-    }*/
 
 }

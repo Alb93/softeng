@@ -16,7 +16,7 @@ import org.jboss.tools.examples.model.employees.Employee;
 
 @Named
 @SessionScoped
-public class RegisterDailyBean implements Serializable, IRegistrator {
+public class RegisterDailyBean implements Serializable {
 	
 	@Inject
     private Logger log;
@@ -32,7 +32,6 @@ public class RegisterDailyBean implements Serializable, IRegistrator {
 		empl = new DailyEmployee();
 	}
     
-	@Override
     public void register() {
     	payrollController.registerEmployee(empl);
         log.info("Registering " + empl.getName());
