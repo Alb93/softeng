@@ -16,24 +16,32 @@
  */
 package org.jboss.tools.examples.controller;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
 import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
-import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
-@Stateless
+@Stateful
 public class PayrollController {
 
 	@Inject
 	PayrollDAO payrollDAO;
+	
+	public static String SUCCESS = "success";
+
+	public static String SUCCESS_D = "success_d";
+	public static String SUCCESS_M = "success_m";
+
+	public static String FAILURE = "failure";
+	
+	private Employee emp;
 	
 	Logger logger = Logger.getLogger(PayrollController.class);
 	
@@ -41,11 +49,12 @@ public class PayrollController {
 		
 		try {
     		
-			DailyEmployee emp = payrollDAO.doLogin(username, password);
+			emp = payrollDAO.doLogin(username, password);
+			System.out.println("EMP dao = "+emp);
     		logger.info(emp.getName());
-    		return "success"; 
+    		return SUCCESS; 
     	} catch (NoResultException e) {
-    		return "failure";  
+    		return FAILURE;  
     	}
 	}
 	
@@ -53,5 +62,10 @@ public class PayrollController {
 		payrollDAO.registerEmployee(emp);
 	}
 
-   
+
+	public Employee getEmp() {
+		return emp;
+	}
+    
+
 }

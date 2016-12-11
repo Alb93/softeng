@@ -1,10 +1,12 @@
 package org.jboss.tools.examples.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
+import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 
 
 
@@ -16,13 +18,19 @@ public class PayrollDAO {
 
 	
 	
-	public DailyEmployee doLogin(String username, String password){
+	public Employee doLogin(String username, String password){
 		
-		DailyEmployee emp = (DailyEmployee) em.createQuery("SELECT e FROM DailyEmployee e where e.username = :usnValue and e.password = :pwdValue")
-    			.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
-		
-		return emp;
-		
+		try {
+			System.out.println("EM = "+em);
+			DailyEmployee emp = (DailyEmployee) em.createQuery("SELECT e FROM DailyEmployee e where e.username = :usnValue and e.password = :pwdValue")
+	    			.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+			return emp;
+		} catch (NoResultException e) {
+			MonthlyEmployeeWithSales emp =  (MonthlyEmployeeWithSales) em.createQuery("SELECT e FROM "+MonthlyEmployeeWithSales.class.getName() +" e where e.username = :usnValue and e.password = :pwdValue")
+	    			.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+			return emp;
+		}
+				
 	}
 	
 	public void registerEmployee(Employee emp){

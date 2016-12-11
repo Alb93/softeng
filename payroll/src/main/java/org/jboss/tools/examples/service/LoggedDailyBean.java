@@ -5,44 +5,47 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import org.jboss.tools.examples.controller.PayrollController;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
-import org.jboss.tools.examples.model.employees.Employee;
 
 @Named
 @SessionScoped
-public class RegisterDailyBean implements Serializable {
+public class LoggedDailyBean implements Serializable {
 	
 	@Inject
     private Logger log;
 	
 	@Inject
 	private PayrollController payrollController;
+	
+	private LoginProxy loginProxy;
+	
+    @PostConstruct
+	public void init() {
+    	FacesContext context = FacesContext.getCurrentInstance();
+        loginProxy = (LoginProxy) context.getApplication().evaluateExpressionGet(context, "#{loginProxy}", LoginProxy.class);
+        showEmp();
+    }
     
     private DailyEmployee empl;
     
     
-    @PostConstruct
-	public void init() {
-		empl = new DailyEmployee();
-	}
-    
-    public void register() {
-    	payrollController.registerEmployee(empl);
-        log.info("Registering " + empl.getName());
+    public void showEmp() {
+    	empl = (DailyEmployee) loginProxy.getActualLogin().getEmployee();
     }
+    
+    public DailyEmployee getEmpl() {
+		return empl;
+	}
     
     public void setEmpl(DailyEmployee empl) {
 		this.empl = empl;
 	}
     
-    public DailyEmployee getEmpl() {
-		return empl;
-	}
+    
 
 }

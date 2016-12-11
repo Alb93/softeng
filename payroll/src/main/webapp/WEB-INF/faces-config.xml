@@ -26,8 +26,16 @@
 		<display-name>login.xhtml</display-name>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>success</from-outcome>
+			<from-outcome>success_d</from-outcome>
 			<to-view-id>/mainPage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success_m</from-outcome>
+			<to-view-id>/mainPage1.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
