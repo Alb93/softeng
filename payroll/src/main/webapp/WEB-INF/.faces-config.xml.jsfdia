@@ -34,5 +34,14 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#mainPage1.xhtml" PATH="/mainPage1.xhtml"
-  SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+  SHAPE="272,321,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#mainPage1.xhtml:0" NAME="item"
+   PATH="/mainPage1.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="salesReceipt::#post_sales_receipt.xhtml"
+    NAME="output" PATH="/post_sales_receipt.xhtml"
+    TARGET="rules:#post_sales_receipt.xhtml" TITLE="salesReceipt" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#post_sales_receipt.xhtml"
+  PATH="/post_sales_receipt.xhtml" SHAPE="480,305,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

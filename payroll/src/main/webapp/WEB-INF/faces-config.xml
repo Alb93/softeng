@@ -54,4 +54,12 @@
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>mainPage1.xhtml</display-name>
+		<from-view-id>/mainPage1.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>salesReceipt</from-outcome>
+			<to-view-id>/post_sales_receipt.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>
