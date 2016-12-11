@@ -55,7 +55,7 @@
                    <h:form>
                  <p>
                 <h:panelGrid columns="2">
-                    <h:commandButton id="Register"
+                    <h:commandButton id="h"
                         action="register_usn_pwd"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
@@ -63,6 +63,16 @@
                         warnClass="warning" globalOnly="true" />
                 </h:panelGrid>
            </p>
+                <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="Register"
+                        action="register_usn_pwd"
+                        value="Register" styleClass="register" />
+                    <h:messages styleClass="messages"
+                        errorClass="invalid" infoClass="valid"
+                        warnClass="warning" globalOnly="true" />
+                </h:panelGrid>
+                   </p>
         </h:form>
        
     </ui:define>

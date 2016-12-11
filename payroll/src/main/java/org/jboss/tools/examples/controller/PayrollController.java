@@ -23,6 +23,7 @@ import javax.persistence.NoResultException;
 import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.Employee;
+import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
@@ -60,6 +61,10 @@ public class PayrollController {
 	
 	public void registerEmployee(Employee emp) {
 		payrollDAO.registerEmployee(emp);
+	}
+	
+	public void postSalesReceipt(SalesReceipt r) {
+		payrollDAO.postSalesReceipt(r);
 	}
 
 

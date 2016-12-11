@@ -7,11 +7,11 @@ import javax.persistence.PersistenceContext;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 
 
 
 public class PayrollDAO {
-	
 	
 	@PersistenceContext
 	EntityManager em;
@@ -37,6 +37,10 @@ public class PayrollDAO {
 		
 		em.persist(emp);
 		
+	}
+	
+	public void postSalesReceipt(SalesReceipt r) {
+		em.persist(r);
 	}
 
 }
