@@ -13,8 +13,19 @@ public class TimeCard {
 	@Id
 	private long id;
 	
+	private long id_daily;
+	
     private Date date;
-    private int hours;
+    private float hours;
+    
+    
+    public void setId_daily(long id_daily) {
+		this.id_daily = id_daily;
+	}
+    
+    public long getId_daily() {
+		return id_daily;
+	}
 	public long getId() {
 		return id;
 	}
@@ -27,10 +38,10 @@ public class TimeCard {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getHours() {
+	public float getHours() {
 		return hours;
 	}
-	public void setHours(int hours) {
+	public void setHours(float hours) {
 		this.hours = hours;
 	}
     

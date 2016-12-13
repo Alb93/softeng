@@ -1,6 +1,7 @@
 package org.jboss.tools.examples.service;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.util.logging.Logger;
 
@@ -11,47 +12,49 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.tools.examples.controller.PayrollController;
-import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
+import org.jboss.tools.examples.model.timecard.TimeCard;
 import org.jboss.tools.examples.utils.CalendarView;
 
 @Named
 @SessionScoped
-public class PostSalesReceiptBean implements Serializable {
+public class PostTimeCardBean implements Serializable {
 	
 	@Inject
     private Logger log;
 	
 	@Inject
 	private PayrollController payrollController;
-    
-    private SalesReceipt r;
-    
+	
+	private TimeCard card;
     
     @PostConstruct
 	public void init() {
-		r = new SalesReceipt();
+		card = new TimeCard();
 	}
     
+    
     public void post(int id) {
-    	r.setId(id);
+    	card.setId_daily(id);
     	setDate();
-    	payrollController.postSalesReceipt(r);
-        log.info("posting " + r.getId()+" sales receipt");
+    	payrollController.postTimeCard(card);
+        log.info("posting " + card.getId()+" sales receipt");
     }
 
 	private void setDate() {
 		FacesContext context = FacesContext.getCurrentInstance();
         CalendarView calendarView = (CalendarView) context.getApplication().evaluateExpressionGet(context, "#{calendarView}", CalendarView.class);
         Date sqldate = new Date(calendarView.getDate2().getTime());
-        r.setDate(sqldate);
+        card.setDate(sqldate);
 	}
 
-	public SalesReceipt getR() {
-		return r;
+	public void setCard(TimeCard card) {
+		this.card = card;
 	}
-
-	public void setR(SalesReceipt r) {
-		this.r = r;
+	
+	public TimeCard getCard() {
+		return card;
 	}
+	
+	
 
 }

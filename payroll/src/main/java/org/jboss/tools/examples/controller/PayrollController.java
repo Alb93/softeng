@@ -24,6 +24,7 @@ import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
+import org.jboss.tools.examples.model.timecard.TimeCard;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
@@ -65,6 +66,10 @@ public class PayrollController {
 	
 	public void postSalesReceipt(SalesReceipt r) {
 		payrollDAO.postSalesReceipt(r);
+	}
+	
+	public void postTimeCard(TimeCard card){
+		payrollDAO.postTimeCard(card);
 	}
 
 
