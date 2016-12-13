@@ -24,6 +24,7 @@ import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
+import org.jboss.tools.examples.model.timecard.TimeCard;
 import org.jboss.tools.examples.model.union.Union;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -40,7 +41,6 @@ public class PayrollController {
 	public void setU(Union u) {
 		this.u = u;
 	}
-
 
 	@Inject
 	PayrollDAO payrollDAO;
@@ -94,6 +94,11 @@ public class PayrollController {
     	} catch (NoResultException e) {
     		return FAILURE;  
     	}
+	}
+
+	
+	public void postTimeCard(TimeCard card){
+		payrollDAO.postTimeCard(card);
 	}
 
 

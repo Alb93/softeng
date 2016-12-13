@@ -8,6 +8,7 @@ import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
+import org.jboss.tools.examples.model.timecard.TimeCard;
 import org.jboss.tools.examples.model.union.Union;
 
 public class PayrollDAO {
@@ -61,6 +62,11 @@ public class PayrollDAO {
 		}
 		return null;
 
+	}
+
+
+	public void postTimeCard(TimeCard card) {
+		em.persist(card);
 	}
 
 }

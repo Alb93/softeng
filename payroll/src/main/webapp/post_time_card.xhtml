@@ -5,24 +5,52 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-		<title>Calendar2</title>
+		<title>Post Time Card</title>
 	</h:head>
 <h:body>
-	<p><h:outputText value="#{loginBean.empl.username}"></h:outputText></p>
+	<p><h:outputText value="#{loggedDailyBean.empl.username}"></h:outputText></p>
 	<h:form id="form">
- 
-    <h:panelGrid columns="1">
-    
- 
-        <h:outputLabel for="popup" value="Popup:" />
-        <p:calendar id="popup" value="#{calendarManagedBean.date}" pattern="dd/MM/yyyy"  />
- 		<h:message for="popup" errorClass="invalid" />
-        
-    </h:panelGrid>
- 
- 
-    
-</h:form>
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <h:panelGrid columns="2" cellpadding="5">
+        <p:outputLabel for="popup" value="Popup:" />
+        <p:calendar id="popup" value="#{calendarView.date2}" />
+ 
+    </h:panelGrid>
+ 
+    
+ 
+    <p:dialog modal="true" resizable="false" header="Values"
+			widgetVar="dlg" showEffect="fold">
+        <p:panelGrid id="display" columns="2"
+				columnClasses="label,value">
+         
+            <h:outputText value="Calendar:" />
+            <h:outputText value="#{calendarView.date2}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+
+
+        </p:panelGrid>
+    </p:dialog>
+
+				<h:outputLabel for="hours" value="Hours:" />
+				<h:inputText id="hours"
+					value="#{postTimeCardBean.card.hours}" />
+				<h:message for="hours" errorClass="hours" />
+                
+                 <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="post"
+                        action="#{postTimeCardBean.post(loggedDailyBean.empl.id)}"
+                        value="Post a time card" styleClass="post" />
+                    <h:messages styleClass="messages"
+                        errorClass="invalid" infoClass="valid"
+                        warnClass="warning" globalOnly="true" />
+                </h:panelGrid>
+            </p>
+             
+	</h:form>
 	
 </h:body>
 </html>

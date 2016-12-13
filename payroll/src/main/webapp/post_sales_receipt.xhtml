@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Calendar1</title>
+	<title>Post Sales Receipt</title>
 </h:head>
 <h:body>
 	<p>
@@ -15,13 +15,12 @@
     <p:growl id="msgs" showDetail="true" />
  
     <h:panelGrid columns="2" cellpadding="5">
-        <p:outputLabel for="popup" value="Popup:" />
+        <p:outputLabel for="popup" value="Date:" />
         <p:calendar id="popup" value="#{calendarView.date2}" />
  
     </h:panelGrid>
  
-    <p:commandButton value="Submit" update="msgs"
-			actionListener="#{calendarView.click}" icon="ui-icon-check" />
+    
  
     <p:dialog modal="true" resizable="false" header="Values"
 			widgetVar="dlg" showEffect="fold">
@@ -45,7 +44,7 @@
                  <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="post"
-                        action="#{postSalesReceiptBean.post()}"
+                        action="#{postSalesReceiptBean.post(loggedMonthlyBean.empl.id)}"
                         value="Post a sales receipt" styleClass="post" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
