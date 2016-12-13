@@ -101,8 +101,7 @@ public class PayrollController {
 		try {
     		
 			adm = payrollDAO.doAdminLogin(username, password);
-			System.out.println("ADM dao = "+adm);
-    		logger.info(emp.getPassword());
+			
     		return SUCCESS; 
     	} catch (NoResultException e) {
     		return FAILURE;  
