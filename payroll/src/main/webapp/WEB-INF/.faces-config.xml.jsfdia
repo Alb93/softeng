@@ -44,4 +44,21 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#post_sales_receipt.xhtml"
   PATH="/post_sales_receipt.xhtml" SHAPE="480,305,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#login_admin.xhtml" PATH="/login_admin.xhtml"
+  SHAPE="32,305,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login_admin.xhtml:0" NAME="item"
+   PATH="/login_admin.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success::#admin_operations.xhtml"
+    NAME="output" PATH="/admin_operations.xhtml"
+    TARGET="rules:#admin_operations.xhtml" TITLE="success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#login_admin.xhtml:1" NAME="item1"
+   PATH="/login_admin.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="failure::#invalidLogin.xhtml" NAME="output"
+    PATH="/invalidLogin.xhtml" TARGET="rules:#invalidLogin.xhtml"
+    TITLE="failure" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin_operations.xhtml"
+  PATH="/admin_operations.xhtml" SHAPE="272,465,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

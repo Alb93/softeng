@@ -22,6 +22,7 @@ import javax.persistence.NoResultException;
 
 import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
+import org.jboss.tools.examples.model.admin.Admin;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
@@ -45,6 +46,8 @@ public class PayrollController {
 	
 	private Employee emp;
 	
+	private Admin adm;
+	
 	Logger logger = Logger.getLogger(PayrollController.class);
 	
 	public String checkLogin(String username, String password){
@@ -56,6 +59,20 @@ public class PayrollController {
     		logger.info(emp.getName());
     		return SUCCESS; 
     	} catch (NoResultException e) {
+    		return FAILURE;  
+    	}
+	}
+	
+	public String checkAdminLogin(String username, String password){
+		try {
+    		
+			adm = payrollDAO.doAdminLogin(username, password);
+			//System.out.println("ADM dao = "+adm);
+    		//logger.info(emp.getPassword());
+			System.out.println("SUCCESS");
+    		return SUCCESS; 
+    	} catch (NoResultException e) {
+    		System.out.println("FAILURE");
     		return FAILURE;  
     	}
 	}

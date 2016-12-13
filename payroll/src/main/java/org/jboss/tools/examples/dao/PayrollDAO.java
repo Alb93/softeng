@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.tools.examples.model.admin.Admin;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
@@ -32,6 +33,13 @@ public class PayrollDAO {
 			return emp;
 		}
 				
+	}
+	
+	public Admin doAdminLogin(String username, String password){
+		
+		Admin adm = (Admin) em.createQuery("SELECT a FROM Admin a where a.username = :usnValue and a.password = :pwdValue")
+				.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+		return adm;	
 	}
 	
 	public void registerEmployee(Employee emp){
