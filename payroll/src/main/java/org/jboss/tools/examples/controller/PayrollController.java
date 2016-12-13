@@ -24,6 +24,7 @@ import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
+import org.jboss.tools.examples.model.union.Union;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
@@ -32,10 +33,20 @@ import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 @Stateful
 public class PayrollController {
 
+	public Union getU() {
+		return u;
+	}
+
+	public void setU(Union u) {
+		this.u = u;
+	}
+
+
 	@Inject
 	PayrollDAO payrollDAO;
 	
 	public static String SUCCESS = "success";
+	public static String SUCCESS_U = "success_u";
 
 	public static String SUCCESS_D = "success_d";
 	public static String SUCCESS_M = "success_m";
@@ -43,6 +54,7 @@ public class PayrollController {
 	public static String FAILURE = "failure";
 	
 	private Employee emp;
+	private Union u;
 	
 	Logger logger = Logger.getLogger(PayrollController.class);
 	
@@ -65,6 +77,23 @@ public class PayrollController {
 	
 	public void postSalesReceipt(SalesReceipt r) {
 		payrollDAO.postSalesReceipt(r);
+	}
+	
+	public void registerUnion(Union u) {
+		payrollDAO.registerUnion(u);
+	}
+	
+	public String checkLoginUnion(String username, String password){
+		
+		try {
+    		
+			u = payrollDAO.doLoginUnion(username, password);
+			System.out.println("u dao = "+u);
+    		logger.info(emp.getName());
+    		return SUCCESS; 
+    	} catch (NoResultException e) {
+    		return FAILURE;  
+    	}
 	}
 
 
