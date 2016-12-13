@@ -52,28 +52,12 @@
                 </p>
                  </h:form>
                 
-                   <h:form>
-                 <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="h"
-                        action="register_usn_pwd"
-                        value="Register" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-           </p>
-                <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="Register"
-                        action="register_usn_pwd"
-                        value="Register" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-                   </p>
-        </h:form>
+                  <form action="./login_admin.jsf">
+    			<input type="submit" value="Login as admin" />
+				</form>
+				 <form action="./login_union.jsf">
+    			<input type="submit" value="Login as union" />
+				</form>
        
     </ui:define>
 </ui:composition>
