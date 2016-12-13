@@ -7,7 +7,21 @@
 <h:head></h:head>
 <h:body>
 
-	<p>Buongiorno admin <h:outputText value="#{adminBean.admin.username}"></h:outputText></p>
+	<p>Admin <h:outputText value="#{adminBean.admin.username}"></h:outputText></p>
+	
+	<h:form action="./register_employee.jsf">
+    	<input type="submit" value="Add new employee" />
+	</h:form>
+	<h:form action="./daily_employee_page.jsf">
+    	<input type="submit" value="Edit employee" />
+	</h:form>
+	<h:form action="./daily_employee_page.jsf">
+    	<input type="submit" value="Post time card" />
+	</h:form>
+	<h:form action="./daily_employee_page.jsf">
+    	<input type="submit" value="Post time card" />
+	</h:form>
+	
 
 
 	
