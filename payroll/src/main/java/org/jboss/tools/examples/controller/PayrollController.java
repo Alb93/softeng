@@ -26,6 +26,7 @@ import org.jboss.tools.examples.model.admin.Admin;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
+import org.jboss.tools.examples.model.union.Union;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
@@ -34,10 +35,19 @@ import org.jboss.tools.examples.model.timecard.TimeCard;
 @Stateful
 public class PayrollController {
 
+	public Union getU() {
+		return u;
+	}
+
+	public void setU(Union u) {
+		this.u = u;
+	}
+
 	@Inject
 	PayrollDAO payrollDAO;
 	
 	public static String SUCCESS = "success";
+	public static String SUCCESS_U = "success_u";
 
 	public static String SUCCESS_D = "success_d";
 	public static String SUCCESS_M = "success_m";
@@ -45,7 +55,7 @@ public class PayrollController {
 	public static String FAILURE = "failure";
 	
 	private Employee emp;
-	
+	private Union u;
 	private Admin adm;
 	
 	Logger logger = Logger.getLogger(PayrollController.class);
@@ -63,20 +73,6 @@ public class PayrollController {
     	}
 	}
 	
-	public String checkAdminLogin(String username, String password){
-		try {
-    		
-			adm = payrollDAO.doAdminLogin(username, password);
-			//System.out.println("ADM dao = "+adm);
-    		//logger.info(emp.getPassword());
-			System.out.println("SUCCESS");
-    		return SUCCESS; 
-    	} catch (NoResultException e) {
-    		System.out.println("FAILURE");
-    		return FAILURE;  
-    	}
-	}
-	
 	public void registerEmployee(Employee emp) {
 		payrollDAO.registerEmployee(emp);
 	}
@@ -84,6 +80,35 @@ public class PayrollController {
 	public void postSalesReceipt(SalesReceipt r) {
 		payrollDAO.postSalesReceipt(r);
 	}
+	
+	public void registerUnion(Union u) {
+		payrollDAO.registerUnion(u);
+	}
+	
+	public String checkLoginUnion(String username, String password){
+		
+		try {
+    		
+			u = payrollDAO.doLoginUnion(username, password);
+			System.out.println("u dao = "+u);
+    		return SUCCESS; 
+    	} catch (NoResultException e) {
+    		return FAILURE;  
+    	}
+	}
+	
+	public String checkAdminLogin(String username, String password){
+		try {
+    		
+			adm = payrollDAO.doAdminLogin(username, password);
+			System.out.println("ADM dao = "+adm);
+    		logger.info(emp.getPassword());
+    		return SUCCESS; 
+    	} catch (NoResultException e) {
+    		return FAILURE;  
+    	}
+	}
+
 	
 	public void postTimeCard(TimeCard card){
 		payrollDAO.postTimeCard(card);
