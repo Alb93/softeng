@@ -9,17 +9,17 @@
 
 	<p>Admin <h:outputText value="#{adminBean.admin.username}"></h:outputText></p>
 	
-	<h:form action="./register_employee.jsf">
+	<h:form action="./register_member.jsf">
     	<input type="submit" value="Add new employee" />
 	</h:form>
-	<h:form action="./daily_employee_page.jsf">
+	<form action="./edit_employee.jsf">
     	<input type="submit" value="Edit employee" />
-	</h:form>
-	<h:form action="./daily_employee_page.jsf">
-    	<input type="submit" value="Post time card" />
-	</h:form>
-	<h:form action="./daily_employee_page.jsf">
-    	<input type="submit" value="Post time card" />
+	</form>
+	<form action="./delete_employee.jsf">
+    	<input type="submit" value="Delete employee" />
+	</form>
+	<h:form action="./run_payroll.jsf">
+    	<input type="submit" value="Run the payroll for today" />
 	</h:form>
 	
 
