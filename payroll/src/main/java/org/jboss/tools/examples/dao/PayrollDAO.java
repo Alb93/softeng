@@ -90,4 +90,9 @@ public class PayrollDAO {
 		
 		return dailyEmployees;
 	}
+	
+	public void removeDailyEmployee(String username){
+		em.createQuery("DELETE FROM DailyEmployee d where d.username = :usnValue")
+				.setParameter("usnValue", username).executeUpdate();
+	}
 }
