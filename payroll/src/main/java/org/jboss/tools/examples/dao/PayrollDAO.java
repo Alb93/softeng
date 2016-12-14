@@ -1,5 +1,8 @@
 package org.jboss.tools.examples.dao;
 
+import java.util.List;
+
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -12,6 +15,7 @@ import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
 import org.jboss.tools.examples.model.union.Union;
 
+@Stateless
 public class PayrollDAO {
 
 	@PersistenceContext
@@ -74,5 +78,16 @@ public class PayrollDAO {
 	
 	public void postTimeCard(TimeCard card) {
 		em.persist(card);
+	}
+	
+	public List<DailyEmployee> findAllDailyEmployees(){
+		List<DailyEmployee> dailyEmployees =
+				em.createQuery("select d from DailyEmployee d", DailyEmployee.class)
+				.getResultList();
+		for (int i = 0; i < dailyEmployees.size(); i++) {
+			System.out.println("ok");
+		}
+		
+		return dailyEmployees;
 	}
 }
