@@ -34,10 +34,12 @@
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
+				<h:form>
 				<h:commandButton id="login" action="#{adminBean.checkLogin()}"
-					value="Login" styleClass="register" />
+					value="Login" styleClass="register"/>
 				<h:messages styleClass="messages" errorClass="invalid"
 					infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:form>
 			</h:panelGrid>
 		</h:form>
 	</div>

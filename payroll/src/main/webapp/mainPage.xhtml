@@ -1,17 +1,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-<h:head></h:head>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Employee login</title>
+</h:head>
 <h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ul>
+		<li><a href="./index.jsf">Home</a></li>
+		<li><a class="active" href="./login.jsf">Employee</a></li>
+		<li><a href="./login_admin.jsf">Admin</a></li>
+		<li><a href="./login_union.jsf">Union</a></li>
+		<li style="float: right"><a class="active" href="">User: <h:outputText
+					value="#{loggedDailyBean.empl.username}"></h:outputText></a></li>
+	</ul>
 
-	<p>Login successful! Daily <h:outputText value="#{loggedDailyBean.empl.username}"></h:outputText></p>
-
-	<form action="./daily_employee_page.jsf">
-    	<input type="submit" value="Post time card" />
-	</form>
-	
+	<div>
+		<h2>Login succesfull ! Daily</h2>
+	</div>
+	<div>
+		<h:form>
+			<p:commandButton type="submit" action="./daily_employee_page.jsf"
+				value="Post time card" ajax="false" icon="ui-icon-star" />
+		</h:form>
+	</div>
 </h:body>
 </html>

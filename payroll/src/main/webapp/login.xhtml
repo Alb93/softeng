@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Payroll</title>
+	<title>Employee login</title>
 </h:head>
 
 <h:body>
@@ -37,10 +37,12 @@
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
+				<h:form>
 				<h:commandButton id="login" action="#{loginProxy.checkLogin()}"
-					value="Login" styleClass="register" />
+					value="Login" styleClass="register"/>
 				<h:messages styleClass="messages" errorClass="invalid"
 					infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:form>
 			</h:panelGrid>
 
 		</h:form>
