@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Post Service Charge</title>
+</h:head>
+<h:body>
+	<p>
+		<h:outputText value="#{loggedUnionBean.u.username}"></h:outputText>
+	</p>
+	
+	<h:form id="form">
+    
+
+				<h:outputLabel for="amount" value="Amount:" />
+				<h:inputText id="amount"
+					value="#{postSalesReceiptBean.r.amount}" />
+				<h:message for="amount" errorClass="amounts" />
+				
+				<h:outputLabel for="service" value="Service:" />
+				<h:inputText id="service"
+					value="#{postSalesReceiptBean.r.amount}" />
+				<h:message for="service" errorClass="service" />
+                
+                
+                 <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="post"
+                        action="#{postSalesReceiptBean.post(loggedMonthlyBean.empl.id)}"
+                        value="Post a sales receipt" styleClass="post" />
+                    <h:messages styleClass="messages"
+                        errorClass="invalid" infoClass="valid"
+                        warnClass="warning" globalOnly="true" />
+                </h:panelGrid>
+            </p>
+             
+	</h:form>
+	
+</h:body>
+</html>

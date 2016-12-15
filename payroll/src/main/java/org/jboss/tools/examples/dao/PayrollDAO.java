@@ -9,6 +9,7 @@ import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
+import org.jboss.tools.examples.model.union.ServiceCharge;
 import org.jboss.tools.examples.model.union.Union;
 
 public class PayrollDAO {
@@ -67,6 +68,12 @@ public class PayrollDAO {
 
 	public void postTimeCard(TimeCard card) {
 		em.persist(card);
+	}
+
+	public void postServiceCharge(ServiceCharge s) {
+		em.persist(s);
+		// TODO Auto-generated method stub
+		
 	}
 
 }
