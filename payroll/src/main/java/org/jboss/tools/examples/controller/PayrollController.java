@@ -17,6 +17,7 @@
 package org.jboss.tools.examples.controller;
 
 import javax.ejb.Stateful;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
@@ -26,12 +27,14 @@ import org.jboss.tools.examples.model.admin.Admin;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
+import org.jboss.tools.examples.model.union.ServiceCharge;
 import org.jboss.tools.examples.model.union.Union;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
+
 @Stateful
 public class PayrollController {
 
@@ -42,6 +45,7 @@ public class PayrollController {
 	public void setU(Union u) {
 		this.u = u;
 	}
+
 
 	@Inject
 	PayrollDAO payrollDAO;
@@ -57,6 +61,7 @@ public class PayrollController {
 	private Employee emp;
 	private Union u;
 	private Admin adm;
+	
 	
 	Logger logger = Logger.getLogger(PayrollController.class);
 	
@@ -93,9 +98,13 @@ public class PayrollController {
 			System.out.println("u dao = "+u);
     		return SUCCESS; 
     	} catch (NoResultException e) {
-    		return FAILURE;  
+    		return FAILURE; 
     	}
 	}
+
+
+	
+
 	
 	public String checkAdminLogin(String username, String password){
 		try {
@@ -112,6 +121,12 @@ public class PayrollController {
 	public void postTimeCard(TimeCard card){
 		payrollDAO.postTimeCard(card);
 	}
+	
+	public void postServiceCharge(ServiceCharge s){
+		payrollDAO.postServiceCharge(s);
+	}
+
+
 
 
 	public Employee getEmp() {

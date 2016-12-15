@@ -13,15 +13,15 @@ import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
+import org.jboss.tools.examples.model.union.ServiceCharge;
 import org.jboss.tools.examples.model.union.Union;
-
 @Stateless
 public class PayrollDAO {
 
 	@PersistenceContext
 	EntityManager em;
 
-	public Employee doLogin(String username, String password) {
+	public Employee doLogin(String username, String password) { 
 
 		try {
 			System.out.println("EM = " + em);
@@ -39,14 +39,21 @@ public class PayrollDAO {
 		}
 
 	}
-	
-	public Admin doAdminLogin(String username, String password){
-		
-		Admin adm = (Admin) em.createQuery("SELECT a FROM Admin a where a.username = :usnValue and a.password = :pwdValue")
-				.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
-		return adm;	
+
+	public void registerEmployee(Employee emp) {
+
+		em.persist(emp);
+
 	}
-	
+
+	public void postSalesReceipt(SalesReceipt r) {
+		em.persist(r);
+	}
+
+	public void registerUnion(Union u) {
+		em.persist(u);
+	}
+
 	public Union doLoginUnion(String username, String password) {
 
 		try {
@@ -62,22 +69,23 @@ public class PayrollDAO {
 
 	}
 
-	public void registerEmployee(Employee emp) {
-
-		em.persist(emp);
-
+	
+	public Admin doAdminLogin(String username, String password){
+		
+		Admin adm = (Admin) em.createQuery("SELECT a FROM Admin a where a.username = :usnValue and a.password = :pwdValue")
+				.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+		return adm;	
 	}
-
-	public void postSalesReceipt(SalesReceipt r) {
-		em.persist(r);
-	}
-
-	public void registerUnion(Union u) {
-		em.persist(u);
-	}
+	
 	
 	public void postTimeCard(TimeCard card) {
 		em.persist(card);
+	}
+
+	public void postServiceCharge(ServiceCharge s) {
+		em.persist(s);
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public List<DailyEmployee> findAllDailyEmployees(){
@@ -89,5 +97,10 @@ public class PayrollDAO {
 		}
 		
 		return dailyEmployees;
+	}
+	
+	public void removeDailyEmployee(String username){
+		em.createQuery("DELETE FROM DailyEmployee d where d.username = :usnValue")
+				.setParameter("usnValue", username).executeUpdate();
 	}
 }

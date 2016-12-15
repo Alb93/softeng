@@ -41,9 +41,6 @@ public class ServiceCharge {
 	public void setId_emp(long id_emp) {
 		this.id_emp = id_emp;
 	}
-
-
-	
 	
 	
 }

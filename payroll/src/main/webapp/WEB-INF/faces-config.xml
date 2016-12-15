@@ -16,6 +16,7 @@
     limitations under the License.
 -->
 <!-- Marker file indicating JSF 2.2 should be enabled in the application -->
+
 <faces-config version="2.2"
     xmlns="http://xmlns.jcp.org/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -73,6 +74,22 @@
 	<navigation-rule>
 		<display-name>login_admin.xhtml</display-name>
 		<from-view-id>/login_admin.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/invalidLogin.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_union.xhtml</display-name>
+		<from-view-id>/login_union.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success_u</from-outcome>
+			<to-view-id>/post_service_charge.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login_union.xhtml</display-name>
+		<from-view-id>/login_union.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>failure</from-outcome>
 			<to-view-id>/invalidLogin.xhtml</to-view-id>
