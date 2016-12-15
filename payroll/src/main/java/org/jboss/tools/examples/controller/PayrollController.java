@@ -17,11 +17,13 @@
 package org.jboss.tools.examples.controller;
 
 import javax.ejb.Stateful;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
 import org.jboss.logging.Logger;
 import org.jboss.tools.examples.dao.PayrollDAO;
+import org.jboss.tools.examples.model.admin.Admin;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
@@ -32,6 +34,7 @@ import org.jboss.tools.examples.model.union.Union;
 // EL name
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
+
 @Stateful
 public class PayrollController {
 
@@ -42,6 +45,7 @@ public class PayrollController {
 	public void setU(Union u) {
 		this.u = u;
 	}
+
 
 	@Inject
 	PayrollDAO payrollDAO;
@@ -56,6 +60,8 @@ public class PayrollController {
 	
 	private Employee emp;
 	private Union u;
+	private Admin adm;
+	
 	
 	Logger logger = Logger.getLogger(PayrollController.class);
 	
@@ -90,6 +96,21 @@ public class PayrollController {
     		
 			u = payrollDAO.doLoginUnion(username, password);
 			System.out.println("u dao = "+u);
+    		return SUCCESS; 
+    	} catch (NoResultException e) {
+    		return FAILURE; 
+    	}
+	}
+
+
+	
+
+	
+	public String checkAdminLogin(String username, String password){
+		try {
+    		
+			adm = payrollDAO.doAdminLogin(username, password);
+			
     		return SUCCESS; 
     	} catch (NoResultException e) {
     		return FAILURE;  

@@ -1,9 +1,13 @@
 package org.jboss.tools.examples.dao;
 
+import java.util.List;
+
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.tools.examples.model.admin.Admin;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
@@ -11,7 +15,7 @@ import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
 import org.jboss.tools.examples.model.union.ServiceCharge;
 import org.jboss.tools.examples.model.union.Union;
-
+@Stateless
 public class PayrollDAO {
 
 	@PersistenceContext
@@ -65,7 +69,15 @@ public class PayrollDAO {
 
 	}
 
-
+	
+	public Admin doAdminLogin(String username, String password){
+		
+		Admin adm = (Admin) em.createQuery("SELECT a FROM Admin a where a.username = :usnValue and a.password = :pwdValue")
+				.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+		return adm;	
+	}
+	
+	
 	public void postTimeCard(TimeCard card) {
 		em.persist(card);
 	}
@@ -75,5 +87,20 @@ public class PayrollDAO {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public List<DailyEmployee> findAllDailyEmployees(){
+		List<DailyEmployee> dailyEmployees =
+				em.createQuery("select d from DailyEmployee d", DailyEmployee.class)
+				.getResultList();
+		for (int i = 0; i < dailyEmployees.size(); i++) {
+			System.out.println("ok");
+		}
+		
+		return dailyEmployees;
+	}
+	
+	public void removeDailyEmployee(String username){
+		em.createQuery("DELETE FROM DailyEmployee d where d.username = :usnValue")
+				.setParameter("usnValue", username).executeUpdate();
+	}
 }

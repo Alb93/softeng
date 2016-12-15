@@ -36,36 +36,36 @@
                 model class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{registerBean.empl.name}" />
+                <h:inputText id="name" value="#{registerDailyBean.empl.name}" />
                 <h:message for="name" errorClass="invalid" />
 
                 <h:outputLabel for="surname" value="Surname:" />
-                <h:inputText id="surname" value="#{registerBean.empl.surname}" />
+                <h:inputText id="surname" value="#{registerDailyBean.empl.surname}" />
                 <h:message for="surname" errorClass="invalid" />
                 
                  <h:outputLabel for="paymentMethod" value="Payment method:" />
                 <h:inputText id="paymentMethod"
-                    value="#{registerBean.empl.paymentMethod}" />
+                    value="#{registerDailyBean.empl.paymentMethod}" />
                 <h:message for="paymentMethod" errorClass="paymentMethod" />
                 
                  <h:outputLabel for="hourlyRate" value="Hourly rate:" />
                 <h:inputText id="hourlyRate"
-                    value="#{registerBean.empl.hourlyRate}" />
+                    value="#{registerDailyBean.empl.hourlyRate}" />
                 <h:message for="hourlyRate" errorClass="hourlyRate" />
                 
   				<h:outputLabel for="duesRate" value="Dues rate:" />
                 <h:inputText id="duesRate"
-                    value="#{registerBean.empl.dueRate}" />
+                    value="#{registerDailyBean.empl.dueRate}" />
                 <h:message for="duesRate" errorClass="duesRate" />
 
                  <h:outputLabel for="username" value="Username:" />
                 <h:inputText id="username"
-                    value="#{registerBean.empl.username}" />
+                    value="#{registerDailyBean.empl.username}" />
                 <h:message for="username" errorClass="invalid" />
                 
                  <h:outputLabel for="password" value="Password:" />
                 <h:inputText id="password"
-                    value="#{registerBean.empl.password}" />
+                    value="#{registerDailyBean.empl.password}" />
                 <h:message for="password" errorClass="password" /> 
                 
                 
@@ -74,7 +74,7 @@
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{registerBean.register()}"
+                        action="#{registerDailyBean.register()}"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"

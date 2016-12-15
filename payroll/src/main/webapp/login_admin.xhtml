@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Payroll</title>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ul>
+		<li><a href="./index.jsf">Home</a></li>
+		<li><a href="./login.jsf">Employee</a></li>
+		<li><a class="active" href="./login_admin.jsf">Admin</a></li>
+		<li><a href="./login_union.jsf">Union</a></li>
+	</ul>
+	<div>
+		<h:form id="admReg">
+			<h2>Admin login</h2>
+			<p>Please enter your username and password.</p>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="username" value="Username:" />
+				<p:inputText id="username" value="#{adminBean.admin.username}">
+					<f:validateRequired />
+				</p:inputText>
+				<h:message for="username" errorClass="invalid" />
+
+				<h:outputLabel for="password" value="Password:" />
+				<p:password id="password" value="#{adminBean.admin.password}">
+					<f:validateRequired />
+				</p:password>
+				<h:message for="password" errorClass="invalid" />
+
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<h:commandButton id="login" action="#{adminBean.checkLogin()}"
+					value="Login" styleClass="register" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>
