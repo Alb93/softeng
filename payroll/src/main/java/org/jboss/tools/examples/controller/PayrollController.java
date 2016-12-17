@@ -16,8 +16,9 @@
  */
 package org.jboss.tools.examples.controller;
 
+import java.util.List;
+
 import javax.ejb.Stateful;
-import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
@@ -126,6 +127,13 @@ public class PayrollController {
 		payrollDAO.postServiceCharge(s);
 	}
 
+	public List<Union> findAllUnions() {
+		return payrollDAO.findAllUnions();
+	}
+	
+	public List<Employee> findAllUnionsEmployee(long unionId) {
+		return payrollDAO.findAllUnionsEmployee(unionId);
+	}
 
 
 

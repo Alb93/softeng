@@ -1,5 +1,6 @@
 package org.jboss.tools.examples.dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -48,6 +49,7 @@ public class PayrollDAO {
 
 	public void postSalesReceipt(SalesReceipt r) {
 		em.persist(r);
+		System.out.println("Posted "+r.getId());
 	}
 
 	public void registerUnion(Union u) {
@@ -97,6 +99,29 @@ public class PayrollDAO {
 		}
 		
 		return dailyEmployees;
+	}
+	
+	public List<Union> findAllUnions(){
+		List<Union> unions =
+				em.createQuery("select u from Union u", Union.class)
+				.getResultList();
+		
+		return unions;
+	}
+	
+	public List<Employee> findAllUnionsEmployee(long unionId){
+		List<DailyEmployee> employees =
+				em.createQuery("select e from DailyEmployee e where e.union_id = :unionIDValue", DailyEmployee.class)
+				.setParameter("unionIDValue", unionId).getResultList();
+		List<MonthlyEmployeeWithSales> monthlyEmployeeWithSales =
+				em.createQuery("select e from MonthlyEmployeeWithSales e where e.union_id = :unionIDValue", MonthlyEmployeeWithSales.class)
+				.setParameter("unionIDValue", unionId).getResultList();
+		
+		List<Employee> emplist = new LinkedList<>();
+		emplist.addAll(employees);
+		emplist.addAll(monthlyEmployeeWithSales);
+		
+		return emplist;
 	}
 	
 	public void removeDailyEmployee(String username){

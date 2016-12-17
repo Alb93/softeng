@@ -21,6 +21,16 @@ public class Employee {
 	
 	protected float dueRate;
 	
+	protected long union_id;
+	
+	public void setUnion_id(long union_id) {
+		this.union_id = union_id;
+	}
+	
+	public long getUnion_id() {
+		return union_id;
+	}
+	
 	public float getDueRate() {
 		return dueRate;
 	}
