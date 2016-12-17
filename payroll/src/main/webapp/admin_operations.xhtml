@@ -1,29 +1,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-<h:head></h:head>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Admin operations</title>
+</h:head>
 <h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ul>
+		<li><a href="./index.jsf">Home</a></li>
+		<li><a href="./login.jsf">Employee</a></li>
+		<li><a class="active" href="./login_admin.jsf">Admin</a></li>
+		<li><a href="./login_union.jsf">Union</a></li>
+		<li style="float: right"><a class="active" href="">Admin: <h:outputText
+					value="#{adminBean.admin.username}"></h:outputText></a></li>
+	</ul>
 
-	<p>Admin <h:outputText value="#{adminBean.admin.username}"></h:outputText></p>
-	
-	<h:form action="./register_member.jsf">
-    	<input type="submit" value="Add new employee" />
-	</h:form>
-	<form action="./edit_employee.jsf">
-    	<input type="submit" value="Edit employee" />
-	</form>
-	<form action="./delete_employee.jsf">
-    	<input type="submit" value="Delete employee" />
-	</form>
-	<h:form action="./run_payroll.jsf">
-    	<input type="submit" value="Run the payroll for today" />
-	</h:form>
+	<div>
+		<h:form>
+			<p:commandButton type="submit" action="./register_member.jsf"
+				value="Add new employee" ajax="false" icon="ui-icon-star" />
+		</h:form>
+	</div>
 	
 
-
+	<div>
+		<h:form>
+			<p:commandButton type="submit" action="./edit_employee.jsf"
+				value="Edit employee" ajax="false" icon="ui-icon-star" />
+		</h:form>
+	</div>
 	
+	
+
+	<div>
+		<h:form>
+			<p:commandButton type="submit" action="./delete_employee.jsf"
+				value="Delete employee" ajax="false" icon="ui-icon-star" />
+		</h:form>
+	</div>
+
+	<div>
+		<h:form>
+			<p:commandButton type="submit" action="./run_payroll.jsf"
+				value="Run the payroll for today" ajax="false" icon="ui-icon-star" />
+		</h:form>
+	</div>
+
+
+
+
 </h:body>
 </html>
