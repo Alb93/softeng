@@ -44,8 +44,8 @@ public class EmployeesBean implements Serializable {
 	}
 	
 	public void removeDailyEmployee(DailyEmployee emp) throws IOException{
-		
-		payrollDAO.removeDailyEmployee(emp.getName());
+		//System.out.println("Cancellando" + emp.getName());
+		payrollDAO.removeDailyEmployee(emp.getId());
 		dailyEmployees.remove(dailyEmployees.indexOf(emp));
 	}
 	

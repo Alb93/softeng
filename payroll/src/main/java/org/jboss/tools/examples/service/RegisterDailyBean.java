@@ -11,12 +11,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import org.jboss.tools.examples.controller.PayrollController;
+import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
-import org.jboss.tools.examples.model.employees.Employee;
 import org.jboss.tools.examples.model.union.Union;
 import org.jboss.tools.examples.utils.UnionDropdownView;
 
@@ -29,6 +27,10 @@ public class RegisterDailyBean implements Serializable {
 	
 	@Inject
 	private PayrollController payrollController;
+	
+	@Inject PayrollDAO payrollDAO;
+	
+	@Inject EmployeesBean empBean;
     
     private DailyEmployee empl;
 	private UnionDropdownView dropdown;
@@ -52,6 +54,7 @@ public class RegisterDailyBean implements Serializable {
     public void register() {
     	empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
     	payrollController.registerEmployee(empl);
+    	empBean.setDailyEmployees(payrollDAO.findAllDailyEmployees());
         log.info("Registering " + empl.getName());
     }
     

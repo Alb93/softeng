@@ -124,8 +124,9 @@ public class PayrollDAO {
 		return emplist;
 	}
 	
-	public void removeDailyEmployee(String username){
-		em.createQuery("DELETE FROM DailyEmployee d where d.username = :usnValue")
-				.setParameter("usnValue", username).executeUpdate();
+	public void removeDailyEmployee(long id){
+		
+		em.createQuery("DELETE FROM DailyEmployee d where d.id = :id")
+				.setParameter("id", id).executeUpdate();
 	}
 }
