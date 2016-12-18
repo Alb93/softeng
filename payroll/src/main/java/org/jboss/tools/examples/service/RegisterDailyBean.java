@@ -56,12 +56,7 @@ public class RegisterDailyBean implements Serializable {
     	empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
     	payrollController.registerEmployee(empl);
     	empBean.setDailyEmployees(payrollDAO.findAllDailyEmployees());
-    	/*try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("register_member.jsf");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+    	empl = new DailyEmployee();
         log.info("Registering " + empl.getName());
         
     }

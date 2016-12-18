@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.tools.examples.controller.PayrollController;
 import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
@@ -22,9 +21,6 @@ public class EmployeesBean implements Serializable {
 	
 	@Inject
     private Logger log;
-	
-	@Inject
-	private PayrollController payrollController;
 	
 	@Inject PayrollDAO payrollDAO;
 	private List<DailyEmployee> dailyEmployees;
