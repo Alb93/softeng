@@ -5,58 +5,130 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Register Monthly</title>
+	<title>Register</title>
+	<script type="text/javascript">
+		function showForm(type){
+			if (type == "1"){
+				document.getElementById("regD").style.display = 'block';
+				document.getElementById("regM").style.display = 'none';
+				} else {
+					document.getElementById("regM").style.display = 'block';
+					document.getElementById("regD").style.display = 'none';
+				}
+			}
+
+		
+	</script>
 </h:head>
-<h:body>
-        <h1>Welcome to WildFly!</h1>
-
-        <div>
-            <p>You have successfully deployed a Java EE 7 Enterprise
-                Application.</p>
-            <h3>Your application can run on:</h3>
-            <img src="resources/gfx/wildfly_400x130.jpg" />
-        </div>
-
-        <h:form id="reg">
-            <h2>Member Registration</h2>
-            <p>Enforces annotation-based constraints defined on the
-                model class.</p>
+<h:body onload="setDefaultRadio()">
+        <h:selectOneRadio id = "radio" onclick="showForm(this.value)" value = "1">
+   			<f:selectItem itemValue= "1" itemLabel="Daily Employee" />
+   			<f:selectItem itemValue= "2" itemLabel="Monthly Employee" />	   			
+		</h:selectOneRadio>	
+        <h:form id="regD">
+            <h2>Daily Employee Registration</h2>
             <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{registerDailyBean.empl.name}" />
-                <h:message for="name" errorClass="invalid" />
+                <h:outputLabel for="nameD" value="Name:" />
+                <h:inputText id="nameD" value="#{registerDailyBean.empl.name}" />
+                <h:message for="nameD" errorClass="invalid" />
 
-                <h:outputLabel for="surname" value="Surname:" />
-                <h:inputText id="surname" value="#{registerDailyBean.empl.surname}" />
-                <h:message for="surname" errorClass="invalid" />
+                <h:outputLabel for="surnameD" value="Surname:" />
+                <h:inputText id="surnameD" value="#{registerDailyBean.empl.surname}" />
+                <h:message for="surnameD" errorClass="invalid" />
                 
-                 <h:outputLabel for="paymentMethod" value="Payment method:" />
-                <h:inputText id="paymentMethod"
+                 <h:outputLabel for="paymentMethodD" value="Payment method:" />
+                <h:inputText id="paymentMethodD"
                     value="#{registerDailyBean.empl.paymentMethod}" />
-                <h:message for="paymentMethod" errorClass="paymentMethod" />
+                <h:message for="paymentMethodD" errorClass="paymentMethod" />
                 
-                 <h:outputLabel for="hourlyRate" value="Hourly rate:" />
-                <h:inputText id="hourlyRate"
+                 <h:outputLabel for="hourlyRateD" value="Hourly rate:" />
+                <h:inputText id="hourlyRateD"
                     value="#{registerDailyBean.empl.hourlyRate}" />
-                <h:message for="hourlyRate" errorClass="hourlyRate" />
+                <h:message for="hourlyRateD" errorClass="hourlyRate" />
                 
-  				<h:outputLabel for="duesRate" value="Dues rate:" />
-                <h:inputText id="duesRate"
+  				<h:outputLabel for="duesRateD" value="Dues rate:" />
+                <h:inputText id="duesRateD"
                     value="#{registerDailyBean.empl.dueRate}" />
-                <h:message for="duesRate" errorClass="duesRate" />
+                <h:message for="duesRateD" errorClass="duesRate" />
 
-                 <h:outputLabel for="username" value="Username:" />
-                <h:inputText id="username"
+                 <h:outputLabel for="usernameD" value="Username:" />
+                <h:inputText id="usernameD"
                     value="#{registerDailyBean.empl.username}" />
-                <h:message for="username" errorClass="invalid" />
+                <h:message for="usernameD" errorClass="invalid" />
                 
-                 <h:outputLabel for="password" value="Password:" />
-                <h:inputText id="password"
+                 <h:outputLabel for="passwordD" value="Password:" />
+                <h:inputText id="passwordD"
                     value="#{registerDailyBean.empl.password}" />
-                <h:message for="password" errorClass="password" /> 
+                <h:message for="passwordD" errorClass="password" /> 
                 
                 
             </h:panelGrid>
+
+		<p:growl id="msgsD" showDetail="true" />
+		
+		<p:panel header="Select a Union" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="Union" value="Union: " />
+				<p:selectOneMenu id="Union" value="#{unionDropdownView.country}"
+					style="width:150px">
+					<f:selectItem itemLabel="Select Union" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{unionDropdownView.unions}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+
+			<p:separator />
+
+		</p:panel>
+            <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="registerD"
+                        action="#{registerDailyBean.register()}"
+                        value="Register" styleClass="register" />
+                    <h:messages styleClass="messages"
+                        errorClass="invalid" infoClass="valid"
+                        warnClass="warning" globalOnly="true" />
+                </h:panelGrid>
+            </p>
+        </h:form>
+        
+        <h:form id="regM" style="display: none">
+		<h2>Monthly Employee Registration</h2>
+		<h:panelGrid columns="3" columnClasses="titleCell">
+			<h:outputLabel for="name" value="Name:" />
+			<h:inputText id="name" value="#{registerMonthlyBean.empl.name}" />
+			<h:message for="name" errorClass="invalid" />
+
+			<h:outputLabel for="surname" value="Surname:" />
+			<h:inputText id="surname" value="#{registerMonthlyBean.empl.surname}" />
+			<h:message for="surname" errorClass="invalid" />
+
+			<h:outputLabel for="paymentMethod" value="Payment method:" />
+			<h:inputText id="paymentMethod"
+				value="#{registerMonthlyBean.empl.paymentMethod}" />
+			<h:message for="paymentMethod" errorClass="paymentMethod" />
+
+			<h:outputLabel for="salary" value="Salary:" />
+			<h:inputText id="salary" value="#{registerMonthlyBean.empl.salary}" />
+			<h:message for="salary" errorClass="salary" />
+
+			<h:outputLabel for="duesRate" value="Dues rate:" />
+			<h:inputText id="duesRate"
+				value="#{registerMonthlyBean.empl.dueRate}" />
+			<h:message for="duesRate" errorClass="duesRate" />
+
+			<h:outputLabel for="username" value="Username:" />
+			<h:inputText id="username"
+				value="#{registerMonthlyBean.empl.username}" />
+			<h:message for="username" errorClass="invalid" />
+
+			<h:outputLabel for="password" value="Password:" />
+			<h:inputText id="password"
+				value="#{registerMonthlyBean.empl.password}" />
+			<h:message for="password" errorClass="password" />
+
+
+		</h:panelGrid>
 
 		<p:growl id="msgs1" showDetail="true" />
 		
@@ -74,50 +146,22 @@
 			<p:separator />
 
 		</p:panel>
+		
+		
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{registerDailyBean.register()}"
+                        action="#{registerMonthlyBean.register()}"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
                         warnClass="warning" globalOnly="true" />
                 </h:panelGrid>
             </p>
-        </h:form>
-       <!--  <h2>Members</h2>
-        <h:panelGroup rendered="#{empty members}">
-            <em>No registered members.</em>
-        </h:panelGroup> -->
-     <!--    <h:dataTable var="_member" value="#{members}"
-            rendered="#{not empty members}"
-            styleClass="simpletablestyle">
-            <h:column>
-                <f:facet name="header">Id</f:facet>
-                #{_member.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{_member.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{_member.email}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Phone #</f:facet>
-                #{_member.phoneNumber}
-            </h:column>
-            <h:column>
-                <f:facet name="header">REST URL</f:facet>
-                <a
-                    href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
-            </h:column>
-            <f:facet name="footer">
-            REST URL for all members: <a
-                    href="#{request.contextPath}/rest/members">/rest/members</a>
-            </f:facet>
-        </h:dataTable> -->
+		
+	</h:form>
+      
+
 
 </h:body>
 </html>
