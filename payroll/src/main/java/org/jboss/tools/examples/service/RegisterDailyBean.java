@@ -1,5 +1,6 @@
 package org.jboss.tools.examples.service;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,14 @@ public class RegisterDailyBean implements Serializable {
     	empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
     	payrollController.registerEmployee(empl);
     	empBean.setDailyEmployees(payrollDAO.findAllDailyEmployees());
+    	/*try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("register_member.jsf");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
         log.info("Registering " + empl.getName());
+        
     }
     
     public void setEmpl(DailyEmployee empl) {

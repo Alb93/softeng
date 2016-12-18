@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Edit</title>
+	
+</h:head>
+<h:body>
+        
+        <h:form id="regD">
+            <h2>Daily Employee Edit</h2>
+            <h:panelGrid columns="3" columnClasses="titleCell">
+                <h:outputLabel for="nameD" value="Name:" />
+                <h:inputText id="nameD" value="#{employeesBean.dEmployee.name}" />
+                <h:message for="nameD" errorClass="invalid" />
+
+                <h:outputLabel for="surnameD" value="Surname:" />
+                <h:inputText id="surnameD" value="#{employeesBean.dEmployee.surname}" />
+                <h:message for="surnameD" errorClass="invalid" />
+                
+                 <h:outputLabel for="paymentMethodD" value="Payment method:" />
+                <h:inputText id="paymentMethodD"
+                    value="#{employeesBean.dEmployee.paymentMethod}" />
+                <h:message for="paymentMethodD" errorClass="paymentMethod" />
+                
+                 <h:outputLabel for="hourlyRateD" value="Hourly rate:" />
+                <h:inputText id="hourlyRateD"
+                    value="#{employeesBean.dEmployee.hourlyRate}" />
+                <h:message for="hourlyRateD" errorClass="hourlyRate" />
+                
+  				<h:outputLabel for="duesRateD" value="Dues rate:" />
+                <h:inputText id="duesRateD"
+                    value="#{employeesBean.dEmployee.dueRate}" />
+                <h:message for="duesRateD" errorClass="duesRate" />
+
+                 <h:outputLabel for="usernameD" value="Username:" />
+                <h:inputText id="usernameD"
+                    value="#{employeesBean.dEmployee.username}" />
+                <h:message for="usernameD" errorClass="invalid" />
+                
+                 <h:outputLabel for="passwordD" value="Password:" />
+                <h:inputText id="passwordD"
+                    value="#{employeesBean.dEmployee.password}" />
+                <h:message for="passwordD" errorClass="password" /> 
+                
+                
+            </h:panelGrid>
+
+		<p:growl id="msgsD" showDetail="true" />
+		
+		<p:panel header="Select a Union" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="Union" value="Union: " />
+				<p:selectOneMenu id="Union" value="#{unionDropdownView.country}"
+					style="width:150px">
+					<f:selectItem itemLabel="Select Union" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{unionDropdownView.unions}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+
+			<p:separator />
+
+		</p:panel>
+            <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="registerD"
+                        action="#{registerDailyBean.register()}"
+                        value="Register" styleClass="register" />
+                    <h:messages styleClass="messages"
+                        errorClass="invalid" infoClass="valid"
+                        warnClass="warning" globalOnly="true" />
+                </h:panelGrid>
+            </p>
+        </h:form>
+        
+        
+      
+
+
+</h:body>
+</html>
+
