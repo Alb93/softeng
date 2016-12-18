@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.tools.examples.controller.PayrollController;
+import org.jboss.tools.examples.dao.PayrollDAO;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.tools.examples.model.union.Union;
 import org.jboss.tools.examples.utils.UnionDropdownView;
@@ -26,6 +27,10 @@ public class RegisterMonthlyBean implements Serializable {
 	
 	@Inject
 	private PayrollController payrollController;
+	
+	@Inject EmployeesBean empBean;
+	
+	@Inject PayrollDAO payrollDAO;
     
 	private UnionDropdownView dropdown;
     private MonthlyEmployeeWithSales empl;
@@ -48,6 +53,7 @@ public class RegisterMonthlyBean implements Serializable {
     public void register() {
     	empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
     	payrollController.registerEmployee(empl);
+    	empBean.setMonthlyEmployees(payrollDAO.findAllMonthlyEmployees());
   //  	System.out.println(dropdown.getCountry()+" Djj");
         log.info("Registering " + empl.getName());
     }

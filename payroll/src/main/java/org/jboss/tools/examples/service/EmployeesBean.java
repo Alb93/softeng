@@ -23,15 +23,14 @@ public class EmployeesBean implements Serializable {
     private Logger log;
 	
 	@Inject PayrollDAO payrollDAO;
-	private DailyEmployee dEmpl;
 	private List<DailyEmployee> dailyEmployees;
-	private List<MonthlyEmployeeWithSales> monthlyEmployeeWithSales;
+	private List<MonthlyEmployeeWithSales> monthlyEmployees;
 	
 	@PostConstruct
 	public void init() {
 		log.info("Logger");
-		dEmpl = new DailyEmployee();
 		dailyEmployees = payrollDAO.findAllDailyEmployees();
+		monthlyEmployees = payrollDAO.findAllMonthlyEmployees();
 		
 	}
 	
@@ -43,11 +42,27 @@ public class EmployeesBean implements Serializable {
 		return dailyEmployees;
 	}
 	
+	public void setMonthlyEmployees(List<MonthlyEmployeeWithSales> monthlyEmployees) {
+		this.monthlyEmployees = monthlyEmployees;
+	}
+	
+	public List<MonthlyEmployeeWithSales> getMonthlyEmployees() {
+		return monthlyEmployees;
+	}
+	
 	public void removeDailyEmployee(DailyEmployee emp) throws IOException{
 		//System.out.println("Cancellando" + emp.getName());
 		payrollDAO.removeDailyEmployee(emp.getId());
 		dailyEmployees.remove(dailyEmployees.indexOf(emp));
 	}
+	
+	public void removeMonthlyEmployee(MonthlyEmployeeWithSales emp) throws IOException{
+		
+		payrollDAO.removeMonthlyEmployee(emp.getId());
+		monthlyEmployees.remove(monthlyEmployees.indexOf(emp));
+	}
+	
+	
 	
 	
 

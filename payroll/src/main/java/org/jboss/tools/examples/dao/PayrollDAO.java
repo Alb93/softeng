@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import org.jboss.tools.examples.model.admin.Admin;
 import org.jboss.tools.examples.model.employees.DailyEmployee;
 import org.jboss.tools.examples.model.employees.Employee;
+import org.jboss.tools.examples.model.employees.MonthlyEmployee;
 import org.jboss.tools.examples.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.tools.examples.model.salesreceipt.SalesReceipt;
 import org.jboss.tools.examples.model.timecard.TimeCard;
@@ -101,6 +102,13 @@ public class PayrollDAO {
 		return dailyEmployees;
 	}
 	
+	public List<MonthlyEmployeeWithSales> findAllMonthlyEmployees(){
+		List<MonthlyEmployeeWithSales> monthlyEmployees =
+				em.createQuery("select m from MonthlyEmployeeWithSales m", MonthlyEmployeeWithSales.class)
+				.getResultList();
+		return monthlyEmployees;
+	}
+	
 	public List<Union> findAllUnions(){
 		List<Union> unions =
 				em.createQuery("select u from Union u", Union.class)
@@ -127,6 +135,12 @@ public class PayrollDAO {
 	public void removeDailyEmployee(long id){
 		
 		em.createQuery("DELETE FROM DailyEmployee d where d.id = :id")
+				.setParameter("id", id).executeUpdate();
+	}
+	
+public void removeMonthlyEmployee(long id){
+		
+		em.createQuery("DELETE FROM MonthlyEmployeeWithSales d where d.id = :id")
 				.setParameter("id", id).executeUpdate();
 	}
 }
