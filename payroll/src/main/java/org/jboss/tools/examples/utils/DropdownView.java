@@ -6,11 +6,12 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
  
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class DropdownView implements Serializable {
      
 	   private String country; 

@@ -24,6 +24,7 @@ public class EmployeesBean implements Serializable {
 	
 	@Inject PayrollDAO payrollDAO;
 	private List<DailyEmployee> dailyEmployees;
+	private DailyEmployee dEmployee;
 	private List<MonthlyEmployeeWithSales> monthlyEmployees;
 	
 	@PostConstruct
@@ -34,6 +35,15 @@ public class EmployeesBean implements Serializable {
 		
 	}
 	
+	public void setdEmployee(DailyEmployee dEmployee) {
+		System.out.println("Sto settando" + dEmployee.getName());
+		this.dEmployee = dEmployee;
+	}
+	
+	public DailyEmployee getdEmployee() {
+		return dEmployee;
+	}
+
 	public void setDailyEmployees(List<DailyEmployee> dailyEmployees) {
 		this.dailyEmployees = dailyEmployees;
 	}
@@ -60,6 +70,17 @@ public class EmployeesBean implements Serializable {
 		
 		payrollDAO.removeMonthlyEmployee(emp.getId());
 		monthlyEmployees.remove(monthlyEmployees.indexOf(emp));
+	}
+	
+	public void goToEditDailyPage(DailyEmployee d){
+		setdEmployee(d);
+		try {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("edit_daily.jsf");
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
 	}
 	
 	

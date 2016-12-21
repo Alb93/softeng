@@ -34,15 +34,17 @@ public class RegisterDailyBean implements Serializable {
     
     private DailyEmployee empl;
 	private UnionDropdownView dropdown;
+	private Map<String,Long> list;
 
     
     @PostConstruct
 	public void init() {
+    	System.out.println("INIZIALIZZANDO dailylist");
 		empl = new DailyEmployee();
 		FacesContext context = FacesContext.getCurrentInstance();
         dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
     	List<Union> unions = payrollController.findAllUnions();
-    	Map<String,Long> list = new HashMap<>();
+    	list = new HashMap<>();
     	for (Union union : unions) {
 			list.put(union.getName(),union.getId());
 			System.out.println(union.getName());
@@ -52,10 +54,15 @@ public class RegisterDailyBean implements Serializable {
 	}
     
     public void register() {
-    	empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
+    	String id = dropdown.getCountry();
+    	if(!id.equals("null")){
+    		empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
+    	}
     	payrollController.registerEmployee(empl);
     	empBean.setDailyEmployees(payrollDAO.findAllDailyEmployees());
+    	empl = new DailyEmployee();
         log.info("Registering " + empl.getName());
+        
     }
     
     public void setEmpl(DailyEmployee empl) {

@@ -5,72 +5,54 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Post Sales Receipt</title>
+	<title>Calendar1</title>
 </h:head>
 <h:body>
 	<p>
 		<h:outputText value="#{loggedMonthlyBean.empl.username}"></h:outputText>
 	</p>
 	<h:form id="form">
-    <p:growl id="msgs" showDetail="true" />
+<p:growl id="msgs" showDetail="true" />
  
-    <h:panelGrid columns="2" cellpadding="5">
-        <p:outputLabel for="popup" value="Date:" />
-        <p:calendar id="popup" value="#{calendarView.date2}" />
+ <h:panelGrid columns="2" cellpadding="5">
+ <p:outputLabel for="popup" value="Popup:" />
+<p:calendar id="popup" value="#{calendarView.date2}" />
  
-    </h:panelGrid>
+ </h:panelGrid>
  
-    
- 
-    <p:dialog modal="true" resizable="false" header="Values"
+ <p:commandButton value="Submit" update="msgs"
+			actionListener="#{calendarView.click}" icon="ui-icon-check" />
+
+ <p:dialog modal="true" resizable="false" header="Values"
 			widgetVar="dlg" showEffect="fold">
-        <p:panelGrid id="display" columns="2"
+ <p:panelGrid id="display" columns="2"
 				columnClasses="label,value">
-         
-            <h:outputText value="Popup:" />
-            <h:outputText value="#{calendarView.date2}">
-                <f:convertDateTime pattern="MM/dd/yyyy" />
-            </h:outputText>
+ 
+ <h:outputText value="Popup:" />
+<h:outputText value="#{calendarView.date2}">
+ <f:convertDateTime pattern="MM/dd/yyyy" />
+ </h:outputText>
 
 
-        </p:panelGrid>
-    </p:dialog>
+ </p:panelGrid>
+ </p:dialog>
 
-		<h:outputLabel for="amount" value="Amount:" />
-		<h:inputText id="amount" value="#{postSalesReceiptBean.r.amount}" />
-		<h:message for="amount" errorClass="amounts" />
-
-		<p>
-			<h:panelGrid columns="2">
-				<h:commandButton id="post"
-					action="#{postSalesReceiptBean.post()}"
-					value="Post a sales receipt" styleClass="post" />
-				<h:messages styleClass="messages" errorClass="invalid"
-					infoClass="valid" warnClass="warning" globalOnly="true" />
-			</h:panelGrid>
-		</p>
-
-		<p:growl id="msgs1" showDetail="true" />
-
-		<p:panel header="Select an Employee" style="margin-bottom:10px;">
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel for="country" value="Employee: " />
-				<p:selectOneMenu id="country" value="#{dropdownView.country}"
-					style="width:150px">
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{dropdownView.employees}" />
-				</p:selectOneMenu>
-			</h:panelGrid>
-
-			<p:separator />
-
-			<p:commandButton value="Submit" update="msgs1"
-				actionListener="#{dropdownView.displayLocation}"
-				icon="ui-icon-check" />
-		</p:panel>
-
-
+				<h:outputLabel for="amount" value="Amount:" />
+				<h:inputText id="amount"
+					value="#{postSalesReceiptBean.r.amount}" />
+				<h:message for="amount" errorClass="amounts" />
+                
+                 <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="post"
+                        action="#{postSalesReceiptBean.post()}"
+                        value="Post a sales receipt" styleClass="post" />
+                    <h:messages styleClass="messages"
+                        errorClass="invalid" infoClass="valid"
+                        warnClass="warning" globalOnly="true" />
+                </h:panelGrid>
+            </p>
+             
 	</h:form>
 
 </h:body>

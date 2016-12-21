@@ -34,14 +34,16 @@ public class RegisterMonthlyBean implements Serializable {
     
 	private UnionDropdownView dropdown;
     private MonthlyEmployeeWithSales empl;
+    private Map<String,Long> list;
     
     @PostConstruct
 	public void init() {
+    	System.out.println("INIZIALIZZANDO monthlylist");
 		empl = new MonthlyEmployeeWithSales();
 		FacesContext context = FacesContext.getCurrentInstance();
         dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
     	List<Union> unions = payrollController.findAllUnions();
-    	Map<String,Long> list = new HashMap<>();
+    	list = new HashMap<>();
     	for (Union union : unions) {
 			list.put(union.getName(),union.getId());
 			System.out.println(union.getName());
@@ -51,7 +53,10 @@ public class RegisterMonthlyBean implements Serializable {
 	}
     
     public void register() {
-    	empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
+    	String id = dropdown.getCountry();
+    	if(!id.equals("null")){
+    		empl.setUnion_id(Long.parseLong(dropdown.getCountry()));
+    	}
     	payrollController.registerEmployee(empl);
     	empBean.setMonthlyEmployees(payrollDAO.findAllMonthlyEmployees());
   //  	System.out.println(dropdown.getCountry()+" Djj");
