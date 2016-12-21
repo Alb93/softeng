@@ -20,16 +20,16 @@
 
 	<div>
 		<h2>Employee login</h2>
-		<p>Please enter your username and password.</p>
+		<p:outputLabel value="Please enter your username and password." />
 		<h:form id="reg">
 			<h:panelGrid columns="3" columnClasses="titleCell">
-				<h:outputLabel for="username" value="Username:" />
+				<p:outputLabel for="username" value="Username:" />
 				<p:inputText id="username" value="#{loginProxy.username}">
 					<f:validateRequired />
 				</p:inputText>
 				<h:message for="username" errorClass="invalid" />
 
-				<h:outputLabel for="password" value="Password:" />
+				<p:outputLabel for="password" value="Password:" />
 				<p:password id="password" value="#{loginProxy.password}">
 					<f:validateRequired />
 				</p:password>
@@ -38,10 +38,10 @@
 
 			<h:panelGrid columns="2">
 				<h:form>
-				<h:commandButton id="login" action="#{loginProxy.checkLogin()}"
-					value="Login" styleClass="register"/>
-				<h:messages styleClass="messages" errorClass="invalid"
-					infoClass="valid" warnClass="warning" globalOnly="true" />
+					<h:commandButton id="login" action="#{loginProxy.checkLogin()}"
+						value="Login" styleClass="register" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:form>
 			</h:panelGrid>
 

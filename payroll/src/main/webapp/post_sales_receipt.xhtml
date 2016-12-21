@@ -8,51 +8,47 @@
 	<title>Post Sales Receipt</title>
 </h:head>
 <h:body>
-	<h:outputStylesheet library="css" name="style.css" />
-	<ul>
-		<li><a href="./index.jsf">Home</a></li>
-		<li><a href="./login.jsf">Employee</a></li>
-		<li><a href="./login_admin.jsf">Admin</a></li>
-		<li><a class="active" href="./login_union.jsf">Union</a></li>
-		<li style="float: right"><a class="active" href="">User: <h:outputText
-					value="#{loggedMonthlyBean.empl.username}"></h:outputText></a></li>
-	</ul>
-
+	<p>
+		<h:outputText value="#{loggedMonthlyBean.empl.username}"></h:outputText>
+	</p>
 	<h:form id="form">
-    	<p:growl id="msgs" showDetail="true" />
- <div>
-	    <h:panelGrid columns="2" cellpadding="5">
-	        <p:outputLabel for="popup" value="Date:" />
-	        <p:calendar id="popup" value="#{calendarView.date2}" />
-	    </h:panelGrid>
- </div>
-<div>
-	    <p:dialog modal="true" resizable="false" header="Values"
-				widgetVar="dlg" showEffect="fold">
-	        <p:panelGrid id="display" columns="2"
-					columnClasses="label,value">
-	         
-	            <h:outputText value="Popup:" />
-	            <h:outputText value="#{calendarView.date2}">
-	                <f:convertDateTime pattern="MM/dd/yyyy" />
-	            </h:outputText>
-	
-	        </p:panelGrid>
-	    </p:dialog>
-</div>
-<div>
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <h:panelGrid columns="2" cellpadding="5">
+        <p:outputLabel for="popup" value="Date:" />
+        <p:calendar id="popup" value="#{calendarView.date2}" />
+ 
+    </h:panelGrid>
+ 
+    
+ 
+    <p:dialog modal="true" resizable="false" header="Values"
+			widgetVar="dlg" showEffect="fold">
+        <p:panelGrid id="display" columns="2"
+				columnClasses="label,value">
+         
+            <h:outputText value="Popup:" />
+            <h:outputText value="#{calendarView.date2}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+
+
+        </p:panelGrid>
+    </p:dialog>
+
 		<h:outputLabel for="amount" value="Amount:" />
 		<h:inputText id="amount" value="#{postSalesReceiptBean.r.amount}" />
 		<h:message for="amount" errorClass="amounts" />
-</div>
-	
+
+		<p>
 			<h:panelGrid columns="2">
-				<h:commandButton id="post" action="#{postSalesReceiptBean.post()}"
+				<h:commandButton id="post"
+					action="#{postSalesReceiptBean.post()}"
 					value="Post a sales receipt" styleClass="post" />
 				<h:messages styleClass="messages" errorClass="invalid"
 					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
-	
+		</p>
 
 		<p:growl id="msgs1" showDetail="true" />
 
@@ -73,6 +69,9 @@
 				actionListener="#{dropdownView.displayLocation}"
 				icon="ui-icon-check" />
 		</p:panel>
+
+
 	</h:form>
+
 </h:body>
 </html>
