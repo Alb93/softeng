@@ -48,9 +48,9 @@
   SHAPE="32,417,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#login_union.xhtml:0" NAME="item"
    PATH="/login_union.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="success_u::#post_sales_receipt.xhtml"
-    NAME="output" PATH="/post_sales_receipt.xhtml"
-    TARGET="rules:#post_sales_receipt.xhtml" TITLE="success_u" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="success_u::#post_service_charge.xhtml"
+    NAME="output" PATH="/post_service_charge.xhtml"
+    TARGET="rules:#post_service_charge.xhtml" TITLE="success_u" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
   <PROCESS-ITEM ID="rules:#login_union.xhtml:1" NAME="item1"
    PATH="/login_union.xhtml" model-entity="JSFProcessItem">
@@ -76,4 +76,6 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#admin_operations.xhtml"
   PATH="/admin_operations.xhtml" SHAPE="272,609,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#post_service_charge.xhtml"
+  PATH="/post_service_charge.xhtml" SHAPE="272,465,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
