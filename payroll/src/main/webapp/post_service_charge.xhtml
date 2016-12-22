@@ -14,7 +14,7 @@
 		<li><a href="./login_admin.jsf">Admin</a></li>
 		<li><a class="active" href="./login_union.jsf">Union</a></li>
 		<li style="float: right"><a class="active" href="">User: <h:outputText
-					value="#{loggedMonthlyBean.empl.username}"></h:outputText></a></li>
+					value="#{loggedUnionBean.u.username}"></h:outputText></a></li>
 	</ul>
 
 	<h:form id="form">
@@ -47,7 +47,7 @@
 	
 			<h:panelGrid columns="2">
 				<h:commandButton id="post" action="#{postServiceChargeBean.post()}"
-					value="Post a sales receipt" styleClass="post" />
+					value="Post a service charge" styleClass="post" />
 				<h:messages styleClass="messages" errorClass="invalid"
 					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
@@ -60,8 +60,6 @@
 				<p:outputLabel for="country" value="Employee: " />
 				<p:selectOneMenu id="country" value="#{dropdownView.country}"
 					style="width:150px">
-					<f:selectItem itemLabel="Select Employee" itemValue="null"
-						noSelectionOption="true" />
 					<f:selectItems value="#{dropdownView.employees}" />
 				</p:selectOneMenu>
 			</h:panelGrid>

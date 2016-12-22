@@ -15,10 +15,13 @@
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
-		
-			<p:column headerText="ID">
+             <p:column headerText="ID">
             	<h:outputText value="#{item.id}" />
         	</p:column>
+			<p:column headerText="Username">
+            	<h:outputText value="#{item.username}" />
+        	</p:column>
+		
 			<p:column headerText="Name">
             	<h:outputText value="#{item.name}" />
         	</p:column>
@@ -27,9 +30,7 @@
             	<h:outputText value="#{item.surname}" />
         	</p:column>
         	
-        	<p:column headerText="Username">
-            	<h:outputText value="#{item.username}" />
-        	</p:column>
+        	
         	
         	<p:column>
             	<p:commandButton update="@form" actionListener="#{employeesBean.goToEditDailyPage(item)}" value="EDIT"  >
@@ -45,9 +46,11 @@
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
-		
 			<p:column headerText="ID">
             	<h:outputText value="#{item.id}" />
+        	</p:column>
+			<p:column headerText="Username">
+            	<h:outputText value="#{item.username}" />
         	</p:column>
 			<p:column headerText="Name">
             	<h:outputText value="#{item.name}" />
@@ -57,12 +60,10 @@
             	<h:outputText value="#{item.surname}" />
         	</p:column>
         	
-        	<p:column headerText="Username">
-            	<h:outputText value="#{item.username}" />
-        	</p:column>
+        	
         	
         	<p:column>
-            	<p:commandButton update="@form" actionListener="#{employeesBean.removeMonthlyEmployee(item)}" value="EDIT"  >
+            	<p:commandButton update="@form" actionListener="#{employeesBean.goToEditMonthlyPage(item)}" value="EDIT"  >
             		
             	</p:commandButton>
         	</p:column>
