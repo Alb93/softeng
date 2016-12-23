@@ -27,7 +27,6 @@ public class MonthlyEmployeesBean implements Serializable {
 	@Inject
 	private PayrollController payrollController;
 	
-	@Inject PayrollDAO payrollDAO;
 	@Inject PostServiceChargeBean serviceChargeBean;
 	private MonthlyEmployeeWithSales mEmployee;
 	private List<MonthlyEmployeeWithSales> monthlyEmployees;
@@ -36,7 +35,7 @@ public class MonthlyEmployeesBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		monthlyEmployees = payrollDAO.findAllMonthlyEmployees();
+		monthlyEmployees = payrollController.findAllMonthlyEmployees();
 		FacesContext context = FacesContext.getCurrentInstance();
         dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
     	List<Union> unions = payrollController.findAllUnions();
@@ -68,7 +67,7 @@ public class MonthlyEmployeesBean implements Serializable {
 	
 	public void removeMonthlyEmployee(MonthlyEmployeeWithSales emp) throws IOException{
 		System.out.println("Cancellando" + emp.getName());	
-		payrollDAO.removeMonthlyEmployee(emp.getId());
+		payrollController.removeMonthlyEmployee(emp.getId());
 		monthlyEmployees.remove(monthlyEmployees.indexOf(emp));
 		serviceChargeBean.reload();
 	}
@@ -91,7 +90,7 @@ public class MonthlyEmployeesBean implements Serializable {
 		
 		mEmployee.setUnion_name(dropdown.getUnion());
 		payrollController.updateMonthlyEmployee(mEmployee);
-		monthlyEmployees = payrollDAO.findAllMonthlyEmployees();
+		monthlyEmployees = payrollController.findAllMonthlyEmployees();
 		serviceChargeBean.reload();
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("edit_employee.jsf");

@@ -105,10 +105,20 @@ public class PayrollController {
 	public void postServiceCharge(ServiceCharge s){
 		payrollDAO.postServiceCharge(s);
 	}
-
+	
+	public List<DailyEmployee> findAllDailyEmployees() {
+		return payrollDAO.findAllDailyEmployees();
+	}
+	
+	public void removeDailyEmployee(int id){
+		payrollDAO.removeDailyEmployee(id);
+	}
+	
 	public List<Union> findAllUnions() {
 		return payrollDAO.findAllUnions();
 	}
+
+	
 	
 	public Union findCorrespondingUnion(String name) {
 		return payrollDAO.findCorrespondingUnion(name);
@@ -130,6 +140,15 @@ public class PayrollController {
 	
 	public void updateMonthlyEmployee(MonthlyEmployeeWithSales m){
 		payrollDAO.updateMonthlyEmployee(m);
+	}
+
+	public List<MonthlyEmployeeWithSales> findAllMonthlyEmployees() {
+		return payrollDAO.findAllMonthlyEmployees();
+	}
+
+	public void removeMonthlyEmployee(int id) {
+		payrollDAO.removeMonthlyEmployee(id);
+		
 	}
     
 

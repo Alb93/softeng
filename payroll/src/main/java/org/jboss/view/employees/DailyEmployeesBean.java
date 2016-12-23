@@ -27,7 +27,6 @@ public class DailyEmployeesBean implements Serializable {
 	@Inject
 	private PayrollController payrollController;
 	
-	@Inject PayrollDAO payrollDAO;
 	@Inject PostServiceChargeBean serviceChargeBean;
 	private List<DailyEmployee> dailyEmployees;
 	private DailyEmployee dEmployee;
@@ -36,7 +35,7 @@ public class DailyEmployeesBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		dailyEmployees = payrollDAO.findAllDailyEmployees();
+		dailyEmployees = payrollController.findAllDailyEmployees();
 		FacesContext context = FacesContext.getCurrentInstance();
         dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
     	List<Union> unions = payrollController.findAllUnions();
@@ -69,7 +68,7 @@ public class DailyEmployeesBean implements Serializable {
 	
 	public void removeDailyEmployee(DailyEmployee emp) throws IOException{
 		System.out.println("Cancellando" + emp.getName());	
-		payrollDAO.removeDailyEmployee(emp.getId());	
+		payrollController.removeDailyEmployee(emp.getId());	
 		dailyEmployees.remove(dailyEmployees.indexOf(emp));
 		serviceChargeBean.reload();
 	}
@@ -92,7 +91,7 @@ public class DailyEmployeesBean implements Serializable {
 		
 		dEmployee.setUnion_name(dropdown.getUnion());
 		payrollController.updateDailyEmployee(dEmployee);
-		dailyEmployees = payrollDAO.findAllDailyEmployees();
+		dailyEmployees = payrollController.findAllDailyEmployees();
 		serviceChargeBean.reload();
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("edit_employee.jsf");
