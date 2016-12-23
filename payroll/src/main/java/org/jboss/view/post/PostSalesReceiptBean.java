@@ -1,4 +1,4 @@
-package org.jboss.view;
+package org.jboss.view.post;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import org.jboss.controller.PayrollController;
 import org.jboss.model.salesreceipt.SalesReceipt;
+import org.jboss.view.login.LoggedMonthlyBean;
 import org.jboss.view.utils.CalendarView;
 
 @SuppressWarnings("serial")

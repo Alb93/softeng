@@ -1,4 +1,4 @@
-package org.jboss.view;
+package org.jboss.view.post;
 
 import java.io.Serializable;
 import java.sql.Date;

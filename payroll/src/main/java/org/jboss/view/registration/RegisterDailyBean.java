@@ -1,5 +1,6 @@
-package org.jboss.view;
+package org.jboss.view.registration;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +13,35 @@ import javax.inject.Named;
 
 import org.jboss.controller.PayrollController;
 import org.jboss.dao.PayrollDAO;
-import org.jboss.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.union.Union;
+import org.jboss.view.employees.DailyEmployeesBean;
+import org.jboss.view.post.PostServiceChargeBean;
 import org.jboss.view.utils.UnionDropdownView;
 
 @SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class RegisterMonthlyBean implements Serializable {
+public class RegisterDailyBean implements Serializable {
 	
 	
 	@Inject
 	private PayrollController payrollController;
 	
-	@Inject EmployeesBean empBean;
-	
 	@Inject PayrollDAO payrollDAO;
+	
+	@Inject DailyEmployeesBean empBean;
+	
+	@Inject PostServiceChargeBean serviceBean;
     
+    private DailyEmployee empl;
 	private UnionDropdownView dropdown;
-    private MonthlyEmployeeWithSales empl;
-    private ArrayList<String> unionNames;
+	private ArrayList<String> unionNames;
+
     
     @PostConstruct
 	public void init() {
-		empl = new MonthlyEmployeeWithSales();
+		empl = new DailyEmployee();
 		FacesContext context = FacesContext.getCurrentInstance();
         dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
     	List<Union> unions = payrollController.findAllUnions();
@@ -46,24 +52,36 @@ public class RegisterMonthlyBean implements Serializable {
 			System.out.println(union.getName());
 		}
     	
+    	for (String name : unionNames) {
+    		System.out.println(name);
+		}
+    	
         dropdown.setUnions(unionNames);
 	}
     
     public void register() {
     	String name = dropdown.getUnion();
+    	//System.out.println("nome union " + name);
     	empl.setUnion_name(name);
     	payrollController.registerEmployee(empl);
-    	empBean.setMonthlyEmployees(payrollDAO.findAllMonthlyEmployees());
+    	empBean.setDailyEmployees(payrollDAO.findAllDailyEmployees());
+    	serviceBean.reload();
     	System.out.println("Registering" + empl.getName());   
-    	empl = new MonthlyEmployeeWithSales();
+    	empl = new DailyEmployee(); 
+    	try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("admin_operations.jsf");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
     }
     
-    public MonthlyEmployeeWithSales getEmpl() {
-		return empl;
-	}
-    
-    public void setEmpl(MonthlyEmployeeWithSales empl) {
+    public void setEmpl(DailyEmployee empl) {
 		this.empl = empl;
 	}
-  
+    
+    public DailyEmployee getEmpl() {
+		return empl;
+	}
+
 }

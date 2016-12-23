@@ -54,10 +54,6 @@ public class PayrollDAO {
 		System.out.println("Posted "+r.getId());
 	}
 
-	public void registerUnion(Union u) {
-		em.persist(u);
-	}
-
 	public Union doLoginUnion(String username, String password) {
 
 		try {
@@ -135,6 +131,9 @@ public class PayrollDAO {
 				.setParameter("unionName", name).getResultList();
 		
 		List<Employee> emplist = new LinkedList<>();
+		for (int i = 0; i < emplist.size(); i++) {
+			System.out.println("Nome" + emplist.get(i).getName());
+		}
 		emplist.addAll(employees);
 		emplist.addAll(monthlyEmployeeWithSales);
 		

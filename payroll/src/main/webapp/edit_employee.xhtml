@@ -11,7 +11,7 @@
 	
 	<h2>Daily Employees</h2>
 	<h:form>
-		<p:dataTable id="table" var="item" value="#{employeesBean.dailyEmployees}" rows="10"
+		<p:dataTable id="table" var="item" value="#{dailyEmployeesBean.dailyEmployees}" rows="10"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
@@ -33,7 +33,7 @@
         	
         	
         	<p:column>
-            	<p:commandButton update="@form" actionListener="#{employeesBean.goToEditDailyPage(item)}" value="EDIT"  >
+            	<p:commandButton update="@form" actionListener="#{dailyEmployeesBean.goToEditDailyPage(item)}" value="EDIT"  >
             		
             	</p:commandButton>
         	</p:column>
@@ -42,7 +42,7 @@
 	</h:form>
 	<h2>Monthly Employees</h2>
 	<h:form>
-		<p:dataTable id="table" var="item" value="#{employeesBean.monthlyEmployees}" rows="10"
+		<p:dataTable id="table" var="item" value="#{monthlyEmployeesBean.monthlyEmployees}" rows="10"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
@@ -63,7 +63,7 @@
         	
         	
         	<p:column>
-            	<p:commandButton update="@form" actionListener="#{employeesBean.goToEditMonthlyPage(item)}" value="EDIT"  >
+            	<p:commandButton update="@form" actionListener="#{monthlyEmployeesBean.goToEditMonthlyPage(item)}" value="EDIT"  >
             		
             	</p:commandButton>
         	</p:column>

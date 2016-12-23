@@ -69,9 +69,6 @@ public class PayrollController {
 		payrollDAO.postSalesReceipt(r);
 	}
 	
-	public void registerUnion(Union u) {
-		payrollDAO.registerUnion(u);
-	}
 	
 	public String checkLoginUnion(String username, String password){
 		

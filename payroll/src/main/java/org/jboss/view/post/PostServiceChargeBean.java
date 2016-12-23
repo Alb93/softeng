@@ -1,4 +1,4 @@
-package org.jboss.view;
+package org.jboss.view.post;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,6 +15,7 @@ import org.jboss.controller.PayrollController;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.union.ServiceCharge;
 import org.jboss.model.union.Union;
+import org.jboss.view.login.LoginUnionBean;
 import org.jboss.view.utils.DropdownView;
 
 @Named
@@ -53,6 +54,21 @@ public class PostServiceChargeBean implements Serializable {
     	r.setEmp_id(Integer.parseInt((dropdown.getCountry())));
     	payrollController.postServiceCharge(r);
         //log.info("posting " + r.getId_emp()+" sales receipt");
+    }
+    
+    public void reload(){
+    	FacesContext context = FacesContext.getCurrentInstance();
+        dropdown = (DropdownView) context.getApplication().evaluateExpressionGet(context, "#{dropdownView}", DropdownView.class);
+        LoginUnionBean loginUnionBean = (LoginUnionBean) context.getApplication().evaluateExpressionGet(context, "#{loginUnionBean}", LoginUnionBean.class);
+        u = loginUnionBean.getU();
+    	List<Employee> employees = payrollController.findAllUnionsEmployee(u.getName());
+    	Map<String,Integer> list = new HashMap<>();
+    	for (Employee employee : employees) {
+			list.put(employee.getName()+" "+employee.getSurname(),employee.getId());
+			System.out.println(employee.getName()+" "+employee.getSurname());
+		}
+    	
+        dropdown.setEmployees(list);
     }
 
 	

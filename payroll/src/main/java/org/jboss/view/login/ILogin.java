@@ -1,4 +1,4 @@
-package org.jboss.view;
+package org.jboss.view.login;
 
 import org.jboss.model.employees.Employee;
 

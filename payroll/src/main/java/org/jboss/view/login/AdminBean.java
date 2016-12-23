@@ -1,4 +1,4 @@
-package org.jboss.view;
+package org.jboss.view.login;
 
 import java.io.Serializable;
 

@@ -1,24 +1,20 @@
-package org.jboss.view;
+package org.jboss.view.login;
 
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.controller.PayrollController;
-import org.jboss.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.model.employees.DailyEmployee;
 
+@SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class LoggedMonthlyBean implements Serializable {
+public class LoggedDailyBean implements Serializable {
 	
 	
-	
-	@Inject
-	private PayrollController payrollController;
 	
 	private LoginProxy loginProxy;
 	
@@ -29,18 +25,18 @@ public class LoggedMonthlyBean implements Serializable {
         showEmp();
     }
     
-    private MonthlyEmployeeWithSales empl;
+    private DailyEmployee empl;
     
     
     public void showEmp() {
-    	empl = (MonthlyEmployeeWithSales) loginProxy.getActualLogin().getEmployee();
+    	empl = (DailyEmployee) loginProxy.getActualLogin().getEmployee();
     }
     
-    public MonthlyEmployeeWithSales getEmpl() {
+    public DailyEmployee getEmpl() {
 		return empl;
 	}
     
-    public void setEmpl(MonthlyEmployeeWithSales empl) {
+    public void setEmpl(DailyEmployee empl) {
 		this.empl = empl;
 	}
     
