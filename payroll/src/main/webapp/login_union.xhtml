@@ -21,13 +21,13 @@
 			<p:outputLabel value="Please enter your username and password." />
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="username" value="Username:" />
-				<p:inputText id="username" value="#{loginUnionBean.u.username}">
+				<p:inputText id="username" value="#{loginUnionBean.u.username}" validatorMessage="Username required">
 					<f:validateRequired />
 				</p:inputText>
 				<h:message for="username" errorClass="invalid" />
 
 				<h:outputLabel for="password" value="Password:" />
-				<p:password id="password" value="#{loginUnionBean.u.password}">
+				<p:password id="password" value="#{loginUnionBean.u.password}" validatorMessage="Password required">
 					<f:validateRequired />
 				</p:password>
 				<h:message for="password" errorClass="invalid" />

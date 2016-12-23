@@ -23,14 +23,14 @@
 		<p:outputLabel value="Please enter your username and password." />
 		<h:form id="reg">
 			<h:panelGrid columns="3" columnClasses="titleCell">
-				<p:outputLabel for="username" value="Username:" />
-				<p:inputText id="username" value="#{loginProxy.username}">
+				<h:outputLabel for="username" value="Username:" />
+				<p:inputText id="username" value="#{loginProxy.username}" validatorMessage="Username required">
 					<f:validateRequired />
 				</p:inputText>
 				<h:message for="username" errorClass="invalid" />
 
-				<p:outputLabel for="password" value="Password:" />
-				<p:password id="password" value="#{loginProxy.password}">
+				<h:outputLabel for="password" value="Password:" />
+				<p:password id="password" value="#{loginProxy.password}" validatorMessage="Password required">
 					<f:validateRequired />
 				</p:password>
 				<h:message for="password" errorClass="invalid" />
