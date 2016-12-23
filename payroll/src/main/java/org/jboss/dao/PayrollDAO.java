@@ -71,10 +71,14 @@ public class PayrollDAO {
 
 	
 	public Admin doAdminLogin(String username, String password){
-		
-		Admin adm = (Admin) em.createQuery("SELECT a FROM Admin a where a.username = :usnValue and a.password = :pwdValue")
-				.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
-		return adm;	
+		try{
+			Admin adm = (Admin) em.createQuery("SELECT a FROM Admin a where a.username = :usnValue and a.password = :pwdValue")
+					.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+			return adm;
+		} catch (NoResultException e){
+			return null;
+		}
+			
 	}
 	
 	

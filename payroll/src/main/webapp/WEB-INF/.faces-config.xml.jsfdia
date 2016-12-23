@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
-  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
    PATH="/login.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="success_d::#mainPage.xhtml" NAME="output"
@@ -21,12 +21,8 @@
     TITLE="failure" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#mainPage.xhtml" PATH="/mainPage.xhtml"
-  SHAPE="256,33,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#invalidLogin.xhtml"
-  PATH="/invalidLogin.xhtml" SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#register_usn_pwd.xhtml"
-  PATH="/register_usn_pwd.xhtml" SHAPE="32,161,0,0" model-entity="JSFProcessGroup">
+  PATH="/register_usn_pwd.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#register_usn_pwd.xhtml:0" NAME="item"
    PATH="/register_usn_pwd.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="success::#login.xhtml" NAME="output"
@@ -34,7 +30,7 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#mainPage1.xhtml" PATH="/mainPage1.xhtml"
-  SHAPE="272,321,0,0" model-entity="JSFProcessGroup">
+  SHAPE="480,193,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#mainPage1.xhtml:0" NAME="item"
    PATH="/mainPage1.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="salesReceipt::#post_sales_receipt.xhtml"
@@ -42,40 +38,10 @@
     TARGET="rules:#post_sales_receipt.xhtml" TITLE="salesReceipt" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#mainPage.xhtml" PATH="/mainPage.xhtml"
+  SHAPE="480,17,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#invalidLogin.xhtml"
+  PATH="/invalidLogin.xhtml" SHAPE="480,305,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#post_sales_receipt.xhtml"
-  PATH="/post_sales_receipt.xhtml" SHAPE="480,305,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#login_union.xhtml" PATH="/login_union.xhtml"
-  SHAPE="32,417,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#login_union.xhtml:0" NAME="item"
-   PATH="/login_union.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="success_u::#post_service_charge.xhtml"
-    NAME="output" PATH="/post_service_charge.xhtml"
-    TARGET="rules:#post_service_charge.xhtml" TITLE="success_u" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:#login_union.xhtml:1" NAME="item1"
-   PATH="/login_union.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="failure::#invalidLogin.xhtml" NAME="output"
-    PATH="/invalidLogin.xhtml" TARGET="rules:#invalidLogin.xhtml"
-    TITLE="failure" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#login_admin.xhtml" PATH="/login_admin.xhtml"
-  SHAPE="32,305,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#login_admin.xhtml:0" NAME="item"
-   PATH="/login_admin.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="success::#admin_operations.xhtml"
-    NAME="output" PATH="/admin_operations.xhtml"
-    TARGET="rules:#admin_operations.xhtml" TITLE="success" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:#login_admin.xhtml:1" NAME="item1"
-   PATH="/login_admin.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="failure::#invalidLogin.xhtml" NAME="output"
-    PATH="/invalidLogin.xhtml" TARGET="rules:#invalidLogin.xhtml"
-    TITLE="failure" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#admin_operations.xhtml"
-  PATH="/admin_operations.xhtml" SHAPE="272,609,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#post_service_charge.xhtml"
-  PATH="/post_service_charge.xhtml" SHAPE="272,465,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/post_sales_receipt.xhtml" SHAPE="688,209,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

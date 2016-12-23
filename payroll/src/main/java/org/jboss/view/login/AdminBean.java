@@ -1,14 +1,18 @@
 package org.jboss.view.login;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.controller.PayrollController;
 import org.jboss.model.admin.Admin;
+import org.primefaces.context.RequestContext;
 
 @SuppressWarnings("serial")
 @Named
@@ -26,9 +30,20 @@ public class AdminBean implements Serializable {
 		admin = new Admin();
 	}
     
-    public String checkLogin(){  	
+    public void checkLogin(){  	
     	System.out.println("admin " + admin.getUsername() + " " + admin.getPassword());
-    	return payrollController.checkAdminLogin(admin.getUsername(), admin.getPassword());
+    	Admin a = payrollController.checkAdminLogin(admin.getUsername(), admin.getPassword());
+    	if(a != null){
+    		try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("admin_operations.jsf");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}else{
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
+    		RequestContext.getCurrentInstance().showMessageInDialog(message);
+    	}
     }
        
     public void setAdmin(Admin admin) {

@@ -63,8 +63,8 @@
 			<to-view-id>/post_sales_receipt.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<navigation-rule>
-		<display-name>login_admin.xhtml</display-name>
+	<!--<navigation-rule>
+		  <display-name>login_admin.xhtml</display-name>
 		<from-view-id>/login_admin.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
@@ -94,5 +94,5 @@
 			<from-outcome>failure</from-outcome>
 			<to-view-id>/invalidLogin.xhtml</to-view-id>
 		</navigation-case>
-	</navigation-rule>
+	</navigation-rule>-->
 </faces-config>

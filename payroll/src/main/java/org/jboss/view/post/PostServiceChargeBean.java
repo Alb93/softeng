@@ -38,11 +38,12 @@ public class PostServiceChargeBean implements Serializable {
         dropdown = (DropdownView) context.getApplication().evaluateExpressionGet(context, "#{dropdownView}", DropdownView.class);
         LoginUnionBean loginUnionBean = (LoginUnionBean) context.getApplication().evaluateExpressionGet(context, "#{loginUnionBean}", LoginUnionBean.class);
         u = loginUnionBean.getU();
+        System.out.println("il nome union è" + u.getName());
     	List<Employee> employees = payrollController.findAllUnionsEmployee(u.getName());
     	Map<String,Integer> list = new HashMap<>();
     	for (Employee employee : employees) {
 			list.put(employee.getName()+" "+employee.getSurname(),employee.getId());
-			System.out.println(employee.getName()+" "+employee.getSurname());
+			System.out.println("la lista" + employee.getName()+" "+employee.getSurname());
 		}
     	
         dropdown.setEmployees(list);

@@ -70,31 +70,22 @@ public class PayrollController {
 	}
 	
 	
-	public String checkLoginUnion(String username, String password){
+	public Union checkLoginUnion(String username, String password){
 		
-		try {
+		
     		
-			u = payrollDAO.doLoginUnion(username, password);
-			System.out.println("u dao = "+u);
-    		return SUCCESS; 
-    	} catch (NoResultException e) {
-    		return FAILURE; 
-    	}
+			return payrollDAO.doLoginUnion(username, password);
+		
 	}
 
 
 	
 
 	
-	public String checkAdminLogin(String username, String password){
-		try {
+	public Admin checkAdminLogin(String username, String password){
     		
-			adm = payrollDAO.doAdminLogin(username, password);
+			return payrollDAO.doAdminLogin(username, password);
 			
-    		return SUCCESS; 
-    	} catch (NoResultException e) {
-    		return FAILURE;  
-    	}
 	}
 
 	
