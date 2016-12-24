@@ -8,6 +8,7 @@
 	<title>Payroll</title>
 </h:head>
 <h:body>
+<!-- 
 	<h:outputStylesheet library="css" name="style.css" />
 	<ul>
 		<li><a href="./index.jsf">Home</a></li>
@@ -43,6 +44,54 @@
 			</h:panelGrid>
 		</h:form>
 	</div>
-	
+	 -->
+	 <h:form>
+		<p:menubar>
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
+			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
+			<p:menuitem value="Admin" url="./login_admin.jsf"
+				icon="ui-icon-person" />
+			<p:menuitem value="Union" url="./login_union.jsf"
+				icon="ui-icon-person" />
+		</p:menubar>
+	</h:form>
+	<div>
+		<h2></h2>
+
+	</div>
+
+	<h:form>
+		<p:panel id="basic" header="Admin login" style="margin-bottom:20px">
+			<h:outputText value="Please enter your username and password." />
+			<h:form id="reg">
+				<h:panelGrid columns="3" columnClasses="titleCell">
+					<h:outputLabel for="username" value="Username:" />
+					<p:inputText id="username" value="#{adminBean.admin.username}"
+						validatorMessage="Username required">
+						<f:validateRequired />
+					</p:inputText>
+					<h:message for="username" errorClass="invalid" />
+
+					<h:outputLabel for="password" value="Password:" />
+					<p:password id="password" value="#{adminBean.admin.password}"
+						validatorMessage="Password required">
+						<f:validateRequired />
+					</p:password>
+					<h:message for="password" errorClass="invalid" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<h:form>
+						<h:commandButton id="login" action="#{adminBean.checkLogin()}"
+							value="Login" styleClass="register" />
+						<h:messages styleClass="messages" errorClass="invalid"
+							infoClass="valid" warnClass="warning" globalOnly="true" />
+					</h:form>
+				</h:panelGrid>
+
+			</h:form>
+		</p:panel>
+	</h:form>
+	 
 </h:body>
 </html>
