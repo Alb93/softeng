@@ -32,13 +32,21 @@ public class PayrollDAO {
 					.createQuery(
 							"SELECT e FROM DailyEmployee e where e.username = :usnValue and e.password = :pwdValue")
 					.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+			System.out.println("Mi ha trovato il daily");
 			return emp;
-		} catch (NoResultException e) {
-			MonthlyEmployeeWithSales emp = (MonthlyEmployeeWithSales) em
-					.createQuery("SELECT e FROM " + MonthlyEmployeeWithSales.class.getName()
-							+ " e where e.username = :usnValue and e.password = :pwdValue")
-					.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
-			return emp;
+		} catch (NoResultException e1) {
+			try{
+				System.out.println("Non mi ha trovato l'emp " + username + " nei daily");
+				MonthlyEmployeeWithSales emp = (MonthlyEmployeeWithSales) em
+						.createQuery("SELECT e FROM " + MonthlyEmployeeWithSales.class.getName()
+								+ " e where e.username = :usnValue and e.password = :pwdValue")
+						.setParameter("usnValue", username).setParameter("pwdValue", password).getSingleResult();
+				return emp;
+			} catch(NoResultException e2){
+				System.out.println("Non mi ha trovato l'emp " + username + " nei monthly");
+				return null;
+			}
+			
 		}
 
 	}

@@ -1,16 +1,20 @@
 package org.jboss.view.login;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.controller.PayrollController;
 import org.jboss.model.employees.Employee;
+import org.primefaces.context.RequestContext;
 
 @Named
 @SessionScoped
@@ -36,6 +40,21 @@ public class LoginProxy implements ILogin, Serializable {
 		}
 		// lack of open-closed, TODO
 	}
+	
+	public void performLogin(){
+		String result = checkLogin();
+		if(result != null){
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect(result);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else{
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
+    		RequestContext.getCurrentInstance().showMessageInDialog(message);
+    	}
+	}
 
 	@Override
 	public String checkLogin() {
@@ -44,13 +63,14 @@ public class LoginProxy implements ILogin, Serializable {
 		setUsernameI(username);
 		setPasswordI(password);
 		for (ILogin iLogin : logins) {
+			System.out.println("Login numero" + i + iLogin.getEmployee().getUsername());
 			if (iLogin.checkLogin().equals(iLogin.getSuccessfulString())) {
-				System.out.println("SUCC " +iLogin.getSuccessfulString());
+				System.out.println("successo" + iLogin.getSuccessfulString() + iLogin.getEmployee().getUsername());
 				return iLogin.getSuccessfulString();
 			}
 			i++;
 		}
-		return PayrollController.FAILURE;
+		return null;
 	}
 
 	@Override

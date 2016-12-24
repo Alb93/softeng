@@ -36,13 +36,14 @@ public class PayrollController {
 	public static String SUCCESS = "success";
 	public static String SUCCESS_U = "success_u";
 
-	public static String SUCCESS_D = "success_d";
-	public static String SUCCESS_M = "success_m";
+	public static String SUCCESS_D = "login_success_daily.jsf";
+	public static String SUCCESS_M = "login_success_monthly.jsf";
 
 	public static String FAILURE = "failure";
 	
 	private Employee emp;
 	private Union u;
+	private boolean empSetted = false;
 	private Admin adm;
 	
 	
@@ -50,15 +51,19 @@ public class PayrollController {
 	
 	public String checkLogin(String username, String password){
 		
-		try {
     		
-			emp = payrollDAO.doLogin(username, password);
+		emp = payrollDAO.doLogin(username, password);
+		if(emp != null){
 			System.out.println("EMP dao = "+emp);
-    		logger.info(emp.getName());
-    		return SUCCESS; 
-    	} catch (NoResultException e) {
-    		return FAILURE;  
-    	}
+	    	logger.info(emp.getName());
+	    	empSetted = true;
+	    	return SUCCESS; 
+		} else {
+			empSetted = false;
+			return FAILURE;
+		}
+		
+    	
 	}
 	
 	public void registerEmployee(Employee emp) {
@@ -79,8 +84,9 @@ public class PayrollController {
 	}
 
 
-	
-
+	public boolean isEmpSetted() {
+		return empSetted;
+	}
 	
 	public Admin checkAdminLogin(String username, String password){
     		

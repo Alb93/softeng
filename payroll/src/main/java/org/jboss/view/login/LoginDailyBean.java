@@ -9,6 +9,7 @@ import javax.inject.Named;
 import org.jboss.controller.PayrollController;
 import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.Employee;
+import org.jboss.model.employees.MonthlyEmployeeWithSales;
 
 @Named
 @SessionScoped
@@ -23,19 +24,21 @@ public class LoginDailyBean implements Serializable, ILogin {
 	public String checkLogin() {
 
 		String result = payrollController.checkLogin(empl.getUsername(), empl.getPassword());
-		System.out.println("INST D = "+ (payrollController.getEmp() instanceof DailyEmployee));
-		//if (payrollController.getEmp() instanceof DailyEmployee) {
-		System.out.println("GETEMP ="+payrollController.getEmp());
-			empl = (DailyEmployee) payrollController.getEmp();
-			System.out.println("TEST = "+empl.getHourlyRate());
-			if (result.equals(PayrollController.SUCCESS))
-				return PayrollController.SUCCESS_D;
-			else
+		if(payrollController.isEmpSetted()){
+			if (payrollController.getEmp() instanceof DailyEmployee) {
+				empl = (DailyEmployee) payrollController.getEmp();
+				if (result.equals(PayrollController.SUCCESS))
+					return PayrollController.SUCCESS_D;
+				else
+					return result;
+			} else {
 				return result;
-//		} else {
-//			return result;
-//		}
-
+			}
+		} else return result;
+		
+			
+		
+		
 	}
 
 	public void setEmpl(DailyEmployee empl) {

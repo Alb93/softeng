@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.controller.PayrollController;
+import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.Employee;
+import org.jboss.model.employees.MonthlyEmployee;
 import org.jboss.model.employees.MonthlyEmployeeWithSales;
 
 @Named
@@ -22,16 +24,20 @@ public class LoginMonthlyBean implements Serializable, ILogin {
 
 	public String checkLogin() {
 		String result = payrollController.checkLogin(empl.getUsername(), empl.getPassword());
-		System.out.println("INST M = "+ (payrollController.getEmp() instanceof MonthlyEmployeeWithSales));
-		if (payrollController.getEmp() instanceof MonthlyEmployeeWithSales) {
-			empl = (MonthlyEmployeeWithSales) payrollController.getEmp();
-			if (result.equals(PayrollController.SUCCESS))
-				return PayrollController.SUCCESS_M;
-			else
+		System.out.println("il result è" + result);
+		if(payrollController.isEmpSetted()){
+			if (payrollController.getEmp() instanceof MonthlyEmployeeWithSales) {
+				System.out.println("mi ha superato instanceof");
+				empl = (MonthlyEmployeeWithSales) payrollController.getEmp();
+				if (result.equals(PayrollController.SUCCESS))
+					return PayrollController.SUCCESS_M;
+				else
+					return result;
+			} else {
 				return result;
-		} else {
-			return result;
-		}
+			}
+		} else return result;
+		
 	}
 
 	@Override
