@@ -42,18 +42,21 @@ public class LoginProxy implements ILogin, Serializable {
 	}
 	
 	public void performLogin(){
-		String result = checkLogin();
-		if(result != null){
-			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect(result);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else{
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
-    		RequestContext.getCurrentInstance().showMessageInDialog(message);
-    	}
+		if(username != null){
+			String result = checkLogin();
+			if(result != null){
+				try {
+					FacesContext.getCurrentInstance().getExternalContext().redirect(result);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else{
+	    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
+	    		RequestContext.getCurrentInstance().showMessageInDialog(message);
+	    	}
+		}
+		
 	}
 
 	@Override
