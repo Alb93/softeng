@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Register</title>
+	<title>Register member</title>
 	<script type="text/javascript">
 		function showForm(type){
 			if (type == "1"){
@@ -20,62 +20,83 @@
 	</script>
 </h:head>
 <h:body>
-	
-        <h:selectOneRadio id = "radio" onclick="showForm(this.value)" value = "1">
-   			<f:selectItem itemValue= "1" itemLabel="Daily Employee" />
-   			<f:selectItem itemValue= "2" itemLabel="Monthly Employee" />	   			
-		</h:selectOneRadio>	
-        <h:form id="regD">
-            <h2>Daily Employee Registration</h2>
-            <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="nameD" value="Name:" />
-                <p:inputText id="nameD" value="#{registerDailyBean.empl.name}" validatorMessage="Name required">
-                	<f:validateRequired />
-                </p:inputText>
-                <p:message for="nameD" errorClass="invalid" />
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
+			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
+			<p:menuitem value="Admin" url="./login_admin.jsf"
+				icon="ui-icon-person" />
+			<p:menuitem value="Union" url="./login_union.jsf"
+				icon="ui-icon-person" />
+			<f:facet name="options">
+				<h:outputText style="margin-right:10px"
+					value="Admin: #{adminBean.admin.username}" />
+			</f:facet>
+		</p:menubar>
 
-                <h:outputLabel for="surnameD" value="Surname:" />
-                <p:inputText id="surnameD" value="#{registerDailyBean.empl.surname}" validatorMessage="Surname required">
-                	<f:validateRequired />
-                </p:inputText>         
-                <p:message for="surnameD" errorClass="invalid" />
-                
-                 <h:outputLabel for="paymentMethodD" value="Payment method:" />
-                <p:inputText id="paymentMethodD"
-                 value="#{registerDailyBean.empl.paymentMethod}" validatorMessage="Payment method required">
-                    <f:validateRequired/>
-                 </p:inputText>
-                <p:message for="paymentMethodD" errorClass="invalid" />
-                
-                 <h:outputLabel for="hourlyRateD" value="Hourly rate:" />
-                <p:inputText id="hourlyRateD"
-                    value="#{registerDailyBean.empl.hourlyRate}" />
-                <p:message for="hourlyRateD" errorClass="hourlyRate" />
-                
-  				<h:outputLabel for="duesRateD" value="Dues rate:" />
-                <p:inputText id="duesRateD"
-                    value="#{registerDailyBean.empl.dueRate}" />
-                <p:message for="duesRateD" errorClass="duesRate" />
+	</h:form>
+	<div>
+		<h2></h2>
+	</div>
+	<p:selectOneRadio id="radio" onclick="showForm(this.value)" value="1">
+		<f:selectItem itemValue="1" itemLabel="Daily Employee" />
+		<f:selectItem itemValue="2" itemLabel="Monthly Employee" />
+	</p:selectOneRadio>
+	<h:form id="regD">
+		<h2>Daily Employee Registration</h2>
+		<h:panelGrid columns="3" columnClasses="titleCell">
+			<h:outputLabel for="nameD" value="Name:" />
+			<p:inputText id="nameD" value="#{registerDailyBean.empl.name}"
+				validatorMessage="Name required">
+				<f:validateRequired />
+			</p:inputText>
+			<p:message for="nameD" errorClass="invalid" />
 
-                 <h:outputLabel for="usernameD" value="Username:" />
-                <p:inputText id="usernameD"
-                    value="#{registerDailyBean.empl.username}" validatorMessage="Username required">
-                    <f:validateRequired/>
-                </p:inputText>
-                <p:message for="usernameD" errorClass="invalid" />
-                
-                 <h:outputLabel for="passwordD" value="Password:" />
-                <p:inputText id="passwordD"
-                    value="#{registerDailyBean.empl.password}" validatorMessage="Password required">
-                    <f:validateRequired/>
-                </p:inputText>
-                <p:message for="passwordD" errorClass="password" /> 
-                
-                
-            </h:panelGrid>
+			<h:outputLabel for="surnameD" value="Surname:" />
+			<p:inputText id="surnameD" value="#{registerDailyBean.empl.surname}"
+				validatorMessage="Surname required">
+				<f:validateRequired />
+			</p:inputText>
+			<p:message for="surnameD" errorClass="invalid" />
+
+			<h:outputLabel for="paymentMethodD" value="Payment method:" />
+			<p:inputText id="paymentMethodD"
+				value="#{registerDailyBean.empl.paymentMethod}"
+				validatorMessage="Payment method required">
+				<f:validateRequired />
+			</p:inputText>
+			<p:message for="paymentMethodD" errorClass="invalid" />
+
+			<h:outputLabel for="hourlyRateD" value="Hourly rate:" />
+			<p:inputText id="hourlyRateD"
+				value="#{registerDailyBean.empl.hourlyRate}" />
+			<p:message for="hourlyRateD" errorClass="hourlyRate" />
+
+			<h:outputLabel for="duesRateD" value="Dues rate:" />
+			<p:inputText id="duesRateD" value="#{registerDailyBean.empl.dueRate}" />
+			<p:message for="duesRateD" errorClass="duesRate" />
+
+			<h:outputLabel for="usernameD" value="Username:" />
+			<p:inputText id="usernameD"
+				value="#{registerDailyBean.empl.username}"
+				validatorMessage="Username required">
+				<f:validateRequired />
+			</p:inputText>
+			<p:message for="usernameD" errorClass="invalid" />
+
+			<h:outputLabel for="passwordD" value="Password:" />
+			<p:inputText id="passwordD"
+				value="#{registerDailyBean.empl.password}"
+				validatorMessage="Password required">
+				<f:validateRequired />
+			</p:inputText>
+			<p:message for="passwordD" errorClass="password" />
+
+
+		</h:panelGrid>
 
 		<p:growl id="msgsD" showDetail="true" />
-		
+
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Union" value="Union: " />
@@ -88,68 +109,72 @@
 			<p:separator />
 
 		</p:panel>
-            <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="registerD"
-                        action="#{registerDailyBean.register()}"
-                        value="Register" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
-        </h:form>
-        
-        <h:form id="regM" style="display: none">
+		<p>
+			<h:panelGrid columns="2">
+				<h:commandButton id="registerD"
+					action="#{registerDailyBean.register()}" value="Register"
+					styleClass="register" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		</p>
+	</h:form>
+
+	<h:form id="regM" style="display: none">
 		<h2>Monthly Employee Registration</h2>
 		<h:panelGrid columns="3" columnClasses="titleCell">
 			<h:outputLabel for="name" value="Name:" />
-			<p:inputText id="name" value="#{registerMonthlyBean.empl.name}" validatorMessage="Name required">
-				 <f:validateRequired/>
+			<p:inputText id="name" value="#{registerMonthlyBean.empl.name}"
+				validatorMessage="Name required">
+				<f:validateRequired />
 			</p:inputText>
 			<p:message for="name" errorClass="invalid" />
 
 			<h:outputLabel for="surname" value="Surname:" />
-			<p:inputText id="surname" value="#{registerMonthlyBean.empl.surname}" validatorMessage="Surname required">
-				<f:validateRequired/>
+			<p:inputText id="surname" value="#{registerMonthlyBean.empl.surname}"
+				validatorMessage="Surname required">
+				<f:validateRequired />
 			</p:inputText>
 			<p:message for="surname" errorClass="invalid" />
-				 
+
 			<h:outputLabel for="paymentMethod" value="Payment method:" />
 			<p:inputText id="paymentMethod"
-				value="#{registerMonthlyBean.empl.paymentMethod}" validatorMessage="Payment method required">
-				<f:validateRequired/>
+				value="#{registerMonthlyBean.empl.paymentMethod}"
+				validatorMessage="Payment method required">
+				<f:validateRequired />
 			</p:inputText>
 			<p:message for="paymentMethod" errorClass="paymentMethod" />
-			
+
 			<h:outputLabel for="salary" value="Salary:" />
 			<p:inputText id="salary" value="#{registerMonthlyBean.empl.salary}">
 			</p:inputText>
 			<p:message for="salary" errorClass="salary" />
-			
+
 			<h:outputLabel for="duesRate" value="Dues rate:" />
 			<p:inputText id="duesRate"
 				value="#{registerMonthlyBean.empl.dueRate}">
 			</p:inputText>
 			<p:message for="duesRate" errorClass="duesRate" />
-			
+
 			<h:outputLabel for="commissionRate" value="Commission rate:" />
 			<p:inputText id="commissionRate"
 				value="#{registerMonthlyBean.empl.commissionRate}">
 			</p:inputText>
 			<p:message for="commissionRate" errorClass="commissionRate" />
-			
+
 			<h:outputLabel for="username" value="Username:" />
 			<p:inputText id="username"
-				value="#{registerMonthlyBean.empl.username}" validatorMessage="Username required">
-				<f:validateRequired/>
+				value="#{registerMonthlyBean.empl.username}"
+				validatorMessage="Username required">
+				<f:validateRequired />
 			</p:inputText>
 			<p:message for="username" errorClass="invalid" />
-				
+
 			<h:outputLabel for="password" value="Password:" />
 			<p:inputText id="password"
-				value="#{registerMonthlyBean.empl.password}" validatorMessage="Password required">
-				<f:validateRequired/>
+				value="#{registerMonthlyBean.empl.password}"
+				validatorMessage="Password required">
+				<f:validateRequired />
 			</p:inputText>
 			<p:message for="password" errorClass="password" />
 
@@ -157,7 +182,7 @@
 		</h:panelGrid>
 
 		<p:growl id="msgs1" showDetail="true" />
-		
+
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="country" value="Union: " />
@@ -170,21 +195,20 @@
 			<p:separator />
 
 		</p:panel>
-		
-		
-            <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="register"
-                        action="#{registerMonthlyBean.register()}"
-                        value="Register" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
-		
+
+
+		<p>
+			<h:panelGrid columns="2">
+				<h:commandButton id="register"
+					action="#{registerMonthlyBean.register()}" value="Register"
+					styleClass="register" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		</p>
+
 	</h:form>
-      
+
 
 
 </h:body>

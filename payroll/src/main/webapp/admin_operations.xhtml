@@ -25,36 +25,24 @@
 	</h:form>
 	<div>
 		<h2></h2>
-
 	</div>
 	<h:form>
-		<p:panel id="basic" header="Add new employee"
+		<p:panel id="basic" header="Admin operations"
 			style="margin-bottom:20px">
 			<h:form>
 				<p:commandButton type="submit" action="./register_member.jsf"
 					value="Add new employee" ajax="false" icon="ui-icon-star" />
-			</h:form>
-		</p:panel>
+				<p:separator />
 
-		<p:panel id="basic1" header="Edit employee" style="margin-bottom:20px">
-			<h:form>
 				<p:commandButton type="submit" action="./edit_employee.jsf"
 					value="Edit employee" ajax="false" icon="ui-icon-star" />
-			</h:form>
-		</p:panel>
+				<p:separator />
 
 
-		<p:panel id="basic2" header="Delete employee"
-			style="margin-bottom:20px">
-			<h:form>
 				<p:commandButton type="submit" action="./delete_employee.jsf"
 					value="Delete employee" ajax="false" icon="ui-icon-star" />
-			</h:form>
-		</p:panel>
+				<p:separator />
 
-		<p:panel id="basic3" header="Run the payroll for today"
-			style="margin-bottom:20px">
-			<h:form>
 				<p:commandButton type="submit" action="./run_payroll.jsf"
 					value="Run the payroll for today" ajax="false" icon="ui-icon-star" />
 			</h:form>

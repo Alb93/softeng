@@ -8,28 +8,37 @@
 	<title>Post Service Charge</title>
 </h:head>
 <h:body>
-	<ul>
-		<li><a href="./index.jsf">Home</a></li>
-		<li><a href="./login.jsf">Employee</a></li>
-		<li><a href="./login_admin.jsf">Admin</a></li>
-		<li><a class="active" href="./login_union.jsf">Union</a></li>
-		<li style="float: right"><a class="active" href="">User: <h:outputText
-					value="#{loggedUnionBean.u.username}"></h:outputText></a></li>
-	</ul>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
+			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
+			<p:menuitem value="Admin" url="./login_admin.jsf"
+				icon="ui-icon-person" />
+			<p:menuitem value="Union" url="./login_union.jsf"
+				icon="ui-icon-person" />
+			<f:facet name="options">
+				<h:outputText style="margin-right:10px"
+					value="Union: #{loggedUnionBean.u.username}" />
+			</f:facet>
+		</p:menubar>
+
+	</h:form>
+	<div>
+		<h2></h2>
+	</div>
 
 	<h:form id="form">
     	<p:growl id="msgs" showDetail="true" />
- <div>
+
 	    <h:panelGrid columns="2" cellpadding="5">
 	        <p:outputLabel for="popup" value="Date:" />
 	        <p:calendar id="popup" value="#{calendarView.date2}" />
 	    </h:panelGrid>
- </div>
-<div>
+
 	    <p:dialog modal="true" resizable="false" header="Values"
-				widgetVar="dlg" showEffect="fold">
+			widgetVar="dlg" showEffect="fold">
 	        <p:panelGrid id="display" columns="2"
-					columnClasses="label,value">
+				columnClasses="label,value">
 	         
 	            <h:outputText value="Popup:" />
 	            <h:outputText value="#{calendarView.date2}">
@@ -38,20 +47,20 @@
 	
 	        </p:panelGrid>
 	    </p:dialog>
-</div>
-<div>
-		<h:outputLabel for="amount" value="Amount:" />
-		<h:inputText id="amount" value="#{postServiceChargeBean.r.amount}" />
-		<h:message for="amount" errorClass="amounts" />
-</div>
-	
-			<h:panelGrid columns="2">
-				<h:commandButton id="post" action="#{postServiceChargeBean.post()}"
-					value="Post a service charge" styleClass="post" />
-				<h:messages styleClass="messages" errorClass="invalid"
-					infoClass="valid" warnClass="warning" globalOnly="true" />
-			</h:panelGrid>
-	
+	    <h:panelGrid columns="1" cellpadding="5">
+
+			<p:outputLabel for="amount" value="Amount:" />
+			<p:inputText id="amount" value="#{postServiceChargeBean.r.amount}" />
+			<h:message for="amount" errorClass="amounts" />
+	    </h:panelGrid>
+
+		<h:panelGrid columns="2">
+			<h:commandButton id="post" action="#{postServiceChargeBean.post()}"
+				value="Post a service charge" styleClass="post" />
+			<h:messages styleClass="messages" errorClass="invalid"
+				infoClass="valid" warnClass="warning" globalOnly="true" />
+		</h:panelGrid>
+
 
 		<p:growl id="msgs1" showDetail="true" />
 
