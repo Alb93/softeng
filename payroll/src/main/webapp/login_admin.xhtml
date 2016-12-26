@@ -5,10 +5,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Payroll</title>
+	<title>Admin login</title>
 </h:head>
 <h:body>
-<!-- 
+	<!-- 
 	<h:outputStylesheet library="css" name="style.css" />
 	<ul>
 		<li><a href="./index.jsf">Home</a></li>
@@ -45,7 +45,7 @@
 		</h:form>
 	</div>
 	 -->
-	 <h:form>
+	<h:form>
 		<p:menubar>
 			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
 			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
@@ -63,7 +63,7 @@
 	<h:form>
 		<p:panel id="basic" header="Admin login" style="margin-bottom:20px">
 			<h:outputText value="Please enter your username and password." />
-			<h:form id="reg">
+			<h:form id="admReg">
 				<h:panelGrid columns="3" columnClasses="titleCell">
 					<h:outputLabel for="username" value="Username:" />
 					<p:inputText id="username" value="#{adminBean.admin.username}"
@@ -92,6 +92,6 @@
 			</h:form>
 		</p:panel>
 	</h:form>
-	 
+
 </h:body>
 </html>

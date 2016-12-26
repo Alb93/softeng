@@ -8,6 +8,73 @@
 	<title>Post Time Card</title>
 </h:head>
 <h:body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
+			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
+			<p:menuitem value="Admin" url="./login_admin.jsf"
+				icon="ui-icon-person" />
+			<p:menuitem value="Union" url="./login_union.jsf"
+				icon="ui-icon-person" />
+			<f:facet name="options">
+				<h:outputText style="margin-right:10px"
+					value="User: #{loggedDailyBean.empl.username}" />
+			</f:facet>
+		</p:menubar>
+
+	</h:form>
+	<div>
+		<h2></h2>
+
+	</div>
+
+
+			<h:form id="form">
+     <p:growl id="msgs" showDetail="true" />
+  
+     <h:panelGrid columns="2" cellpadding="5">
+         <p:outputLabel for="popup" value="Popup:" />
+         <p:calendar id="popup" value="#{calendarView.date2}" />
+  
+     </h:panelGrid>
+  
+     
+  
+     <p:dialog modal="true" resizable="false" header="Values"
+ 			widgetVar="dlg" showEffect="fold">
+         <p:panelGrid id="display" columns="2"
+ 				columnClasses="label,value">
+          
+             <h:outputText value="Calendar:" />
+             <h:outputText value="#{calendarView.date2}">
+                 <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+ 
+ 
+         </p:panelGrid>
+     </p:dialog>
+ 
+ 				<h:outputLabel for="hours" value="Hours:" />
+ 				<h:inputText id="hours"
+ 					value="#{postTimeCardBean.card.hours}" />
+ 				<h:message for="hours" errorClass="hours" />
+                 
+                  <p>
+                 <h:panelGrid columns="2">
+                     <h:commandButton id="post"
+                         action="#{postTimeCardBean.post(loggedDailyBean.empl.id)}"
+                         value="Post a time card" styleClass="post" />
+                    <h:messages styleClass="messages"
+                         errorClass="invalid" infoClass="valid"
+                         warnClass="warning" globalOnly="true" />
+                 </h:panelGrid>
+             </p>
+              
+ 	</h:form>
+	
+
+
+	<!-- 
 	<h:outputStylesheet library="css" name="style.css" />
 	<ul>
 		<li><a href="./index.jsf">Home</a></li>
@@ -18,18 +85,18 @@
 					value="#{loggedDailyBean.empl.username}"></h:outputText></a></li>
 	</ul>
 	<h:form id="form">
-  <!--   <p:growl id="msgs" showDetail="true" /> -->
+     <p:growl id="msgs" showDetail="true" />
  
 		<div>
-			    
-	        	<p:outputLabel for="popup" value="Date:" />
-	        	<p:calendar id="popup" value="#{calendarView.date2}" />
-    			    
-			<!-- 
-    <p:dialog modal="true" resizable="false" header="Values"
-			widgetVar="dlg" showEffect="fold">
+			             
+			<p:outputLabel for="popup" value="Date:" />
+			        
+			<p:calendar id="popup" value="#{calendarView.date2}" />
+			              
+			<p:dialog modal="true" resizable="false" header="Values"
+				widgetVar="dlg" showEffect="fold">
         <h:panelGrid id="display" columns="2"
-				columnClasses="label,value">
+					columnClasses="label,value">
          
             <h:outputText value="Calendar:" />
             <h:outputText value="#{calendarView.date2}">
@@ -39,12 +106,12 @@
 
         </h:panelGrid>
     </p:dialog>
- -->
-				<p:outputLabel for="hours" value="Hours:" /> 
-				<p:inputText id="hours" value="#{postTimeCardBean.card.hours}">
-					<f:validateRequired />
-				</p:inputText>
-				<h:message for="hours" errorClass="hours" />
+
+			<p:outputLabel for="hours" value="Hours:" />
+			<p:inputText id="hours" value="#{postTimeCardBean.card.hours}">
+				<f:validateRequired />
+			</p:inputText>
+			<h:message for="hours" errorClass="hours" />
 		</div>
 		<div>
 			<h:panelGrid columns="2">
@@ -57,6 +124,6 @@
 			</h:panelGrid>
 		</div>
 	</h:form>
-
+ -->
 </h:body>
 </html>
