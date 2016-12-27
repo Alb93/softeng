@@ -21,10 +21,6 @@
                 <h:inputText id="surnameD" value="#{dailyEmployeesBean.dEmployee.surname}" />
                 <h:message for="surnameD" errorClass="invalid" />
                 
-                 <h:outputLabel for="paymentMethodD" value="Payment method:" />
-                <h:inputText id="paymentMethodD"
-                    value="#{dailyEmployeesBean.dEmployee.paymentMethod}" />
-                <h:message for="paymentMethodD" errorClass="paymentMethod" />
                 
                  <h:outputLabel for="hourlyRateD" value="Hourly rate:" />
                 <h:inputText id="hourlyRateD"
@@ -50,6 +46,27 @@
             </h:panelGrid>
 
 		<p:growl id="msgsD" showDetail="true" />
+		
+		<p:panel header="Select a payment method" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="Payment" value="Payment: " />
+				<span><p:selectOneMenu id="Payment" value="#{paymentDropdownView.method}"
+					style="width:150px">
+					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
+  					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
+  					<f:selectItem itemValue="Bank" itemLabel="Bank" />
+  					<f:ajax render="input" />	
+				</p:selectOneMenu>
+				<h:panelGroup id="input">
+    				<p:inputText  value ="#{dailyEmployeesBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required = "true" />		
+    				<p:inputText  value = "#{dailyEmployeesBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" required = "true"/>
+				</h:panelGroup></span>
+			</h:panelGrid>
+
+			<p:separator />
+
+		</p:panel>
+		
 		
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">

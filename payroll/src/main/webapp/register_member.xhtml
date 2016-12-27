@@ -59,13 +59,6 @@
 			</p:inputText>
 			<p:message for="surnameD" errorClass="invalid" />
 
-			<h:outputLabel for="paymentMethodD" value="Payment method:" />
-			<p:inputText id="paymentMethodD"
-				value="#{registerDailyBean.empl.paymentMethod}"
-				validatorMessage="Payment method required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="paymentMethodD" errorClass="invalid" />
 
 			<h:outputLabel for="hourlyRateD" value="Hourly rate:" />
 			<p:inputText id="hourlyRateD"
@@ -96,6 +89,26 @@
 		</h:panelGrid>
 
 		<p:growl id="msgsD" showDetail="true" />
+		
+		<p:panel header="Select a payment method" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="Payment" value="Payment: " />
+				<span><p:selectOneMenu id="Payment" value="#{paymentDropdownView.method}"
+					style="width:150px">
+					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
+  					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
+  					<f:selectItem itemValue="Bank" itemLabel="Bank" />
+  					<f:ajax render="input" />	
+				</p:selectOneMenu>
+				<h:panelGroup id="input">
+    				<p:inputText  value ="#{registerDailyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}"/>
+    				<p:inputText  value = "#{registerDailyBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" />
+				</h:panelGroup></span>
+			</h:panelGrid>
+
+			<p:separator />
+
+		</p:panel>
 
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
@@ -109,6 +122,7 @@
 			<p:separator />
 
 		</p:panel>
+		
 		<p>
 			<h:panelGrid columns="2">
 				<h:commandButton id="registerD"
@@ -136,14 +150,6 @@
 				<f:validateRequired />
 			</p:inputText>
 			<p:message for="surname" errorClass="invalid" />
-
-			<h:outputLabel for="paymentMethod" value="Payment method:" />
-			<p:inputText id="paymentMethod"
-				value="#{registerMonthlyBean.empl.paymentMethod}"
-				validatorMessage="Payment method required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="paymentMethod" errorClass="paymentMethod" />
 
 			<h:outputLabel for="salary" value="Salary:" />
 			<p:inputText id="salary" value="#{registerMonthlyBean.empl.salary}">
@@ -183,6 +189,25 @@
 
 		<p:growl id="msgs1" showDetail="true" />
 
+		<p:panel header="Select a payment method" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="Payment" value="Payment: " />
+				<span><p:selectOneMenu id="Payment" value="#{paymentDropdownView.method}"
+					style="width:150px">
+					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
+  					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
+  					<f:selectItem itemValue="Bank" itemLabel="Bank" />
+  					<f:ajax render="input" />	
+				</p:selectOneMenu>
+				<h:panelGroup id="input">
+    				<p:inputText  value ="#{registerMonthlyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required = "true" />		
+    				<p:inputText  value = "#{registerMonthlyBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" required = "true"/>
+				</h:panelGroup></span>
+			</h:panelGrid>
+
+			<p:separator />
+
+		</p:panel>
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="country" value="Union: " />
@@ -195,6 +220,7 @@
 			<p:separator />
 
 		</p:panel>
+		
 
 
 		<p>

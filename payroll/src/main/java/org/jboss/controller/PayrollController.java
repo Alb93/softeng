@@ -12,6 +12,8 @@ import org.jboss.model.admin.Admin;
 import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.model.payment.Bank;
+import org.jboss.model.payment.Mail;
 import org.jboss.model.salesreceipt.SalesReceipt;
 import org.jboss.model.timecard.TimeCard;
 import org.jboss.model.union.ServiceCharge;
@@ -66,8 +68,15 @@ public class PayrollController {
     	
 	}
 	
-	public void registerEmployee(Employee emp) {
+	public void registerEmployee(Employee emp, Bank bank, Mail mail) {
 		payrollDAO.registerEmployee(emp);
+		if(emp.getPaymentMethod().equals("Bank")){
+			bank.setEmp_username(emp.getUsername());
+			payrollDAO.registerBankAccount(bank);
+		} else if(emp.getPaymentMethod().equals("Mail")) {
+			mail.setEmp_username(emp.getUsername());
+			payrollDAO.registerMailAddress(mail);
+		}
 	}
 	
 	public void postSalesReceipt(SalesReceipt r) {
@@ -131,12 +140,26 @@ public class PayrollController {
 		return emp;
 	}
 	
-	public void updateDailyEmployee(DailyEmployee d){
+	public void updateDailyEmployee(DailyEmployee d, Bank b, Mail m){
 		payrollDAO.updateDailyEmployee(d);
+		if(d.getPaymentMethod().equals("Bank")){
+			b.setEmp_username(d.getUsername());
+			payrollDAO.updateBankAccount(b);
+		} else if(d.getPaymentMethod().equals("Mail")) {
+			m.setEmp_username(d.getUsername());
+			payrollDAO.updateMailAddress(m);
+		}
 	}
 	
-	public void updateMonthlyEmployee(MonthlyEmployeeWithSales m){
+	public void updateMonthlyEmployee(MonthlyEmployeeWithSales m, Bank b, Mail mail){
 		payrollDAO.updateMonthlyEmployee(m);
+		if(m.getPaymentMethod().equals("Bank")){
+			b.setEmp_username(m.getUsername());
+			payrollDAO.updateBankAccount(b);
+		} else if(m.getPaymentMethod().equals("Mail")) {
+			mail.setEmp_username(m.getUsername());
+			payrollDAO.updateMailAddress(mail);
+		}
 	}
 
 	public List<MonthlyEmployeeWithSales> findAllMonthlyEmployees() {
@@ -146,6 +169,14 @@ public class PayrollController {
 	public void removeMonthlyEmployee(int id) {
 		payrollDAO.removeMonthlyEmployee(id);
 		
+	}
+	
+	public Bank getBank(String username){
+		return payrollDAO.findBank(username);
+	}
+	
+	public Mail getMail(String username){
+		return payrollDAO.findMail(username);
 	}
     
 

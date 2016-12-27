@@ -13,6 +13,8 @@ import org.jboss.model.admin.Admin;
 import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.model.payment.Bank;
+import org.jboss.model.payment.Mail;
 import org.jboss.model.salesreceipt.SalesReceipt;
 import org.jboss.model.timecard.TimeCard;
 import org.jboss.model.union.ServiceCharge;
@@ -52,9 +54,19 @@ public class PayrollDAO {
 	}
 
 	public void registerEmployee(Employee emp) {
+		
 
 		em.persist(emp);
+		
 
+	}
+	
+	public void registerMailAddress(Mail mail){
+		em.persist(mail);
+	}
+	
+	public void registerBankAccount(Bank bank){
+		em.persist(bank);
 	}
 
 	public void postSalesReceipt(SalesReceipt r) {
@@ -132,6 +144,18 @@ public class PayrollDAO {
 		return union;
 	}
 	
+	public Bank findBank(String username) {
+		Bank bank = em.createQuery("select b from Bank b where b.emp_username = :username", Bank.class)
+				.setParameter("username", username).getSingleResult();
+		return bank;
+	}
+	
+	public Mail findMail(String username) {
+		Mail mail = em.createQuery("select m from Mail m where m.emp_username = :username", Mail.class)
+				.setParameter("username", username).getSingleResult();
+		return mail;
+	}
+	
 	
 	
 	public List<Employee> findAllUnionsEmployee(String name){
@@ -204,5 +228,23 @@ public class PayrollDAO {
 	
 	
 	
+	}
+
+	public void updateBankAccount(Bank b) {
+		Query q = em.createQuery("UPDATE Bank b SET b.bank_account = :account WHERE b.emp_username = :username");
+		q.setParameter("account", b.getBank_account());
+		q.setParameter("username", b.getEmp_username());
+		
+		q.executeUpdate();
+		
+	}
+
+	public void updateMailAddress(Mail m) {
+		Query q = em.createQuery("UPDATE Mail m SET m.mail_address = :address WHERE m.emp_username = :username");
+		q.setParameter("address", m.getMail_address());
+		q.setParameter("username", m.getEmp_username());
+		
+		q.executeUpdate();
+		
 	}
 }

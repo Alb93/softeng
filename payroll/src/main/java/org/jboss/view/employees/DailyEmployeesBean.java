@@ -13,10 +13,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.controller.PayrollController;
-import org.jboss.dao.PayrollDAO;
 import org.jboss.model.employees.DailyEmployee;
+import org.jboss.model.payment.Bank;
+import org.jboss.model.payment.Mail;
 import org.jboss.model.union.Union;
 import org.jboss.view.post.PostServiceChargeBean;
+import org.jboss.view.utils.PaymentDropdownView;
 import org.jboss.view.utils.UnionDropdownView;
 
 @SuppressWarnings("serial")
@@ -28,9 +30,12 @@ public class DailyEmployeesBean implements Serializable {
 	private PayrollController payrollController;
 	
 	@Inject PostServiceChargeBean serviceChargeBean;
+	private Bank bank = new Bank();
+    private Mail mail = new Mail();
 	private List<DailyEmployee> dailyEmployees;
 	private DailyEmployee dEmployee;
 	private UnionDropdownView dropdown;
+	private PaymentDropdownView paymentDropdownView;
 	private ArrayList<String> unionNames;
 	
 	@PostConstruct
@@ -38,7 +43,8 @@ public class DailyEmployeesBean implements Serializable {
 		dailyEmployees = payrollController.findAllDailyEmployees();
 		FacesContext context = FacesContext.getCurrentInstance();
         dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
-    	List<Union> unions = payrollController.findAllUnions();
+        paymentDropdownView = (PaymentDropdownView) context.getApplication().evaluateExpressionGet(context, "#{paymentDropdownView}", PaymentDropdownView.class);
+        List<Union> unions = payrollController.findAllUnions();
     	unionNames = new ArrayList<>();
     	unionNames.add("-");
     	for (Union union : unions) {
@@ -79,6 +85,17 @@ public class DailyEmployeesBean implements Serializable {
 			Union union = payrollController.findCorrespondingUnion(d.getUnion_name());
 			dropdown.setUnion(union.getName());
 		}
+		if(d.getPaymentMethod().equals("Bank")){
+			//query bank
+			paymentDropdownView.setMethod("Bank");
+			bank = payrollController.getBank(d.getUsername());
+			
+		}
+		if(d.getPaymentMethod().equals("Mail")){
+			paymentDropdownView.setMethod("Mail");
+			mail = payrollController.getMail(d.getUsername());
+		}
+		System.out.println("la mail è " + mail.getMail_address());
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("edit_daily.jsf");
 		} catch (IOException e) {
@@ -90,7 +107,8 @@ public class DailyEmployeesBean implements Serializable {
 	public void updateDailyEmployee(){
 		
 		dEmployee.setUnion_name(dropdown.getUnion());
-		payrollController.updateDailyEmployee(dEmployee);
+		dEmployee.setPaymentMethod(paymentDropdownView.getMethod());
+		payrollController.updateDailyEmployee(dEmployee, bank, mail);
 		dailyEmployees = payrollController.findAllDailyEmployees();
 		serviceChargeBean.reload();
 		try {
@@ -103,5 +121,22 @@ public class DailyEmployeesBean implements Serializable {
 		}	
 		
 	}
+	
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
+	
+	public Bank getBank() {
+		return bank;
+	}
+	
+	public void setMail(Mail mail) {
+		this.mail = mail;
+	}
+	
+	public Mail getMail() {
+		return mail;
+	}
+	
 
 }

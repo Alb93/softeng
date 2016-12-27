@@ -15,8 +15,11 @@ import org.jboss.controller.PayrollController;
 import org.jboss.dao.PayrollDAO;
 import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.model.payment.Bank;
+import org.jboss.model.payment.Mail;
 import org.jboss.model.union.Union;
 import org.jboss.view.post.PostServiceChargeBean;
+import org.jboss.view.utils.PaymentDropdownView;
 import org.jboss.view.utils.UnionDropdownView;
 
 @SuppressWarnings("serial")
@@ -28,9 +31,12 @@ public class MonthlyEmployeesBean implements Serializable {
 	private PayrollController payrollController;
 	
 	@Inject PostServiceChargeBean serviceChargeBean;
+	private Bank bank = new Bank();
+    private Mail mail = new Mail();
 	private MonthlyEmployeeWithSales mEmployee;
 	private List<MonthlyEmployeeWithSales> monthlyEmployees;
 	private UnionDropdownView dropdown;
+	private PaymentDropdownView paymentDropdownView;
 	private ArrayList<String> unionNames;
 	
 	@PostConstruct
@@ -38,6 +44,7 @@ public class MonthlyEmployeesBean implements Serializable {
 		monthlyEmployees = payrollController.findAllMonthlyEmployees();
 		FacesContext context = FacesContext.getCurrentInstance();
         dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
+        paymentDropdownView = (PaymentDropdownView) context.getApplication().evaluateExpressionGet(context, "#{paymentDropdownView}", PaymentDropdownView.class);
     	List<Union> unions = payrollController.findAllUnions();
     	unionNames = new ArrayList<>();
     	unionNames.add("-");
@@ -78,6 +85,16 @@ public class MonthlyEmployeesBean implements Serializable {
 			Union union = payrollController.findCorrespondingUnion(m.getUnion_name());
 			dropdown.setUnion(union.getName());
 		}
+		if(m.getPaymentMethod().equals("Bank")){
+			//query bank
+			paymentDropdownView.setMethod("Bank");
+			bank = payrollController.getBank(m.getUsername());
+			
+		}
+		if(m.getPaymentMethod().equals("Mail")){
+			paymentDropdownView.setMethod("Mail");
+			mail = payrollController.getMail(m.getUsername());
+		}
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("edit_monthly.jsf");
 		} catch (IOException e) {
@@ -89,7 +106,8 @@ public class MonthlyEmployeesBean implements Serializable {
 	public void updateMonthlyEmployee(){
 		
 		mEmployee.setUnion_name(dropdown.getUnion());
-		payrollController.updateMonthlyEmployee(mEmployee);
+		mEmployee.setPaymentMethod(paymentDropdownView.getMethod());
+		payrollController.updateMonthlyEmployee(mEmployee, bank, mail);
 		monthlyEmployees = payrollController.findAllMonthlyEmployees();
 		serviceChargeBean.reload();
 		try {
@@ -98,6 +116,22 @@ public class MonthlyEmployeesBean implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+	}
+	
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
+	
+	public Bank getBank() {
+		return bank;
+	}
+	
+	public void setMail(Mail mail) {
+		this.mail = mail;
+	}
+	
+	public Mail getMail() {
+		return mail;
 	}
 
 }

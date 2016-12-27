@@ -25,21 +25,23 @@ public class LoginUnionBean implements Serializable {
 	private Union u = new Union();
 
 	public void checkLogin() {
-
-		Union un = payrollController.checkLoginUnion(u.getUsername(), u.getPassword());
-		System.out.println(u.getUsername()+" "+u.getPassword());	
-		if(un != null){
-    		try {
-    			u = un;
-				FacesContext.getCurrentInstance().getExternalContext().redirect("post_service_charge.jsf");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	}else{
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
-    		RequestContext.getCurrentInstance().showMessageInDialog(message);
-    	}
+		if(u.getUsername() != null){
+			Union un = payrollController.checkLoginUnion(u.getUsername(), u.getPassword());
+			System.out.println(u.getUsername()+" "+u.getPassword());	
+			if(un != null){
+	    		try {
+	    			u = un;
+					FacesContext.getCurrentInstance().getExternalContext().redirect("post_service_charge.jsf");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    	}else{
+	    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
+	    		RequestContext.getCurrentInstance().showMessageInDialog(message);
+	    	}
+		}
+		
 	}
 
 	public void setUnion(Union u) {
