@@ -33,8 +33,8 @@
      <p:growl id="msgs" showDetail="true" />
   
      <h:panelGrid columns="2" cellpadding="5">
-         <p:outputLabel for="popup" value="Popup:" />
-         <p:calendar id="popup" value="#{calendarView.date2}" />
+         <p:outputLabel for="popup" value="Date:" />
+         <p:calendar id="popup" value="#{calendarView.date}"  />
   
      </h:panelGrid>
   
@@ -44,7 +44,7 @@
  				columnClasses="label,value">
           
              <h:outputText value="Calendar:" />
-             <h:outputText value="#{calendarView.date2}">
+             <h:outputText value="#{calendarView.date}">
                  <f:convertDateTime pattern="MM/dd/yyyy" />
             </h:outputText>
  
@@ -53,8 +53,10 @@
      </p:dialog>
  
  				<h:outputLabel for="hours" value="Hours:" />
- 				<h:inputText id="hours"
- 					value="#{postTimeCardBean.card.hours}" />
+ 				<p:inputText id="hours"
+ 					value="#{postTimeCardBean.card.hours}" validatorMessage="Hours required" converterMessage="Please enter digits only.">
+ 					<f:validateRequired/>
+ 				</p:inputText>
  				<h:message for="hours" errorClass="hours" />
                  
                   <p>
@@ -72,56 +74,6 @@
 	
 
 
-	<!-- 
-	<h:outputStylesheet library="css" name="style.css" />
-	<ul>
-		<li><a href="./index.jsf">Home</a></li>
-		<li><a class="active" href="./login.jsf">Employee</a></li>
-		<li><a href="./login_admin.jsf">Admin</a></li>
-		<li><a href="./login_union.jsf">Union</a></li>
-		<li style="float: right"><a class="active" href="">User: <h:outputText
-					value="#{loggedDailyBean.empl.username}"></h:outputText></a></li>
-	</ul>
-	<h:form id="form">
-     <p:growl id="msgs" showDetail="true" />
- 
-		<div>
-			             
-			<p:outputLabel for="popup" value="Date:" />
-			        
-			<p:calendar id="popup" value="#{calendarView.date2}" />
-			              
-			<p:dialog modal="true" resizable="false" header="Values"
-				widgetVar="dlg" showEffect="fold">
-        <h:panelGrid id="display" columns="2"
-					columnClasses="label,value">
-         
-            <h:outputText value="Calendar:" />
-            <h:outputText value="#{calendarView.date2}">
-                <f:convertDateTime pattern="MM/dd/yyyy" />
-            </h:outputText>
-
-
-        </h:panelGrid>
-    </p:dialog>
-
-			<p:outputLabel for="hours" value="Hours:" />
-			<p:inputText id="hours" value="#{postTimeCardBean.card.hours}">
-				<f:validateRequired />
-			</p:inputText>
-			<h:message for="hours" errorClass="hours" />
-		</div>
-		<div>
-			<h:panelGrid columns="2">
-				<p:commandButton id="post"
-					action="#{postTimeCardBean.post(loggedDailyBean.empl.id)}"
-					value="Post the time card" styleClass="post" ajax="false"
-					icon="ui-icon-star" />
-				<h:messages styleClass="messages" errorClass="invalid"
-					infoClass="valid" warnClass="warning" globalOnly="true" />
-			</h:panelGrid>
-		</div>
-	</h:form>
- -->
+	
 </h:body>
 </html>

@@ -182,10 +182,20 @@ public class PayrollDAO {
 				.setParameter("id", id).executeUpdate();
 	}
 	
+	public void removeTimeCard(int id){
+		em.createQuery("DELETE FROM TimeCard t where t.emp_id = :id")
+			.setParameter("id", id).executeUpdate();
+	}
+	
 	public void removeMonthlyEmployee(int id){
 		
 		em.createQuery("DELETE FROM MonthlyEmployeeWithSales d where d.id = :id")
 				.setParameter("id", id).executeUpdate();
+	}
+	
+	public void removeSalesReceipt(int id){
+		em.createQuery("DELETE FROM SalesReceipt s where s.emp_id = :id")
+			.setParameter("id", id).executeUpdate();
 	}
 
 	public void updateDailyEmployee(DailyEmployee d){
