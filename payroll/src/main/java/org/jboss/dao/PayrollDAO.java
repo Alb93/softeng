@@ -29,7 +29,7 @@ public class PayrollDAO {
 	public Employee doLogin(String username, String password) { 
 
 		try {
-			System.out.println("EM = " + em);
+			System.out.println("EM = "  + em);
 			DailyEmployee emp = (DailyEmployee) em
 					.createQuery(
 							"SELECT e FROM DailyEmployee e where e.username = :usnValue and e.password = :pwdValue")
