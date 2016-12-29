@@ -32,7 +32,7 @@
 
 	    <h:panelGrid columns="2" cellpadding="5">
 	        <p:outputLabel for="popup" value="Date:" />
-	        <p:calendar id="popup" value="#{calendarView.date2}" />
+	        <p:calendar id="popup" value="#{calendarView.date}" />
 	    </h:panelGrid>
 
 	    <p:dialog modal="true" resizable="false" header="Values"
@@ -41,7 +41,7 @@
 				columnClasses="label,value">
 	         
 	            <h:outputText value="Popup:" />
-	            <h:outputText value="#{calendarView.date2}">
+	            <h:outputText value="#{calendarView.date}">
 	                <f:convertDateTime pattern="MM/dd/yyyy" />
 	            </h:outputText>
 	

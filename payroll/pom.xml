@@ -61,7 +61,7 @@
 				<artifactId>jconsole</artifactId>
 				<version>1.8</version>
 				<scope>system</scope>
-				<systemPath>C:\Program Files\Java\jdk1.8.0_91\lib\jconsole.jar</systemPath>
+				<systemPath>C:\Program Files\Java\jdk1.8.0_111\lib\jconsole.jar</systemPath>
 			</dependency>
 			<!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill 
 				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
