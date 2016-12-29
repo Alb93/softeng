@@ -70,13 +70,13 @@ public class PayrollController {
 	
 	public void registerEmployee(Employee emp, Bank bank, Mail mail) {
 		payrollDAO.registerEmployee(emp);
-		if(emp.getPaymentMethod().equals("Bank")){
-			bank.setEmp_username(emp.getUsername());
-			payrollDAO.registerBankAccount(bank);
-		} else if(emp.getPaymentMethod().equals("Mail")) {
-			mail.setEmp_username(emp.getUsername());
-			payrollDAO.registerMailAddress(mail);
-		}
+//		if(emp.getPaymentMethod().equals("Bank")){
+//			bank.setEmp_username(emp.getUsername());
+//			payrollDAO.registerBankAccount(bank);
+//		} else if(emp.getPaymentMethod().equals("Mail")) {
+//			mail.setEmp_username(emp.getUsername());
+//			payrollDAO.registerMailAddress(mail);
+//		}
 	}
 	
 	public void postSalesReceipt(SalesReceipt r) {
