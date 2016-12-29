@@ -25,24 +25,25 @@ public class PostSalesReceiptBean implements Serializable {
     
     private SalesReceipt r;
     
-    
     @PostConstruct
 	public void init() {
 		r = new SalesReceipt();
 	}
     
     public void post() {
-    	setDate();
-    	setMonthlyId();
-    	payrollController.postSalesReceipt(r);
-        System.out.println(("posting " + r.getId()+" sales receipt"));
-        r = new SalesReceipt();
+    	if(r.getAmount() != 0){
+    		setDate();
+        	setMonthlyId();
+        	payrollController.postSalesReceipt(r);
+            System.out.println(("posting " + r.getId()+" sales receipt"));
+            r = new SalesReceipt();
+    	}   	
     }
 
 	private void setDate() {
 		FacesContext context = FacesContext.getCurrentInstance();
         CalendarView calendarView = (CalendarView) context.getApplication().evaluateExpressionGet(context, "#{calendarView}", CalendarView.class);
-        Date sqldate = new Date(calendarView.getDate2().getTime());
+        Date sqldate = new Date(calendarView.getDate().getTime());
         r.setDate(sqldate);
 	}
 

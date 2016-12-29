@@ -30,17 +30,20 @@ public class PostTimeCardBean implements Serializable {
 	}
       
     public void post(int id) {
-    	card.setEmp_id(id);;
-    	setDate();
-    	payrollController.postTimeCard(card);
-    	card = new TimeCard();
-        System.out.println("posting " + card.getId()+" time card");
+    	if(card.getHours() != 0){
+    		card.setEmp_id(id);;
+        	setDate();
+        	payrollController.postTimeCard(card);
+        	card = new TimeCard();
+            System.out.println("posting " + card.getId()+" time card");
+    	}
+    	
     }
 
 	private void setDate() {
 		FacesContext context = FacesContext.getCurrentInstance();
         CalendarView calendarView = (CalendarView) context.getApplication().evaluateExpressionGet(context, "#{calendarView}", CalendarView.class);
-        Date sqldate = new Date(calendarView.getDate2().getTime());
+        Date sqldate = new Date(calendarView.getDate().getTime());
         card.setDate(sqldate);
 	}
 

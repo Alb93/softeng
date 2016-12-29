@@ -16,7 +16,7 @@
  
  <h:panelGrid columns="2" cellpadding="5">
  <p:outputLabel for="popup" value="Popup:" />
-<p:calendar id="popup" value="#{calendarView.date2}" />
+<p:calendar id="popup" value="#{calendarView.date}" />
  
  </h:panelGrid>
  
@@ -29,7 +29,7 @@
 				columnClasses="label,value">
  
  <h:outputText value="Popup:" />
-<h:outputText value="#{calendarView.date2}">
+<h:outputText value="#{calendarView.date}">
  <f:convertDateTime pattern="MM/dd/yyyy" />
  </h:outputText>
 
@@ -38,8 +38,10 @@
  </p:dialog>
 
 				<h:outputLabel for="amount" value="Amount:" />
-				<h:inputText id="amount"
-					value="#{postSalesReceiptBean.r.amount}" />
+				<p:inputText id="amount"
+					value="#{postSalesReceiptBean.r.amount}" validatorMessage="Amount required" converterMessage="Please enter digits only.">
+ 					<f:validateRequired/>
+ 				</p:inputText>
 				<h:message for="amount" errorClass="amounts" />
                 
                  <p>

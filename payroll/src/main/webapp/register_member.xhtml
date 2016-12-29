@@ -62,11 +62,11 @@
 
 			<h:outputLabel for="hourlyRateD" value="Hourly rate:" />
 			<p:inputText id="hourlyRateD"
-				value="#{registerDailyBean.empl.hourlyRate}" />
+				value="#{registerDailyBean.empl.hourlyRate}" converterMessage="Please enter digits only."/>
 			<p:message for="hourlyRateD" errorClass="hourlyRate" />
 
 			<h:outputLabel for="duesRateD" value="Dues rate:" />
-			<p:inputText id="duesRateD" value="#{registerDailyBean.empl.dueRate}" />
+			<p:inputText id="duesRateD" value="#{registerDailyBean.empl.dueRate}" converterMessage="Please enter digits only." />
 			<p:message for="duesRateD" errorClass="duesRate" />
 
 			<h:outputLabel for="usernameD" value="Username:" />
@@ -101,8 +101,11 @@
   					<f:ajax render="input" />	
 				</p:selectOneMenu>
 				<h:panelGroup id="input">
-    				<p:inputText  value ="#{registerDailyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}"/>
-    				<p:inputText  value = "#{registerDailyBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" />
+    				<p:inputText  value ="#{registerDailyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required="true"
+    				validatorMessage="Invalid email format">
+    					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+    				</p:inputText>
+    				<p:inputText  value = "#{registerDailyBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" required="true"/>
 				</h:panelGroup></span>
 			</h:panelGrid>
 
@@ -158,13 +161,13 @@
 
 			<h:outputLabel for="duesRate" value="Dues rate:" />
 			<p:inputText id="duesRate"
-				value="#{registerMonthlyBean.empl.dueRate}">
+				value="#{registerMonthlyBean.empl.dueRate}" converterMessage="Please enter digits only.">
 			</p:inputText>
 			<p:message for="duesRate" errorClass="duesRate" />
 
 			<h:outputLabel for="commissionRate" value="Commission rate:" />
 			<p:inputText id="commissionRate"
-				value="#{registerMonthlyBean.empl.commissionRate}">
+				value="#{registerMonthlyBean.empl.commissionRate}" converterMessage="Please enter digits only.">
 			</p:inputText>
 			<p:message for="commissionRate" errorClass="commissionRate" />
 
@@ -200,7 +203,10 @@
   					<f:ajax render="input" />	
 				</p:selectOneMenu>
 				<h:panelGroup id="input">
-    				<p:inputText  value ="#{registerMonthlyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required = "true" />		
+    				<p:inputText  value ="#{registerMonthlyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required="true"
+    				validatorMessage="Invalid email format">
+    					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+    				</p:inputText>		
     				<p:inputText  value = "#{registerMonthlyBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" required = "true"/>
 				</h:panelGroup></span>
 			</h:panelGrid>
