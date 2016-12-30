@@ -241,20 +241,18 @@ public class PayrollDAO {
 	}
 
 	public void updateBankAccount(Bank b) {
-		Query q = em.createQuery("UPDATE Bank b SET b.bank_account = :account WHERE b.emp_username = :username");
-		q.setParameter("account", b.getBank_account());
-		q.setParameter("username", b.getEmp_username());
-		
-		q.executeUpdate();
+		em.persist(b);
 		
 	}
 
 	public void updateMailAddress(Mail m) {
-		Query q = em.createQuery("UPDATE Mail m SET m.mail_address = :address WHERE m.emp_username = :username");
-		q.setParameter("address", m.getMail_address());
-		q.setParameter("username", m.getEmp_username());
-		
-		q.executeUpdate();
-		
+		em.persist(m);		
+	}
+	
+	public void removeOldBankAndMail(String username){
+		em.createQuery("DELETE FROM Mail m where m.emp_username = :username")
+		.setParameter("username", username).executeUpdate();
+		em.createQuery("DELETE FROM Bank b where b.emp_username = :username")
+		.setParameter("username", username).executeUpdate();
 	}
 }

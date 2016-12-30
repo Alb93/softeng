@@ -46,7 +46,7 @@
         	
         	      	
         	<p:column>
-            	<p:commandButton update="@form" actionListener="#{dailyEmployeesBean.removeDailyEmployee(item)}" value="REMOVE" onclick="return confirm('Are you sure?')"  >
+            	<p:commandButton update="@form" actionListener="#{dailyEmployeesBean.removeDailyEmployee(item)}" value="REMOVE" >
             		
             	</p:commandButton>
         	</p:column>
@@ -76,7 +76,7 @@
         	
         	
         	<p:column>
-            	<p:commandButton update="@form" actionListener="#{monthlyEmployeesBean.removeMonthlyEmployee(item)}" value="REMOVE" onclick="return confirm('Are you sure?')"   >
+            	<p:commandButton update="@form" actionListener="#{monthlyEmployeesBean.removeMonthlyEmployee(item)}" value="REMOVE">
             		
             	</p:commandButton>
         	</p:column>

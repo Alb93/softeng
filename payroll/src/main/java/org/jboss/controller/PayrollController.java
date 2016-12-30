@@ -143,24 +143,26 @@ public class PayrollController {
 	
 	public void updateDailyEmployee(DailyEmployee d, Bank b, Mail m){
 		payrollDAO.updateDailyEmployee(d);
+		payrollDAO.removeOldBankAndMail(d.getUsername());
 		if(d.getPaymentMethod().equals("Bank")){
 			b.setEmp_username(d.getUsername());
 			payrollDAO.updateBankAccount(b);
 		} else if(d.getPaymentMethod().equals("Mail")) {
 			m.setEmp_username(d.getUsername());
 			payrollDAO.updateMailAddress(m);
-		}
+		} 
 	}
 	
 	public void updateMonthlyEmployee(MonthlyEmployeeWithSales m, Bank b, Mail mail){
 		payrollDAO.updateMonthlyEmployee(m);
+		payrollDAO.removeOldBankAndMail(m.getUsername());
 		if(m.getPaymentMethod().equals("Bank")){
 			b.setEmp_username(m.getUsername());
 			payrollDAO.updateBankAccount(b);
 		} else if(m.getPaymentMethod().equals("Mail")) {
 			mail.setEmp_username(m.getUsername());
 			payrollDAO.updateMailAddress(mail);
-		}
+		} 
 	}
 
 	public List<MonthlyEmployeeWithSales> findAllMonthlyEmployees() {
