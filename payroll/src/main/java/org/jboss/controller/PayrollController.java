@@ -38,8 +38,8 @@ public class PayrollController {
 	public static String SUCCESS = "success";
 	public static String SUCCESS_U = "success_u";
 
-	public static String SUCCESS_D = "login_success_daily.jsf";
-	public static String SUCCESS_M = "login_success_monthly.jsf";
+	public static String SUCCESS_D = "success_d";
+	public static String SUCCESS_M = "success_m";
 
 	public static String FAILURE = "failure";
 	

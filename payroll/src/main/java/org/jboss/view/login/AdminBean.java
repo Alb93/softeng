@@ -30,22 +30,18 @@ public class AdminBean implements Serializable {
 		admin = new Admin();
 	}
     
-    public void checkLogin(){  	
+    public String checkLogin(){  	
     	if(admin.getUsername() != null){
     		System.out.println("admin " + admin.getUsername() + " " + admin.getPassword());
         	Admin a = payrollController.checkAdminLogin(admin.getUsername(), admin.getPassword());
         	if(a != null){
-        		try {
-    				FacesContext.getCurrentInstance().getExternalContext().redirect("admin_operations.jsf");
-    			} catch (IOException e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
-    			}
+        		return "success";
         	}else{
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
         		RequestContext.getCurrentInstance().showMessageInDialog(message);
+        		return "";
         	}
-    	}
+    	} return "";
     	
     }
        

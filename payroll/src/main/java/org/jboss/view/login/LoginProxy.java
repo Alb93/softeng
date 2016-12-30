@@ -12,10 +12,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.controller.PayrollController;
 import org.jboss.model.employees.Employee;
 import org.primefaces.context.RequestContext;
 
+@SuppressWarnings("serial")
 @Named
 @SessionScoped
 public class LoginProxy implements ILogin, Serializable {
@@ -41,21 +41,17 @@ public class LoginProxy implements ILogin, Serializable {
 		// lack of open-closed, TODO
 	}
 	
-	public void performLogin(){
+	public String performLogin(){
 		if(username != null){
 			String result = checkLogin();
 			if(result != null){
-				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect(result);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				return result;
 			} else{
 	    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Invalid credentials");
 	    		RequestContext.getCurrentInstance().showMessageInDialog(message);
+	    		return "";
 	    	}
-		}
+		} return "";
 		
 	}
 
