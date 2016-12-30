@@ -30,14 +30,17 @@ public class PostSalesReceiptBean implements Serializable {
 		r = new SalesReceipt();
 	}
     
-    public void post() {
+    public String post() {
     	if(r.getAmount() != 0){
     		setDate();
         	setMonthlyId();
         	payrollController.postSalesReceipt(r);
             System.out.println(("posting " + r.getId()+" sales receipt"));
             r = new SalesReceipt();
-    	}   	
+            return "success";
+    	} 
+    	return "";
+    	
     }
 
 	private void setDate() {

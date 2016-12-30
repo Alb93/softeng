@@ -42,6 +42,7 @@ public class RegisterMonthlyBean implements Serializable {
     private String selectedUnion = "-";
 	private ArrayList<String> unionNames;
 	private String selectedPaymentMethod = "Mail";
+	private boolean usernameAlreadyUsed = false;
 	
     
     @PostConstruct
@@ -59,14 +60,21 @@ public class RegisterMonthlyBean implements Serializable {
     public String register() {
     	empl.setUnion_name(selectedUnion);
     	empl.setPaymentMethod(selectedPaymentMethod);
-    	payrollController.registerEmployee(empl, bank, mail);
-    	empBean.setMonthlyEmployees(payrollDAO.findAllMonthlyEmployees());
-    	serviceBean.reload();
-    	System.out.println("Registering" + empl.getName());   
-    	empl = new MonthlyEmployeeWithSales();
-    	mail = new Mail();
-    	bank = new Bank();
-    	return "success";
+    	if(payrollController.checkUsername(empl.getUsername())){
+    		usernameAlreadyUsed = true;
+    		return "failure";
+    	} else {
+    		usernameAlreadyUsed = false;
+    		payrollController.registerEmployee(empl, bank, mail);
+        	empBean.setMonthlyEmployees(payrollDAO.findAllMonthlyEmployees());
+        	serviceBean.reload();
+        	System.out.println("Registering" + empl.getName());   
+        	empl = new MonthlyEmployeeWithSales();
+        	mail = new Mail();
+        	bank = new Bank();
+        	return "success";
+    	}
+    	
     }
     
     public MonthlyEmployeeWithSales getEmpl() {
@@ -115,6 +123,14 @@ public class RegisterMonthlyBean implements Serializable {
     
     public String getSelectedPaymentMethod() {
 		return selectedPaymentMethod;
+	}
+    
+    public boolean isUsernameAlreadyUsed() {
+		return usernameAlreadyUsed;
+	}
+    
+    public void setUsernameAlreadyUsed(boolean usernameAlreadyUsed) {
+		this.usernameAlreadyUsed = usernameAlreadyUsed;
 	}
     
   

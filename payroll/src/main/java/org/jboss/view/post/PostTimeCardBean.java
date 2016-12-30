@@ -29,14 +29,17 @@ public class PostTimeCardBean implements Serializable {
 		card = new TimeCard();
 	}
       
-    public void post(int id) {
+    public String post(int id) {
     	if(card.getHours() != 0){
     		card.setEmp_id(id);;
         	setDate();
         	payrollController.postTimeCard(card);
         	card = new TimeCard();
             System.out.println("posting " + card.getId()+" time card");
+            return "success";
     	}
+    	return "";
+    	
     	
     }
 

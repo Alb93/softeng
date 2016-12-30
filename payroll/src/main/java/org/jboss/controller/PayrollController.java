@@ -69,6 +69,7 @@ public class PayrollController {
 	}
 	
 	public void registerEmployee(Employee emp, Bank bank, Mail mail) {
+		
 		payrollDAO.registerEmployee(emp);
 		if(emp.getPaymentMethod().equals("Bank")){
 			bank.setEmp_username(emp.getUsername());
@@ -77,6 +78,10 @@ public class PayrollController {
 			mail.setEmp_username(emp.getUsername());
 			payrollDAO.registerMailAddress(mail);
 		}
+	}
+	
+	public boolean checkUsername(String username){
+		return payrollDAO.checkIfUsernameAlreadyExists(username);
 	}
 	
 	public void postSalesReceipt(SalesReceipt r) {

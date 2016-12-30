@@ -72,6 +72,20 @@
 			<to-view-id>/login_success_monthly.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/post_time_card.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/login_success_daily.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/post_sales_receipt.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/login_success_monthly.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	
 	

@@ -135,6 +135,10 @@
 					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
 		</p>
+		
+		<h:outputScript rendered="#{registerDailyBean.usernameAlreadyUsed}">
+    alert("Username already in use.");
+	</h:outputScript>
 	</h:form>
 
 	<h:form id="regM" style="display: none">
@@ -238,6 +242,9 @@
 					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
 		</p>
+		<h:outputScript rendered="#{registerMonthlyBean.usernameAlreadyUsed}">
+    alert("Username already in use.");
+	</h:outputScript>
 
 	</h:form>
 

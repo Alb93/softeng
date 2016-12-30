@@ -70,4 +70,22 @@
   PATH="/login_success_daily.xhtml" SHAPE="240,737,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#login_success_monthly.xhtml"
   PATH="/login_success_monthly.xhtml" SHAPE="256,625,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#post_time_card.xhtml"
+  PATH="/post_time_card.xhtml" SHAPE="32,721,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#post_time_card.xhtml:0" NAME="item"
+   PATH="/post_time_card.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success::#login_success_daily.xhtml"
+    NAME="output" PATH="/login_success_daily.xhtml"
+    TARGET="rules:#login_success_daily.xhtml" TITLE="success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#post_sales_receipt.xhtml"
+  PATH="/post_sales_receipt.xhtml" SHAPE="32,833,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#post_sales_receipt.xhtml:0" NAME="item"
+   PATH="/post_sales_receipt.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success::#login_success_monthly.xhtml"
+    NAME="output" PATH="/login_success_monthly.xhtml"
+    TARGET="rules:#login_success_monthly.xhtml" TITLE="success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

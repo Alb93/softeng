@@ -23,16 +23,12 @@
 		</p:menubar>
 
 	</h:form>
-	<div>
-		<h2></h2>
-
-	</div>
 
 
 			<h:form id="form">
      <p:growl id="msgs" showDetail="true" />
   
-     <h:panelGrid columns="2" cellpadding="5">
+     <h:panelGrid columns="3" cellpadding="5">
          <p:outputLabel for="popup" value="Date:" />
          <p:calendar id="popup" value="#{calendarView.date}"  />
   
@@ -52,7 +48,7 @@
          </p:panelGrid>
      </p:dialog>
  
- 				<h:outputLabel for="hours" value="Hours:" />
+ 				<p:outputLabel for="hours" value="Hours:" />
  				<p:inputText id="hours"
  					value="#{postTimeCardBean.card.hours}" validatorMessage="Hours required" converterMessage="Please enter digits only.">
  					<f:validateRequired/>

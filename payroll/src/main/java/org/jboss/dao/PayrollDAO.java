@@ -52,6 +52,26 @@ public class PayrollDAO {
 		}
 
 	}
+	
+	public boolean checkIfUsernameAlreadyExists(String username){
+		try {
+			em.createQuery(
+							"SELECT e FROM DailyEmployee e where e.username = :usnValue")
+					.setParameter("usnValue", username).getSingleResult();
+			System.out.println("Mi ha trovato il daily");
+			return true;
+		} catch (NoResultException e1) {
+			try{
+				em.createQuery("SELECT e FROM " + MonthlyEmployeeWithSales.class.getName()
+								+ " e where e.username = :usnValue")
+						.setParameter("usnValue", username).getSingleResult();
+				return true;
+			} catch(NoResultException e2){
+				return false;
+			}
+			
+		}
+	}
 
 	public void registerEmployee(Employee emp) {
 		
