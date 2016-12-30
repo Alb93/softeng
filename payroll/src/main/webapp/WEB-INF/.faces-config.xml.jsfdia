@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PROCESS model-entity="JSFProcess"/>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#admin_operations.xhtml"
+  PATH="/admin_operations.xhtml" SHAPE="496,17,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#register_member.xhtml"
+  PATH="/register_member.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#register_member.xhtml:0" NAME="item"
+   PATH="/register_member.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success::#admin_operations.xhtml"
+    NAME="output" PATH="/admin_operations.xhtml"
+    TARGET="rules:#admin_operations.xhtml" TITLE="success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#edit_daily.xhtml" PATH="/edit_daily.xhtml"
+  SHAPE="240,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#edit_daily.xhtml:0" NAME="item"
+   PATH="/edit_daily.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success::#edit_employee.xhtml" NAME="output"
+    PATH="/edit_employee.xhtml" TARGET="rules:#edit_employee.xhtml"
+    TITLE="success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#edit_monthly.xhtml"
+  PATH="/edit_monthly.xhtml" SHAPE="240,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#edit_monthly.xhtml:0" NAME="item"
+   PATH="/edit_monthly.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success::#edit_employee.xhtml" NAME="output"
+    PATH="/edit_employee.xhtml" TARGET="rules:#edit_employee.xhtml"
+    TITLE="success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#edit_employee.xhtml"
+  PATH="/edit_employee.xhtml" SHAPE="448,353,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

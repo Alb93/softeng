@@ -93,7 +93,7 @@
 		<p:panel header="Select a payment method" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Payment" value="Payment: " />
-				<span><p:selectOneMenu id="Payment" value="#{paymentDropdownView.method}"
+				<span><p:selectOneMenu id="Payment" value="#{registerDailyBean.selectedPaymentMethod}"
 					style="width:150px">
 					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
   					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
@@ -101,11 +101,11 @@
   					<f:ajax render="input" />	
 				</p:selectOneMenu>
 				<h:panelGroup id="input">
-    				<p:inputText  value ="#{registerDailyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required="true"
+    				<p:inputText  value ="#{registerDailyBean.mail.mail_address}" rendered="#{registerDailyBean.selectedPaymentMethod == 'Mail'}" required="true"
     				validatorMessage="Invalid email format">
     					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
     				</p:inputText>
-    				<p:inputText  value = "#{registerDailyBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" required="true"/>
+    				<p:inputText  value = "#{registerDailyBean.bank.bank_account}" rendered="#{registerDailyBean.selectedPaymentMethod == 'Bank'}" required="true"/>
 				</h:panelGroup></span>
 			</h:panelGrid>
 
@@ -116,9 +116,9 @@
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Union" value="Union: " />
-				<p:selectOneMenu id="Union" value="#{unionDropdownView.union}"
+				<p:selectOneMenu id="Union" value="#{registerDailyBean.selectedUnion}"
 					style="width:150px">
-					<f:selectItems value="#{unionDropdownView.unions}" />
+					<f:selectItems value="#{registerDailyBean.unionNames}" />
 				</p:selectOneMenu>
 			</h:panelGrid>
 
@@ -195,7 +195,7 @@
 		<p:panel header="Select a payment method" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Payment" value="Payment: " />
-				<span><p:selectOneMenu id="Payment" value="#{paymentDropdownView.method}"
+				<span><p:selectOneMenu id="Payment" value="#{registerMonthlyBean.selectedPaymentMethod}"
 					style="width:150px">
 					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
   					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
@@ -203,11 +203,11 @@
   					<f:ajax render="input" />	
 				</p:selectOneMenu>
 				<h:panelGroup id="input">
-    				<p:inputText  value ="#{registerMonthlyBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required="true"
+    				<p:inputText  value ="#{registerMonthlyBean.mail.mail_address}" rendered="#{registerMonthlyBean.selectedPaymentMethod == 'Mail'}" required="true"
     				validatorMessage="Invalid email format">
     					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
     				</p:inputText>		
-    				<p:inputText  value = "#{registerMonthlyBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" required = "true"/>
+    				<p:inputText  value = "#{registerMonthlyBean.bank.bank_account}" rendered="#{registerMonthlyBean.selectedPaymentMethod == 'Bank'}" required = "true"/>
 				</h:panelGroup></span>
 			</h:panelGrid>
 
@@ -217,9 +217,9 @@
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="country" value="Union: " />
-				<p:selectOneMenu id="country" value="#{unionDropdownView.union}"
+				<p:selectOneMenu id="country" value="#{registerMonthlyBean.selectedUnion}"
 					style="width:150px">
-					<f:selectItems value="#{unionDropdownView.unions}" />
+					<f:selectItems value="#{registerMonthlyBean.unionNames}" />
 				</p:selectOneMenu>
 			</h:panelGrid>
 

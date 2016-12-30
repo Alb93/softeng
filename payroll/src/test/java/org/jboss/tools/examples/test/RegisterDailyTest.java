@@ -7,6 +7,9 @@ import javax.inject.Inject;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.dao.PayrollDAO;
 import org.jboss.model.employees.DailyEmployee;
+import org.jboss.model.payment.Bank;
+import org.jboss.model.payment.Mail;
+import org.jboss.view.employees.DailyEmployeesBean;
 import org.jboss.view.registration.RegisterDailyBean;
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,12 +44,14 @@ public class RegisterDailyTest extends ArquillianTest {
 		
 		// Set an element in the bean
 		DailyEmployee d = new DailyEmployee();
-		d.setName("MARIO");
-		d.setSurname("ROSSI");
-		d.setUsername("MARIO");
-		d.setPassword("MARIO");
+		d.setName("Mario");
+		d.setSurname("Rossi");
+		d.setUsername("Ma");
+		d.setPassword("Ma");
 		d.setDueRate(4.0f);
 		d.setHourlyRate(3.0f);
+		registerDailyBean.setSelectedUnion("-");
+		registerDailyBean.setSelectedPaymentMethod("Pickup");
 		registerDailyBean.setEmpl(d);
 		registerDailyBean.register();
 

@@ -1,13 +1,11 @@
 package org.jboss.view.registration;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,7 +18,6 @@ import org.jboss.model.union.Union;
 import org.jboss.view.employees.MonthlyEmployeesBean;
 import org.jboss.view.post.PostServiceChargeBean;
 import org.jboss.view.utils.PaymentDropdownView;
-import org.jboss.view.utils.UnionDropdownView;
 
 @SuppressWarnings("serial")
 @Named
@@ -39,21 +36,17 @@ public class RegisterMonthlyBean implements Serializable {
 	
 	@Inject PaymentDropdownView payment;
     
-	private Bank bank;
-    private Mail mail;
-	private UnionDropdownView dropdown;
-	private PaymentDropdownView paymentDropdownView;
-    private MonthlyEmployeeWithSales empl;
-    private ArrayList<String> unionNames;
+	private MonthlyEmployeeWithSales empl;
+	private Bank bank = new Bank();
+    private Mail mail = new Mail();
+    private String selectedUnion = "-";
+	private ArrayList<String> unionNames;
+	private String selectedPaymentMethod = "Mail";
+	
     
     @PostConstruct
 	public void init() {
 		empl = new MonthlyEmployeeWithSales();
-		bank = new Bank();
-		mail = new Mail();
-		FacesContext context = FacesContext.getCurrentInstance();
-        dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
-        paymentDropdownView = (PaymentDropdownView) context.getApplication().evaluateExpressionGet(context, "#{paymentDropdownView}", PaymentDropdownView.class);
         List<Union> unions = payrollController.findAllUnions();
     	unionNames = new ArrayList<>();
     	unionNames.add("-");
@@ -61,15 +54,11 @@ public class RegisterMonthlyBean implements Serializable {
 			unionNames.add(union.getName());
 			System.out.println(union.getName());
 		}
-    	
-        dropdown.setUnions(unionNames);
 	}
     
-    public void register() {
-    	String name = dropdown.getUnion();
-    	String payment = paymentDropdownView.getMethod();
-    	empl.setUnion_name(name);
-    	empl.setPaymentMethod(payment);
+    public String register() {
+    	empl.setUnion_name(selectedUnion);
+    	empl.setPaymentMethod(selectedPaymentMethod);
     	payrollController.registerEmployee(empl, bank, mail);
     	empBean.setMonthlyEmployees(payrollDAO.findAllMonthlyEmployees());
     	serviceBean.reload();
@@ -77,12 +66,7 @@ public class RegisterMonthlyBean implements Serializable {
     	empl = new MonthlyEmployeeWithSales();
     	mail = new Mail();
     	bank = new Bank();
-    	try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("admin_operations.jsf");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	return "success";
     }
     
     public MonthlyEmployeeWithSales getEmpl() {
@@ -108,5 +92,30 @@ public class RegisterMonthlyBean implements Serializable {
     public Mail getMail() {
 		return mail;
 	}
+    
+    public void setSelectedUnion(String selectedUnion) {
+		this.selectedUnion = selectedUnion;
+	}
+    
+    public String getSelectedUnion() {
+		return selectedUnion;
+	}
+    
+    public void setUnionNames(ArrayList<String> unionNames) {
+		this.unionNames = unionNames;
+	}
+    
+    public ArrayList<String> getUnionNames() {
+		return unionNames;
+	}
+    
+    public void setSelectedPaymentMethod(String selectedPaymentMethod) {
+		this.selectedPaymentMethod = selectedPaymentMethod;
+	}
+    
+    public String getSelectedPaymentMethod() {
+		return selectedPaymentMethod;
+	}
+    
   
 }

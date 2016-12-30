@@ -34,16 +34,13 @@ public class DailyEmployeesBean implements Serializable {
     private Mail mail = new Mail();
 	private List<DailyEmployee> dailyEmployees;
 	private DailyEmployee dEmployee;
-	private UnionDropdownView dropdown;
-	private PaymentDropdownView paymentDropdownView;
+	private String selectedUnion = "-";
 	private ArrayList<String> unionNames;
+	private String selectedMethod = "Mail";
 	
 	@PostConstruct
 	public void init() {
 		dailyEmployees = payrollController.findAllDailyEmployees();
-		FacesContext context = FacesContext.getCurrentInstance();
-        dropdown = (UnionDropdownView) context.getApplication().evaluateExpressionGet(context, "#{unionDropdownView}", UnionDropdownView.class);
-        paymentDropdownView = (PaymentDropdownView) context.getApplication().evaluateExpressionGet(context, "#{paymentDropdownView}", PaymentDropdownView.class);
         List<Union> unions = payrollController.findAllUnions();
     	unionNames = new ArrayList<>();
     	unionNames.add("-");
@@ -51,7 +48,6 @@ public class DailyEmployeesBean implements Serializable {
 			unionNames.add(union.getName());
 			System.out.println(union.getName());
 		}  	
-        dropdown.setUnions(unionNames);
 		
 	}
 	
@@ -83,17 +79,19 @@ public class DailyEmployeesBean implements Serializable {
 		setdEmployee(d);
 		if(!(d.getUnion_name().equals("-"))){
 			Union union = payrollController.findCorrespondingUnion(d.getUnion_name());
-			dropdown.setUnion(union.getName());
+			selectedUnion = union.getName();
 		}
 		if(d.getPaymentMethod().equals("Bank")){
 			//query bank
-			paymentDropdownView.setMethod("Bank");
+			selectedMethod = "Bank";
 			bank = payrollController.getBank(d.getUsername());
 			
 		}
-		if(d.getPaymentMethod().equals("Mail")){
-			paymentDropdownView.setMethod("Mail");
+		else if(d.getPaymentMethod().equals("Mail")){
+			selectedMethod = "Mail";
 			mail = payrollController.getMail(d.getUsername());
+		} else {
+			selectedMethod = "Pickup";
 		}
 		System.out.println("la mail è " + mail.getMail_address());
 		try {
@@ -104,21 +102,14 @@ public class DailyEmployeesBean implements Serializable {
 		}	
 	}
 	
-	public void updateDailyEmployee(){
+	public String updateDailyEmployee(){
 		
-		dEmployee.setUnion_name(dropdown.getUnion());
-		dEmployee.setPaymentMethod(paymentDropdownView.getMethod());
+		dEmployee.setUnion_name(selectedUnion);
+		dEmployee.setPaymentMethod(selectedMethod);
 		payrollController.updateDailyEmployee(dEmployee, bank, mail);
 		dailyEmployees = payrollController.findAllDailyEmployees();
 		serviceChargeBean.reload();
-		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("edit_employee.jsf");
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage("You can't delete it."));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		return "success";	
 		
 	}
 	
@@ -136,6 +127,30 @@ public class DailyEmployeesBean implements Serializable {
 	
 	public Mail getMail() {
 		return mail;
+	}
+	
+	public void setSelectedMethod(String selectedMethod) {
+		this.selectedMethod = selectedMethod;
+	}
+	
+	public void setSelectedUnion(String selectedUnion) {
+		this.selectedUnion = selectedUnion;
+	}
+	
+	public void setUnionNames(ArrayList<String> unionNames) {
+		this.unionNames = unionNames;
+	}
+	
+	public String getSelectedMethod() {
+		return selectedMethod;
+	}
+	
+	public String getSelectedUnion() {
+		return selectedUnion;
+	}
+	
+	public ArrayList<String> getUnionNames() {
+		return unionNames;
 	}
 	
 

@@ -50,7 +50,7 @@
 		<p:panel header="Select a payment method" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Payment" value="Payment: " />
-				<span><p:selectOneMenu id="Payment" value="#{paymentDropdownView.method}"
+				<span><p:selectOneMenu id="Payment" value="#{monthlyEmployeesBean.selectedMethod}"
 					style="width:150px">
 					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
   					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
@@ -58,8 +58,8 @@
   					<f:ajax render="input" />	
 				</p:selectOneMenu>
 				<h:panelGroup id="input">
-    				<p:inputText  value ="#{monthlyEmployeesBean.mail.mail_address}" rendered="#{paymentDropdownView.method == 'Mail'}" required = "true" />		
-    				<p:inputText  value = "#{monthlyEmployeesBean.bank.bank_account}" rendered="#{paymentDropdownView.method == 'Bank'}" required = "true"/>
+    				<p:inputText  value ="#{monthlyEmployeesBean.mail.mail_address}" rendered="#{monthlyEmployeesBean.selectedMethod == 'Mail'}" required = "true" />		
+    				<p:inputText  value = "#{monthlyEmployeesBean.bank.bank_account}" rendered="#{monthlyEmployeesBean.selectedMethod == 'Bank'}" required = "true"/>
 				</h:panelGroup></span>
 			</h:panelGrid>
 
@@ -70,11 +70,11 @@
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Union" value="Union: " />
-				<p:selectOneMenu id="Union" value="#{unionDropdownView.union}"
+				<p:selectOneMenu id="Union" value="#{monthlyEmployeesBean.selectedUnion}"
 					style="width:150px">
 					<!--  <f:selectItem itemLabel="#{unionDropdownView.country}" itemValue="#{unionDropdownView.country}"
 						noSelectionOption="false" />-->
-					<f:selectItems value="#{unionDropdownView.unions}" />
+					<f:selectItems value="#{monthlyEmployeesBean.unionNames}" />
 				</p:selectOneMenu>
 			</h:panelGrid>
 
