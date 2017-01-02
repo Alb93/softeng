@@ -13,7 +13,7 @@ import org.jboss.model.union.Union;
 
 @Named
 @SessionScoped
-public class LoggedUnionBean implements Serializable {
+public class LoggedUnionBean implements Serializable, ILogout {
 	
 	
 	@Inject
@@ -40,6 +40,12 @@ public class LoggedUnionBean implements Serializable {
 
 	public void setU(Union u) {
 		this.u = u;
+	}
+
+	@Override
+	public String logout() {
+		login.setUnion(new Union());
+		return "success";
 	}
 
 }

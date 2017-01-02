@@ -62,5 +62,9 @@ public class LoginMonthlyBean implements Serializable, ILogin {
 	public void setPasswordI(String password) {
 		empl.setPassword(password);
 	}
+	
+	public void setEmpl(MonthlyEmployeeWithSales empl) {
+		this.empl = empl;
+	}
 
 }

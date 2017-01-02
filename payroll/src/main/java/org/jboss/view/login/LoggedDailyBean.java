@@ -12,7 +12,7 @@ import org.jboss.model.employees.DailyEmployee;
 @SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class LoggedDailyBean implements Serializable {
+public class LoggedDailyBean implements Serializable, ILogout {
 	
 	
 	
@@ -38,6 +38,12 @@ public class LoggedDailyBean implements Serializable {
     
     public void setEmpl(DailyEmployee empl) {
 		this.empl = empl;
+	}
+
+	@Override
+	public String logout() {
+		loginProxy.getLdb().setEmpl(new DailyEmployee());
+		return "success";
 	}
     
     

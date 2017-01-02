@@ -1,12 +1,10 @@
 package org.jboss.view.login;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +15,7 @@ import org.primefaces.context.RequestContext;
 @SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class AdminBean implements Serializable {
+public class AdminBean implements Serializable, ILogout {
 	
 	
 	@Inject
@@ -51,5 +49,11 @@ public class AdminBean implements Serializable {
     
     public Admin getAdmin() {
 		return admin;
+	}
+
+	@Override
+	public String logout() {
+		admin = new Admin();
+		return "success";
 	}
 }

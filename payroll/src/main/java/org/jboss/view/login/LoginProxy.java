@@ -118,5 +118,15 @@ public class LoginProxy implements ILogin, Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public LoginDailyBean getLdb() {
+		return ldb;
+	}
+	
+	public LoginMonthlyBean getLmb() {
+		return lmb;
+	}
+	
+	
 
 }

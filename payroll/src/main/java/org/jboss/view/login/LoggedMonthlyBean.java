@@ -13,7 +13,7 @@ import org.jboss.model.employees.MonthlyEmployeeWithSales;
 
 @Named
 @SessionScoped
-public class LoggedMonthlyBean implements Serializable {
+public class LoggedMonthlyBean implements Serializable, ILogout {
 	
 	
 	
@@ -42,6 +42,12 @@ public class LoggedMonthlyBean implements Serializable {
     
     public void setEmpl(MonthlyEmployeeWithSales empl) {
 		this.empl = empl;
+	}
+
+	@Override
+	public String logout() {
+		loginProxy.getLmb().setEmpl(new MonthlyEmployeeWithSales());
+		return "success";
 	}
     
     
