@@ -91,6 +91,9 @@
                         warnClass="warning" globalOnly="true" />
                 </h:panelGrid>
             </p>
+            <h:outputScript rendered="#{monthlyEmployeesBean.usernameAlreadyUsed}">
+    alert("Username already in use.");
+	</h:outputScript>
         </h:form>
         
         
