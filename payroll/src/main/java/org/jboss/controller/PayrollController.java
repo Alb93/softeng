@@ -121,6 +121,14 @@ public class PayrollController {
 		return payrollDAO.findAllDailyEmployees();
 	}
 	
+	public List<TimeCard> findTimeCardsOfThisEmp(int id){
+		return payrollDAO.findTimeCardsOfThisEmp(id);
+	}
+	
+	public List<ServiceCharge> findServiceChargesOfThisEmp(int id){
+		return payrollDAO.findServiceChargeOfThisEmp(id);
+	}
+	
 	public void removeDailyEmployee(int id){
 		payrollDAO.removeDailyEmployee(id);
 		payrollDAO.removeTimeCard(id);

@@ -280,4 +280,22 @@ public class PayrollDAO {
 		em.createQuery("DELETE FROM Bank b where b.emp_username = :username")
 		.setParameter("username", username).executeUpdate();
 	}
+	
+	public List<TimeCard> findTimeCardsOfThisEmp(int id){
+
+		List<TimeCard> cards = em
+					.createQuery(
+							"SELECT t FROM TimeCard t where t.emp_id = :id", TimeCard.class)
+					.setParameter("id", id).getResultList();
+			return cards;
+		
+	}
+	
+	public List<ServiceCharge> findServiceChargeOfThisEmp(int id){
+		List<ServiceCharge> charges = em
+				.createQuery(
+						"SELECT s FROM ServiceCharge s where s.emp_id = :id", ServiceCharge.class)
+				.setParameter("id", id).getResultList();
+		return charges;
+	}
 }
