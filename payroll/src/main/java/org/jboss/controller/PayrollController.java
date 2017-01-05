@@ -124,6 +124,7 @@ public class PayrollController {
 	public void removeDailyEmployee(int id){
 		payrollDAO.removeDailyEmployee(id);
 		payrollDAO.removeTimeCard(id);
+		payrollDAO.removeServiceCharge(id);
 	}
 	
 	public List<Union> findAllUnions() {
@@ -177,6 +178,7 @@ public class PayrollController {
 	public void removeMonthlyEmployee(int id) {
 		payrollDAO.removeMonthlyEmployee(id);
 		payrollDAO.removeSalesReceipt(id);
+		payrollDAO.removeServiceCharge(id);
 		
 	}
 	

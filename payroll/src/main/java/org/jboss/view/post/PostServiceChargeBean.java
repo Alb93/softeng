@@ -14,6 +14,7 @@ import org.jboss.controller.PayrollController;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.union.ServiceCharge;
 import org.jboss.model.union.Union;
+import org.jboss.view.login.LoggedUnionBean;
 import org.jboss.view.login.LoginUnionBean;
 
 @Named
@@ -25,7 +26,7 @@ public class PostServiceChargeBean implements Serializable {
 	private PayrollController payrollController;
 	
 	@Inject
-	private LoginUnionBean loginUnionBean;
+	private LoggedUnionBean loggedUnionBean;
     
     private ServiceCharge r;
 	private Union u;
@@ -36,7 +37,7 @@ public class PostServiceChargeBean implements Serializable {
     @PostConstruct
 	public void init() {
     	System.out.println("init del post ser");
-        u = loginUnionBean.getU();
+        u = loggedUnionBean.getU();
         System.out.println("il nome union è" + u.getName());
     	List<Employee> employees = payrollController.findAllUnionsEmployee(u.getName());
     	employeesList = new HashMap<>();
@@ -57,7 +58,7 @@ public class PostServiceChargeBean implements Serializable {
     
     public void reload(){
         
-        u = loginUnionBean.getU();
+        u = loggedUnionBean.getU();
     	List<Employee> employees = payrollController.findAllUnionsEmployee(u.getName());
     	employeesList = new HashMap<>();
     	for (Employee employee : employees) {

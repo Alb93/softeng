@@ -18,6 +18,9 @@ public class LoginDailyBean implements Serializable, ILogin {
 
 	@Inject
 	private PayrollController payrollController;
+	
+	@Inject
+	private LoggedDailyBean loggedDailyBean;
 
 	private DailyEmployee empl = new DailyEmployee();
 
@@ -27,6 +30,7 @@ public class LoginDailyBean implements Serializable, ILogin {
 		if(payrollController.isEmpSetted()){
 			if (payrollController.getEmp() instanceof DailyEmployee) {
 				empl = (DailyEmployee) payrollController.getEmp();
+				loggedDailyBean.setEmpl(empl);
 				if (result.equals(PayrollController.SUCCESS))
 					return PayrollController.SUCCESS_D;
 				else

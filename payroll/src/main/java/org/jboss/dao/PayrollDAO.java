@@ -207,6 +207,11 @@ public class PayrollDAO {
 			.setParameter("id", id).executeUpdate();
 	}
 	
+	public void removeServiceCharge(int id){
+		em.createQuery("DELETE FROM ServiceCharge s where s.emp_id = :id")
+			.setParameter("id", id).executeUpdate();
+	}
+	
 	public void removeMonthlyEmployee(int id){
 		
 		em.createQuery("DELETE FROM MonthlyEmployeeWithSales d where d.id = :id")
