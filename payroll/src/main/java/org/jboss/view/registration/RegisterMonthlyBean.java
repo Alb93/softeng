@@ -59,6 +59,9 @@ public class RegisterMonthlyBean implements Serializable {
     
     public String register() {
     	empl.setUnion_name(selectedUnion);
+    	if(selectedUnion.equals("-")){
+    		empl.setDueRate(0);
+    	}
     	empl.setPaymentMethod(selectedPaymentMethod);
     	if(payrollController.checkUsername(empl.getUsername())){
     		usernameAlreadyUsed = true;

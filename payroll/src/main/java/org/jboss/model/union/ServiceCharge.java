@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Table(name="serviceCharges")
 public class ServiceCharge {
 	
-	private String service;
 
 	@Id @GeneratedValue
 	private int id;
@@ -18,14 +17,6 @@ public class ServiceCharge {
 	private float amount;
 	
 	private int emp_id;
-
-	public String getService() {
-		return service;
-	}
-
-	public void setService(String service) {
-		this.service = service;
-	}
 
 	public float getAmount() {
 		return amount;

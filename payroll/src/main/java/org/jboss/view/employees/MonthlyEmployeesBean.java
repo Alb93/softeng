@@ -38,7 +38,6 @@ public class MonthlyEmployeesBean implements Serializable {
 	private String selectedUnion = "-";
 	private ArrayList<String> unionNames;
 	private String selectedMethod = "Mail";
-	private boolean usernameAlreadyUsed = false;
 	
 	@PostConstruct
 	public void init() {
@@ -105,16 +104,15 @@ public class MonthlyEmployeesBean implements Serializable {
 	public String updateMonthlyEmployee(){
 		
 		mEmployee.setUnion_name(selectedUnion);
+		if(selectedUnion.equals("-")){
+			mEmployee.setDueRate(0);
+		}
 		mEmployee.setPaymentMethod(selectedMethod);
-		if(payrollController.checkUsername(mEmployee.getUsername())){
-    		usernameAlreadyUsed = true;
-    		return "failure";
-    	} else {
-    		payrollController.updateMonthlyEmployee(mEmployee, bank, mail);
-    		monthlyEmployees = payrollController.findAllMonthlyEmployees();
-    		serviceChargeBean.reload();
-    		return "success";	
-    	}	
+		payrollController.updateMonthlyEmployee(mEmployee, bank, mail);
+    	monthlyEmployees = payrollController.findAllMonthlyEmployees();
+    	serviceChargeBean.reload();
+    	return "success";	
+    		
 	}
 	
 	public void setBank(Bank bank) {
@@ -155,10 +153,6 @@ public class MonthlyEmployeesBean implements Serializable {
 	
 	public ArrayList<String> getUnionNames() {
 		return unionNames;
-	}
-	
-	public boolean isUsernameAlreadyUsed() {
-		return usernameAlreadyUsed;
 	}
 
 }

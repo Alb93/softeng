@@ -9,6 +9,20 @@
 	
 </h:head>
 <h:body>
+	<h:form>
+		<p:menubar>
+			
+			<p:menuitem value="Admin" 
+				icon="ui-icon-person" />
+			
+			<f:facet name="options">
+				<h:outputText style="margin-right:10px"
+					value="Admin: #{adminBean.admin.username}" />
+					
+			</f:facet>
+		</p:menubar>
+
+	</h:form>
         
         <h:form id="regD">
             <h2>Daily Employee Edit</h2>
@@ -22,15 +36,9 @@
                 <h:message for="surnameD" errorClass="invalid" />
                 
                 
-                 <h:outputLabel for="hourlyRateD" value="Hourly rate:" />
-                <h:inputText id="hourlyRateD"
-                    value="#{dailyEmployeesBean.dEmployee.hourlyRate}" />
-                <h:message for="hourlyRateD" errorClass="hourlyRate" />
                 
-  				<h:outputLabel for="duesRateD" value="Dues rate:" />
-                <h:inputText id="duesRateD"
-                    value="#{dailyEmployeesBean.dEmployee.dueRate}" />
-                <h:message for="duesRateD" errorClass="duesRate" />
+                
+  				
 
                  <h:outputLabel for="usernameD" value="Username:" />
                 <h:inputText id="usernameD"
@@ -41,6 +49,11 @@
                 <h:inputText id="passwordD"
                     value="#{dailyEmployeesBean.dEmployee.password}" />
                 <h:message for="passwordD" errorClass="password" /> 
+                
+                 <h:outputLabel for="hourlyRateD" value="Hourly rate:" />
+                <h:inputText id="hourlyRateD"
+                    value="#{dailyEmployeesBean.dEmployee.hourlyRate}" />
+                <h:message for="hourlyRateD" errorClass="hourlyRate" />
                 
                 
             </h:panelGrid>
@@ -68,21 +81,30 @@
 		</p:panel>
 		
 		
-		<p:panel header="Select a Union" style="margin-bottom:10px;">
+		
+            <p><p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Union" value="Union: " />
-				<p:selectOneMenu id="Union" value="#{dailyEmployeesBean.selectedUnion}"
+				<span><p:selectOneMenu id="Union" value="#{dailyEmployeesBean.selectedUnion}"
 					style="width:150px">
-					<!--  <f:selectItem itemLabel="#{unionDropdownView.country}" itemValue="#{unionDropdownView.country}"
-						noSelectionOption="false" />-->
 					<f:selectItems value="#{dailyEmployeesBean.unionNames}" />
+					<f:ajax render="unions" />	
 				</p:selectOneMenu>
+				<h:panelGroup id="unions">
+					<h:outputLabel value="Dues rate:" rendered="#{dailyEmployeesBean.selectedUnion != '-'}"/>
+    				<p:inputText  value="#{dailyEmployeesBean.dEmployee.dueRate}" converterMessage="Please enter digits only."
+    				 rendered="#{dailyEmployeesBean.selectedUnion != '-'}" required="true"/>
+
+    				
+				</h:panelGroup></span>
+				
+			
+	
 			</h:panelGrid>
 
 			<p:separator />
 
 		</p:panel>
-            <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="registerD"
                         action="#{dailyEmployeesBean.updateDailyEmployee()}"
@@ -92,9 +114,7 @@
                         warnClass="warning" globalOnly="true" />
                 </h:panelGrid>
             </p>
-            <h:outputScript rendered="#{dailyEmployeesBean.usernameAlreadyUsed}">
-    alert("Username already in use.");
-	</h:outputScript>
+       
         </h:form>
         
         

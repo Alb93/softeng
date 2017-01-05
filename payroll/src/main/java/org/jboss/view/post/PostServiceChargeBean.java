@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,6 +17,7 @@ import org.jboss.model.union.ServiceCharge;
 import org.jboss.model.union.Union;
 import org.jboss.view.login.LoggedUnionBean;
 import org.jboss.view.login.LoginUnionBean;
+import org.primefaces.context.RequestContext;
 
 @Named
 @SessionScoped
@@ -50,10 +52,15 @@ public class PostServiceChargeBean implements Serializable {
 	}
     
     public void post() {
-    
-    	r.setEmp_id(Integer.parseInt(selectedUnion));
-    	payrollController.postServiceCharge(r);
-       r = new ServiceCharge();
+    	if(employeesList.isEmpty()){
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "There are no employees in this union");
+    		RequestContext.getCurrentInstance().showMessageInDialog(message);
+    	} else {
+    		r.setEmp_id(Integer.parseInt(selectedUnion));
+        	payrollController.postServiceCharge(r);
+        	r = new ServiceCharge();
+    	}
+    	
     }
     
     public void reload(){
