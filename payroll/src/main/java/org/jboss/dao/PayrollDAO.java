@@ -299,4 +299,13 @@ public class PayrollDAO {
 				.setParameter("id", id).getResultList();
 		return charges;
 	}
+	
+	public List<SalesReceipt> findSalesReceiptOfThisEmp(int id){
+		
+		List<SalesReceipt> receipts = em
+				.createQuery(
+						"SELECT s FROM SalesReceipt s where s.emp_id = :id", SalesReceipt.class)
+				.setParameter("id", id).getResultList();
+		return receipts;		
+	}
 }

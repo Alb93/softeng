@@ -129,6 +129,10 @@ public class PayrollController {
 		return payrollDAO.findServiceChargeOfThisEmp(id);
 	}
 	
+	public List<SalesReceipt> findSalesReceiptOfThisEmp(int id){
+		return payrollDAO.findSalesReceiptOfThisEmp(id);
+	}
+	
 	public void removeDailyEmployee(int id){
 		payrollDAO.removeDailyEmployee(id);
 		payrollDAO.removeTimeCard(id);

@@ -8,7 +8,7 @@ import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.timecard.TimeCard;
 
-public class DailyPaymentCalculator extends IPaymentCalculator<TimeCard> {
+public class DailyPaymentCalculator extends PaymentCalculator<TimeCard> {
 	
 	private DailyEmployee dailyEmployee;
 	private Date date;

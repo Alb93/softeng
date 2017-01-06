@@ -5,7 +5,7 @@ import java.util.List;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.union.ServiceCharge;
 
-public abstract class IPaymentCalculator <T> {
+public abstract class PaymentCalculator <T> {
 	
 	private List<ServiceCharge> charges;
 	

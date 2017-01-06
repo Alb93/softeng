@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.jboss.model.union.ServiceCharge;
 
-public class ServiceChargesFilter implements RecordFilter<ServiceCharge> {
+public class ServiceChargesForDailyFilter implements RecordFilter<ServiceCharge> {
 
 	@Override
 	public List<ServiceCharge> filter(Date date, List<ServiceCharge> charges) {
@@ -18,7 +18,7 @@ public class ServiceChargesFilter implements RecordFilter<ServiceCharge> {
 			
 			String recordWeek = new SimpleDateFormat("w").format(serviceCharge.getDate());
 			System.out.println(recordWeek +  " " +  serviceCharge.getEmp_id());
-			//we keep only the time cards submitted in the current week
+			//we keep only the sales receipts submitted in the current week
 			if(referenceWeek.equals(recordWeek)) {
 				filteredCharges.add(serviceCharge);			}
 		}

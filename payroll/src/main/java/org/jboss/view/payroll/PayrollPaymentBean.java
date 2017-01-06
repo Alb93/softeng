@@ -12,12 +12,16 @@ import javax.inject.Named;
 import org.jboss.controller.PayrollController;
 import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.model.salesreceipt.SalesReceipt;
 import org.jboss.model.timecard.TimeCard;
 import org.jboss.model.union.ServiceCharge;
 import org.jboss.utils.payrollalgorithm.DailyPaymentCalculator;
-import org.jboss.utils.payrollalgorithm.IPaymentCalculator;
+import org.jboss.utils.payrollalgorithm.MonthlyPaymentCalculator;
+import org.jboss.utils.payrollalgorithm.PaymentCalculator;
 import org.jboss.utils.payrollalgorithm.RecordFilter;
-import org.jboss.utils.payrollalgorithm.ServiceChargesFilter;
+import org.jboss.utils.payrollalgorithm.SalesReceiptFilter;
+import org.jboss.utils.payrollalgorithm.ServiceChargesForDailyFilter;
+import org.jboss.utils.payrollalgorithm.ServiceChargesForMonthlyFilter;
 import org.jboss.utils.payrollalgorithm.TimeCardFilter;
 
 
@@ -30,12 +34,14 @@ public class PayrollPaymentBean implements Serializable {
 	private PayrollController payrollController;
 	
 	private List<DailyEmployee> dailyEmployees;
-	private IPaymentCalculator<TimeCard> dailyPaymentCalculator = new DailyPaymentCalculator();
+	private PaymentCalculator<TimeCard> dailyPaymentCalculator = new DailyPaymentCalculator();
 	private RecordFilter<TimeCard> timeCardFilter = new TimeCardFilter();
-	private RecordFilter<ServiceCharge> serviceChargeFilter = new ServiceChargesFilter();
+	private RecordFilter<ServiceCharge> serviceChargeDailyFilter = new ServiceChargesForDailyFilter();
+	private RecordFilter<ServiceCharge> serviceChargeMonthlyFilter = new ServiceChargesForMonthlyFilter();
 	private List<MonthlyEmployeeWithSales> monthlyEmployees;
+	private PaymentCalculator<SalesReceipt> monthlyPaymentCalculator = new MonthlyPaymentCalculator();
+	private RecordFilter<SalesReceipt> salesReceiptFilter = new SalesReceiptFilter();
 	
-	//private IPaymentCalculator monthlyPaymentCalculator = new MonthlyPaymentCalculator();
 	
 	@PostConstruct
 	public void init(){
@@ -44,20 +50,33 @@ public class PayrollPaymentBean implements Serializable {
 			float payment = calculateDailyPayment(dailyEmployee);
 			dailyEmployee.setPaymentAmount(String.valueOf(payment) + " €");
 		}
+		
 		monthlyEmployees = payrollController.findAllMonthlyEmployees();
+		for (MonthlyEmployeeWithSales monthlyEmployee : monthlyEmployees) {
+			float payment = calculateMonthlyPayment(monthlyEmployee);
+			monthlyEmployee.setPaymentAmount(String.valueOf(payment) + " €");
+		}
 	}
 	
 	public float calculateDailyPayment(DailyEmployee dailyEmployee){
 		List<TimeCard> cards = payrollController.findTimeCardsOfThisEmp(dailyEmployee.getId());
 		List<TimeCard> filteredCards = timeCardFilter.filter(new Date(), cards);
 		List<ServiceCharge> charges = payrollController.findServiceChargesOfThisEmp(dailyEmployee.getId());
-		List<ServiceCharge> filteredCharges = serviceChargeFilter.filter(new Date(), charges);
+		List<ServiceCharge> filteredCharges = serviceChargeDailyFilter.filter(new Date(), charges);
 		dailyPaymentCalculator.setPostObject(filteredCards);
 		dailyPaymentCalculator.setServiceCharges(filteredCharges);
 		return dailyPaymentCalculator.calculatePayment(dailyEmployee);		
 	}
 	
-	public void calculateMonthlyPayment(MonthlyEmployeeWithSales monthlyEmployeeWithSales){
+	public float calculateMonthlyPayment(MonthlyEmployeeWithSales monthlyEmployee){
+		List<SalesReceipt> receipts = payrollController.findSalesReceiptOfThisEmp(monthlyEmployee.getId());
+		List<SalesReceipt> filteredReceipts = salesReceiptFilter.filter(new Date(), receipts);
+		List<ServiceCharge> charges = payrollController.findServiceChargesOfThisEmp(monthlyEmployee.getId());
+		List<ServiceCharge> filteredCharges = serviceChargeMonthlyFilter.filter(new Date(), charges);	
+		monthlyPaymentCalculator.setPostObject(filteredReceipts);
+		monthlyPaymentCalculator.setServiceCharges(filteredCharges);
+		return monthlyPaymentCalculator.calculatePayment(monthlyEmployee);		
+		
 		
 	}
 	
