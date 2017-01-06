@@ -1,6 +1,7 @@
 package org.jboss.view.payroll;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,9 +14,12 @@ import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.MonthlyEmployeeWithSales;
 import org.jboss.model.timecard.TimeCard;
 import org.jboss.model.union.ServiceCharge;
-import org.jboss.utils.DailyPaymentCalculator;
-import org.jboss.utils.IPaymentCalculator;
-import org.jboss.utils.MonthlyPaymentCalculator;
+import org.jboss.utils.payrollalgorithm.DailyPaymentCalculator;
+import org.jboss.utils.payrollalgorithm.IPaymentCalculator;
+import org.jboss.utils.payrollalgorithm.RecordFilter;
+import org.jboss.utils.payrollalgorithm.ServiceChargesFilter;
+import org.jboss.utils.payrollalgorithm.TimeCardFilter;
+
 
 @SuppressWarnings("serial")
 @Named
@@ -26,25 +30,31 @@ public class PayrollPaymentBean implements Serializable {
 	private PayrollController payrollController;
 	
 	private List<DailyEmployee> dailyEmployees;
-	private List<MonthlyEmployeeWithSales> monthlyEmployees;
 	private IPaymentCalculator<TimeCard> dailyPaymentCalculator = new DailyPaymentCalculator();
+	private RecordFilter<TimeCard> timeCardFilter = new TimeCardFilter();
+	private RecordFilter<ServiceCharge> serviceChargeFilter = new ServiceChargesFilter();
+	private List<MonthlyEmployeeWithSales> monthlyEmployees;
+	
 	//private IPaymentCalculator monthlyPaymentCalculator = new MonthlyPaymentCalculator();
 	
 	@PostConstruct
 	public void init(){
 		dailyEmployees = payrollController.findAllDailyEmployees();
 		for (DailyEmployee dailyEmployee : dailyEmployees) {
-			String payment = calculateDailyPayment(dailyEmployee);
+			float payment = calculateDailyPayment(dailyEmployee);
+			dailyEmployee.setPaymentAmount(String.valueOf(payment) + " €");
 		}
 		monthlyEmployees = payrollController.findAllMonthlyEmployees();
 	}
 	
-	public String calculateDailyPayment(DailyEmployee dailyEmployee){
+	public float calculateDailyPayment(DailyEmployee dailyEmployee){
 		List<TimeCard> cards = payrollController.findTimeCardsOfThisEmp(dailyEmployee.getId());
+		List<TimeCard> filteredCards = timeCardFilter.filter(new Date(), cards);
 		List<ServiceCharge> charges = payrollController.findServiceChargesOfThisEmp(dailyEmployee.getId());
-		dailyPaymentCalculator.setPostObject(cards);
-		dailyPaymentCalculator.calculatePayment(dailyEmployee);
-		return null;
+		List<ServiceCharge> filteredCharges = serviceChargeFilter.filter(new Date(), charges);
+		dailyPaymentCalculator.setPostObject(filteredCards);
+		dailyPaymentCalculator.setServiceCharges(filteredCharges);
+		return dailyPaymentCalculator.calculatePayment(dailyEmployee);		
 	}
 	
 	public void calculateMonthlyPayment(MonthlyEmployeeWithSales monthlyEmployeeWithSales){

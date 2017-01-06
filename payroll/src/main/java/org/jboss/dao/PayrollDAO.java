@@ -292,6 +292,7 @@ public class PayrollDAO {
 	}
 	
 	public List<ServiceCharge> findServiceChargeOfThisEmp(int id){
+		
 		List<ServiceCharge> charges = em
 				.createQuery(
 						"SELECT s FROM ServiceCharge s where s.emp_id = :id", ServiceCharge.class)

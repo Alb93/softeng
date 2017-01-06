@@ -1,4 +1,4 @@
-package org.jboss.utils;
+package org.jboss.utils.payrollalgorithm;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -8,14 +8,13 @@ import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.timecard.TimeCard;
 
-public class DailyPaymentCalculator implements IPaymentCalculator<TimeCard> {
+public class DailyPaymentCalculator extends IPaymentCalculator<TimeCard> {
 	
 	private DailyEmployee dailyEmployee;
 	private Date date;
 	private List<TimeCard> cards;
 	
 	public DailyPaymentCalculator() {
-		//settiamo la data corrente
 		this.date = new Date();
 	}
 
@@ -27,17 +26,19 @@ public class DailyPaymentCalculator implements IPaymentCalculator<TimeCard> {
 		cal.setTime(date);
 		if(cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
 			float hourlyRate = dailyEmployee.getHourlyRate();
-			
 			for (TimeCard timeCard : cards) {
 				float hoursWorked = timeCard.getHours();
 				if(hoursWorked > 8) {
 					payment += (8 * hourlyRate);
-					float extraHours = 8 - hoursWorked;
+					float extraHours = hoursWorked - 8 ;
 					payment += (extraHours * 1.5* hourlyRate);
 				} else {
 					payment += (hourlyRate * hoursWorked);
 				}
 			}
+			
+			payment -= deductFromPayment(dailyEmployee.getDueRate());
+			
 			
 		}
 		return payment;

@@ -1,4 +1,4 @@
-package org.jboss.utils;
+package org.jboss.utils.payrollalgorithm;
 
 public class MonthlyPaymentCalculator {
 

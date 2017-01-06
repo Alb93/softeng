@@ -1,6 +1,7 @@
 package org.jboss.view.post;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,6 +19,7 @@ import org.jboss.model.union.ServiceCharge;
 import org.jboss.model.union.Union;
 import org.jboss.view.login.LoggedUnionBean;
 import org.jboss.view.login.LoginUnionBean;
+import org.jboss.view.utils.CalendarView;
 import org.primefaces.context.RequestContext;
 
 @Named
@@ -57,6 +60,7 @@ public class PostServiceChargeBean implements Serializable {
     		RequestContext.getCurrentInstance().showMessageInDialog(message);
     	} else {
     		r.setEmp_id(Integer.parseInt(selectedUnion));
+    		setDate();
         	payrollController.postServiceCharge(r);
         	r = new ServiceCharge();
     	}
@@ -73,6 +77,13 @@ public class PostServiceChargeBean implements Serializable {
 			System.out.println(employee.getName()+" "+employee.getSurname());
 		}
     }
+    
+    private void setDate() {
+		FacesContext context = FacesContext.getCurrentInstance();
+        CalendarView calendarView = (CalendarView) context.getApplication().evaluateExpressionGet(context, "#{calendarView}", CalendarView.class);
+        Date sqldate = new Date(calendarView.getDate().getTime());
+        r.setDate(sqldate);
+	}
 
 	
 

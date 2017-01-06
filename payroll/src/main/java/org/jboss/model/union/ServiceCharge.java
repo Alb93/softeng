@@ -1,5 +1,7 @@
 package org.jboss.model.union;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +19,8 @@ public class ServiceCharge {
 	private float amount;
 	
 	private int emp_id;
+	
+	private Date date;
 
 	public float getAmount() {
 		return amount;
@@ -43,8 +47,12 @@ public class ServiceCharge {
 	}
 
 	
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
-	
-	
-	
+	public Date getDate() {
+		return date;
+	}
+		
 }
