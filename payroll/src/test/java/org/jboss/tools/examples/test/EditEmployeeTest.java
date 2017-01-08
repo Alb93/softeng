@@ -1,7 +1,5 @@
 package org.jboss.tools.examples.test;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class DeleteEmployeeTest extends ArquillianTest {
+public class EditEmployeeTest extends ArquillianTest {
 	
 	@Inject DailyEmployeesBean dailyEmployeesBean;
 	@Inject MonthlyEmployeesBean monthlyEmployeesBean;
@@ -61,59 +59,86 @@ public class DeleteEmployeeTest extends ArquillianTest {
 			payrollDAO.removeMonthlyEmployee(tmp2.getId());
 	}
 
+	
+	
 	@Test
-	public void testDeleteDailyEmp() throws IOException{
+	public void editDailyTest(){
 		d.setName("Pino");
 		d.setSurname("Pino");
 		d.setUsername("Pino");
 		d.setPassword("Pino");
-		d.setDueRate(4.0f);
-		d.setHourlyRate(3.0f);
+		d.setDueRate(4);
+		d.setHourlyRate(3);
 		registerDailyBean.setSelectedUnion("-");
 		registerDailyBean.setSelectedPaymentMethod("Pickup");
 		registerDailyBean.setEmpl(d);
 		registerDailyBean.register();
-		dailyEmployeesBean.getDailyEmployees().add(d);
-		dailyEmployeesBean.removeDailyEmployee(d);
+		
+		float newHourlyRate = 5;
+		float newDueRate = 4;
+		String newUnion = "union1";
+		String newPaymentMethod = "Mail";
+		
+		d.setHourlyRate(newHourlyRate);
+		d.setDueRate(newDueRate);
+		dailyEmployeesBean.setSelectedMethod(newPaymentMethod);
+		dailyEmployeesBean.setSelectedUnion(newUnion);
+		dailyEmployeesBean.setdEmployee(d);
+		
+		dailyEmployeesBean.updateDailyEmployee();
+		
 		List<DailyEmployee> dailyEmployees = payrollDAO.findAllDailyEmployees();
-		boolean notFound = true;
+		boolean found = true;
 		for (DailyEmployee dailyEmployee : dailyEmployees) {
-			if(dailyEmployee.getName().equals("Pino") && dailyEmployee.getSurname().equals("Pino")){
-				notFound = false;
+			if("union1".equals(dailyEmployee.getUnion_name()) && "Mail".equals(dailyEmployee.getPaymentMethod()) &&
+					dailyEmployee.getDueRate() == 4 && dailyEmployee.getHourlyRate() == 5){
+				found = true;
+				break;
+				
 			}
 		}
 		
-		Assert.assertTrue("Pino was deleted", notFound);
-		
-		
+		Assert.assertTrue("Pino was modified", found);
 	}
 	
 	@Test
-	public void testDeleteMonthlyEmp() throws IOException{
+	public void editMonthlyTest(){
 		m.setName("Pino");
 		m.setSurname("Pino");
 		m.setUsername("Pino");
 		m.setPassword("Pino");
-		m.setDueRate(4.0f);
-		m.setCommissionRate(4.0f);
-		m.setSalary(4.0f);
+		m.setDueRate(4);
+		m.setSalary(5);
 		registerMonthlyBean.setSelectedUnion("-");
 		registerMonthlyBean.setSelectedPaymentMethod("Pickup");
 		registerMonthlyBean.setEmpl(m);
 		registerMonthlyBean.register();
-		monthlyEmployeesBean.getMonthlyEmployees().add(m);
-		monthlyEmployeesBean.removeMonthlyEmployee(m);
+		
+		float newSalary = 5;
+		float newDueRate = 4;
+		String newUnion = "union1";
+		String newPaymentMethod = "Mail";
+		
+		m.setSalary(newSalary);
+		m.setDueRate(newDueRate);
+		monthlyEmployeesBean.setSelectedMethod(newPaymentMethod);
+		monthlyEmployeesBean.setSelectedUnion(newUnion);
+		monthlyEmployeesBean.setmEmployee(m);
+		
+		monthlyEmployeesBean.updateMonthlyEmployee();
+		
 		List<MonthlyEmployeeWithSales> monthlyEmployees = payrollDAO.findAllMonthlyEmployees();
-		boolean notFound = true;
-		for (MonthlyEmployeeWithSales monthlyEmployeeWithSales : monthlyEmployees) {
-			if(monthlyEmployeeWithSales.getName().equals("Pino") && monthlyEmployeeWithSales.getSurname().equals("Pino")){
-				notFound = false;
+		boolean found = true;
+		for (MonthlyEmployeeWithSales monthlyEmployee : monthlyEmployees) {
+			if("union1".equals(monthlyEmployee.getUnion_name()) && "Mail".equals(monthlyEmployee.getPaymentMethod()) &&
+					monthlyEmployee.getDueRate() == 4 && monthlyEmployee.getSalary() == 5){
+				found = true;
+				break;
+				
 			}
 		}
 		
-		Assert.assertTrue("Pino was deleted", notFound);
-		
-		
+		Assert.assertTrue("Pino was modified", found);
 	}
 
 }
