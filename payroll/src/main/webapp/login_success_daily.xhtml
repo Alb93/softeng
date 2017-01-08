@@ -11,21 +11,25 @@
 
 	<h:form>
 		<p:menubar>
-			
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
 			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
-			
+			<p:menuitem value="Admin" url="./login_admin.jsf"
+				icon="ui-icon-person" />
+			<p:menuitem value="Union" url="./login_union.jsf"
+				icon="ui-icon-person" />
+
 			<f:facet name="options">
 				<h:outputText style="margin-right:10px"
 					value="User: #{loggedDailyBean.empl.username}" />
-					<p:commandButton id="logout"
-					action="#{sessionBean.performLogout(loggedDailyBean)}" value="Logout"
-					styleClass="register" style="margin-right:10px"/>
+				<p:commandButton id="logout"
+					action="#{sessionBean.performLogout(loggedDailyBean)}"
+					value="Logout" styleClass="register" style="margin-right:10px" />
 			</f:facet>
 		</p:menubar>
 
 	</h:form>
 	<div>
-		<h2></h2>
+	<h2></h2>
 
 	</div>
 
@@ -39,27 +43,5 @@
 	</h:form>
 
 
-
-	<!-- 
-	<h:outputStylesheet library="css" name="style.css" />
-	<ul>
-		<li><a href="./index.jsf">Home</a></li>
-		<li><a class="active" href="./login.jsf">Employee</a></li>
-		<li><a href="./login_admin.jsf">Admin</a></li>
-		<li><a href="./login_union.jsf">Union</a></li>
-		<li style="float: right"><a class="active" href="">User: <h:outputText
-					value="#{loggedDailyBean.empl.username}"></h:outputText></a></li>
-	</ul>
-
-	<div>
-		<h2>Login succesfull ! Daily</h2>
-	</div>
-	<div>
-		<h:form>
-			<p:commandButton type="submit" action="./post_time_card.jsf"
-				value="Post time card" ajax="false" icon="ui-icon-star" />
-		</h:form>
-	</div>
-	 -->
 </h:body>
 </html>

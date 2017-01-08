@@ -6,119 +6,136 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Edit</title>
-	
+
 </h:head>
 <h:body>
 	<h:form>
 		<p:menubar>
-			
-			<p:menuitem value="Admin" 
+
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
+			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
+			<p:menuitem value="Admin" url="./login_admin.jsf"
 				icon="ui-icon-person" />
-			
+			<p:menuitem value="Union" url="./login_union.jsf"
+				icon="ui-icon-person" />
+
 			<f:facet name="options">
+
 				<h:outputText style="margin-right:10px"
 					value="Admin: #{adminBean.admin.username}" />
-					
+				<p:commandButton id="logout"
+					action="#{sessionBean.performLogout(adminBean)}" value="Logout"
+					styleClass="register" style="margin-right:10px" />
 			</f:facet>
 		</p:menubar>
 
 	</h:form>
-        
-        <h:form id="regD">
-            <h2>Daily Employee Edit</h2>
-            <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="nameD" value="Name:" />
-                <h:inputText id="nameD" value="#{dailyEmployeesBean.dEmployee.name}" />
-                <h:message for="nameD" errorClass="invalid" />
+	<div>
+		<h2></h2>
 
-                <h:outputLabel for="surnameD" value="Surname:" />
-                <h:inputText id="surnameD" value="#{dailyEmployeesBean.dEmployee.surname}" />
-                <h:message for="surnameD" errorClass="invalid" />
-                
-                
-                
-                
-  				
+	</div>
+	<h:form id="regD">
+		<p:panel id="basic" header="Daily Employee Edit"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="nameD" value="Name:" />
+				<h:inputText id="nameD" value="#{dailyEmployeesBean.dEmployee.name}" />
+				<h:message for="nameD" errorClass="invalid" />
 
-                 <h:outputLabel for="usernameD" value="Username:" />
-                <h:inputText id="usernameD"
-                    value="#{dailyEmployeesBean.dEmployee.username}" />
-                <h:message for="usernameD" errorClass="invalid" />
-                
-                 <h:outputLabel for="passwordD" value="Password:" />
-                <h:inputText id="passwordD"
-                    value="#{dailyEmployeesBean.dEmployee.password}" />
-                <h:message for="passwordD" errorClass="password" /> 
-                
-                 <h:outputLabel for="hourlyRateD" value="Hourly rate:" />
-                <h:inputText id="hourlyRateD"
-                    value="#{dailyEmployeesBean.dEmployee.hourlyRate}" />
-                <h:message for="hourlyRateD" errorClass="hourlyRate" />
-                
-                
-            </h:panelGrid>
+				<h:outputLabel for="surnameD" value="Surname:" />
+				<h:inputText id="surnameD"
+					value="#{dailyEmployeesBean.dEmployee.surname}" />
+				<h:message for="surnameD" errorClass="invalid" />
 
+
+
+
+
+
+				<h:outputLabel for="usernameD" value="Username:" />
+				<h:inputText id="usernameD"
+					value="#{dailyEmployeesBean.dEmployee.username}" />
+				<h:message for="usernameD" errorClass="invalid" />
+
+				<h:outputLabel for="passwordD" value="Password:" />
+				<h:inputText id="passwordD"
+					value="#{dailyEmployeesBean.dEmployee.password}" />
+				<h:message for="passwordD" errorClass="password" />
+
+				<h:outputLabel for="hourlyRateD" value="Hourly rate:" />
+				<h:inputText id="hourlyRateD"
+					value="#{dailyEmployeesBean.dEmployee.hourlyRate}" />
+				<h:message for="hourlyRateD" errorClass="hourlyRate" />
+
+
+			</h:panelGrid>
+		</p:panel>
 		<p:growl id="msgsD" showDetail="true" />
-		
+
 		<p:panel header="Select a payment method" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Payment" value="Payment: " />
-				<span><p:selectOneMenu id="Payment" value="#{dailyEmployeesBean.selectedMethod}"
-					style="width:150px">
-					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
-  					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
-  					<f:selectItem itemValue="Bank" itemLabel="Bank" />
-  					<f:ajax render="input" />	
-				</p:selectOneMenu>
-				<h:panelGroup id="input">
-    				<p:inputText  value ="#{dailyEmployeesBean.mail.mail_address}" rendered="#{dailyEmployeesBean.selectedMethod == 'Mail'}" required = "true" />		
-    				<p:inputText  value = "#{dailyEmployeesBean.bank.bank_account}" rendered="#{dailyEmployeesBean.selectedMethod == 'Bank'}" required = "true"/>
-				</h:panelGroup></span>
+				<span><p:selectOneMenu id="Payment"
+						value="#{dailyEmployeesBean.selectedMethod}" style="width:150px">
+						<f:selectItem itemValue="Mail" itemLabel="Mail" />
+						<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
+						<f:selectItem itemValue="Bank" itemLabel="Bank" />
+						<f:ajax render="input" />
+					</p:selectOneMenu> <h:panelGroup id="input">
+						<p:inputText value="#{dailyEmployeesBean.mail.mail_address}"
+							rendered="#{dailyEmployeesBean.selectedMethod == 'Mail'}"
+							required="true" />
+						<p:inputText value="#{dailyEmployeesBean.bank.bank_account}"
+							rendered="#{dailyEmployeesBean.selectedMethod == 'Bank'}"
+							required="true" />
+					</h:panelGroup></span>
 			</h:panelGrid>
 
 			<p:separator />
 
 		</p:panel>
-		
-		
-		
-            <p><p:panel header="Select a Union" style="margin-bottom:10px;">
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel for="Union" value="Union: " />
-				<span><p:selectOneMenu id="Union" value="#{dailyEmployeesBean.selectedUnion}"
-					style="width:150px">
-					<f:selectItems value="#{dailyEmployeesBean.unionNames}" />
-					<f:ajax render="unions" />	
-				</p:selectOneMenu>
-				<h:panelGroup id="unions">
-					<h:outputLabel value="Dues rate:" rendered="#{dailyEmployeesBean.selectedUnion != '-'}"/>
-    				<p:inputText  value="#{dailyEmployeesBean.dEmployee.dueRate}" converterMessage="Please enter digits only."
-    				 rendered="#{dailyEmployeesBean.selectedUnion != '-'}" required="true"/>
 
-    				
-				</h:panelGroup></span>
-				
-			
-	
+
+
+		<p>
+			<p:panel header="Select a Union" style="margin-bottom:10px;">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="Union" value="Union: " />
+					<span><p:selectOneMenu id="Union"
+							value="#{dailyEmployeesBean.selectedUnion}" style="width:150px">
+							<f:selectItems value="#{dailyEmployeesBean.unionNames}" />
+							<f:ajax render="unions" />
+						</p:selectOneMenu> <h:panelGroup id="unions">
+							<h:outputLabel value="Dues rate:"
+								rendered="#{dailyEmployeesBean.selectedUnion != '-'}" />
+							<p:inputText value="#{dailyEmployeesBean.dEmployee.dueRate}"
+								converterMessage="Please enter digits only."
+								rendered="#{dailyEmployeesBean.selectedUnion != '-'}"
+								required="true" />
+
+
+						</h:panelGroup></span>
+
+
+
+				</h:panelGrid>
+
+				<p:separator />
+
+			</p:panel>
+			<h:panelGrid columns="2">
+				<h:commandButton id="registerD"
+					action="#{dailyEmployeesBean.updateDailyEmployee()}" value="Update"
+					styleClass="register" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
+		</p>
 
-			<p:separator />
+	</h:form>
 
-		</p:panel>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="registerD"
-                        action="#{dailyEmployeesBean.updateDailyEmployee()}"
-                        value="Update" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
-       
-        </h:form>
-        
-        
-      
+
+
 
 
 </h:body>

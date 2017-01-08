@@ -1,114 +1,123 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
 <h:body>
 
 	<h:form>
 		<p:menubar>
-			
-			<p:menuitem value="Admin" 
+
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
+			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
+			<p:menuitem value="Admin" url="./login_admin.jsf"
 				icon="ui-icon-person" />
-			
+			<p:menuitem value="Union" url="./login_union.jsf"
+				icon="ui-icon-person" />
+
 			<f:facet name="options">
+
 				<h:outputText style="margin-right:10px"
 					value="Admin: #{adminBean.admin.username}" />
+				<p:commandButton id="logout"
+					action="#{sessionBean.performLogout(adminBean)}" value="Logout"
+					styleClass="register" style="margin-right:10px" />
 			</f:facet>
 		</p:menubar>
 
 	</h:form>
 	<div>
-		<h2></h2>
+	<h2></h2>
 	</div>
 	<h:form id="form">
-     <p:growl id="msgs" showDetail="true" />
-  
-     <h:panelGrid columns="3" cellpadding="5">
-         <p:outputLabel for="popup" value="Date:" />
-         <p:calendar id="popup" value="#{calendarView.date}"  />
-  
-     </h:panelGrid>
-  
-     <p:dialog modal="true" resizable="false" header="Values"
- 			widgetVar="dlg" showEffect="fold">
-         <p:panelGrid id="display" columns="2"
- 				columnClasses="label,value">
-          
-             <h:outputText value="Calendar:" />
-             <h:outputText value="#{calendarView.date}">
-                 <f:convertDateTime pattern="MM/dd/yyyy" />
-            </h:outputText>
- 
- 
-         </p:panelGrid>
-          </p:dialog>
-           <p>
-                 <h:panelGrid columns="2">
-                     <h:commandButton id="post"
-                         action="#{payrollPaymentBean.runPayroll()}"
-                         value="Run the payroll" styleClass="post" />
-                    <h:messages styleClass="messages"
-                         errorClass="invalid" infoClass="valid"
-                         warnClass="warning" globalOnly="true" />
-                 </h:panelGrid>
-             </p>
-              
- 	</h:form>
-	
+		<p:panel id="basic" header="Select a date" style="margin-bottom:20px">
+			<p:growl id="msgs" showDetail="true" />
+
+			<h:panelGrid columns="3" cellpadding="5">
+				<p:outputLabel for="popup" value="Date:" />
+				<p:calendar id="popup" value="#{calendarView.date}" />
+
+			</h:panelGrid>
+
+			<p:dialog modal="true" resizable="false" header="Values"
+				widgetVar="dlg" showEffect="fold">
+				<p:panelGrid id="display" columns="2" columnClasses="label,value">
+
+					<h:outputText value="Calendar:" />
+					<h:outputText value="#{calendarView.date}">
+						<f:convertDateTime pattern="MM/dd/yyyy" />
+					</h:outputText>
+
+
+				</p:panelGrid>
+			</p:dialog>
+			<p>
+			<h:panelGrid columns="2">
+				<h:commandButton id="post"
+					action="#{payrollPaymentBean.runPayroll()}" value="Run the payroll"
+					styleClass="post" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+			</p>
+		</p:panel>
+	</h:form>
+
 	<h1>Payments</h1>
 	<h2>Daily Employees</h2>
 	<h:form>
-		<p:dataTable id="table" var="item" value="#{payrollPaymentBean.dailyEmployees}" rows="10"
-                         paginator="true"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
+		<p:dataTable id="table" var="item"
+			value="#{payrollPaymentBean.dailyEmployees}" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
 			<p:column headerText="ID">
-            	<h:outputText value="#{item.id}" />
-        	</p:column>
-        	<p:column headerText="Name">
-            	<h:outputText value="#{item.name}" />
-        	</p:column>	
-        	<p:column headerText="Surname">
-            	<h:outputText value="#{item.surname}" />
-        	</p:column>
+				<h:outputText value="#{item.id}" />
+			</p:column>
+			<p:column headerText="Name">
+				<h:outputText value="#{item.name}" />
+			</p:column>
+			<p:column headerText="Surname">
+				<h:outputText value="#{item.surname}" />
+			</p:column>
 			<p:column headerText="Payment">
-            	<h:outputText value="#{item.paymentAmount}" />
-        	</p:column>					
-		</p:dataTable>	
+				<h:outputText value="#{item.paymentAmount}" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
 	<h2>Monthly Employees</h2>
 	<h:form>
-		<p:dataTable id="table" var="item" value="#{payrollPaymentBean.monthlyEmployees}" rows="10"
-                         paginator="true"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
+		<p:dataTable id="table" var="item"
+			value="#{payrollPaymentBean.monthlyEmployees}" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
 			<p:column headerText="ID">
-            	<h:outputText value="#{item.id}" />
-        	</p:column>
-			
+				<h:outputText value="#{item.id}" />
+			</p:column>
+
 			<p:column headerText="Name">
-            	<h:outputText value="#{item.name}" />
-        	</p:column>
-        	
-        	<p:column headerText="Surname">
-            	<h:outputText value="#{item.surname}" />
-        	</p:column>
-        	<p:column headerText="Payment">
-            	<h:outputText value="#{item.paymentAmount}" />
-        	</p:column>
-        	
-        	
-        	
-        	
-		</p:dataTable>	
+				<h:outputText value="#{item.name}" />
+			</p:column>
+
+			<p:column headerText="Surname">
+				<h:outputText value="#{item.surname}" />
+			</p:column>
+			<p:column headerText="Payment">
+				<h:outputText value="#{item.paymentAmount}" />
+			</p:column>
+
+
+
+
+		</p:dataTable>
 	</h:form>
-	
-	
 
 
-	
+
+
+
 </h:body>
 </html>
