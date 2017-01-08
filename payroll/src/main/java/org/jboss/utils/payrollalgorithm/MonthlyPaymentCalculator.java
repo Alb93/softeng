@@ -16,8 +16,8 @@ public class MonthlyPaymentCalculator extends PaymentCalculator<SalesReceipt> {
 	private Date date;
 	private List<SalesReceipt> receipts;
 
-	public MonthlyPaymentCalculator() {
-		this.date = new Date();
+	public MonthlyPaymentCalculator(Date date) {
+		this.date = date;
 	}
 
 	@Override

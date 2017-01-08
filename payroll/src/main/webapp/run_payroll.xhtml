@@ -22,7 +22,42 @@
 	</h:form>
 	<div>
 		<h2></h2>
-	</div>	
+	</div>
+	<h:form id="form">
+     <p:growl id="msgs" showDetail="true" />
+  
+     <h:panelGrid columns="3" cellpadding="5">
+         <p:outputLabel for="popup" value="Date:" />
+         <p:calendar id="popup" value="#{calendarView.date}"  />
+  
+     </h:panelGrid>
+  
+     <p:dialog modal="true" resizable="false" header="Values"
+ 			widgetVar="dlg" showEffect="fold">
+         <p:panelGrid id="display" columns="2"
+ 				columnClasses="label,value">
+          
+             <h:outputText value="Calendar:" />
+             <h:outputText value="#{calendarView.date}">
+                 <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+ 
+ 
+         </p:panelGrid>
+          </p:dialog>
+           <p>
+                 <h:panelGrid columns="2">
+                     <h:commandButton id="post"
+                         action="#{payrollPaymentBean.runPayroll()}"
+                         value="Run the payroll" styleClass="post" />
+                    <h:messages styleClass="messages"
+                         errorClass="invalid" infoClass="valid"
+                         warnClass="warning" globalOnly="true" />
+                 </h:panelGrid>
+             </p>
+              
+ 	</h:form>
+	
 	<h1>Payments</h1>
 	<h2>Daily Employees</h2>
 	<h:form>

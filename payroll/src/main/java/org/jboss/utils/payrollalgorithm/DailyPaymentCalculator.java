@@ -14,8 +14,8 @@ public class DailyPaymentCalculator extends PaymentCalculator<TimeCard> {
 	private Date date;
 	private List<TimeCard> cards;
 	
-	public DailyPaymentCalculator() {
-		this.date = new Date();
+	public DailyPaymentCalculator(Date date) {
+		this.date = date;
 	}
 
 	@Override

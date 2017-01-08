@@ -1,4 +1,4 @@
-package org.jboss.utils.payrollalgorithm;
+package org.jboss.utils.payrollalgorithm.filter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

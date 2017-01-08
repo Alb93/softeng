@@ -22,6 +22,9 @@ public class PostTimeCardBean implements Serializable {
 	@Inject
 	private PayrollController payrollController;
 	
+	@Inject
+	private CalendarView calendarView;
+	
 	private TimeCard card;
     
     @PostConstruct
@@ -44,8 +47,7 @@ public class PostTimeCardBean implements Serializable {
     }
 
 	private void setDate() {
-		FacesContext context = FacesContext.getCurrentInstance();
-        CalendarView calendarView = (CalendarView) context.getApplication().evaluateExpressionGet(context, "#{calendarView}", CalendarView.class);
+		
         Date sqldate = new Date(calendarView.getDate().getTime());
         card.setDate(sqldate);
 	}
