@@ -32,6 +32,9 @@ public class PostServiceChargeBean implements Serializable {
 	
 	@Inject
 	private LoggedUnionBean loggedUnionBean;
+	
+	@Inject
+	private CalendarView calendarView;
     
     private ServiceCharge r;
 	private Union u;
@@ -79,8 +82,7 @@ public class PostServiceChargeBean implements Serializable {
     }
     
     private void setDate() {
-		FacesContext context = FacesContext.getCurrentInstance();
-        CalendarView calendarView = (CalendarView) context.getApplication().evaluateExpressionGet(context, "#{calendarView}", CalendarView.class);
+		
         Date sqldate = new Date(calendarView.getDate().getTime());
         r.setDate(sqldate);
 	}

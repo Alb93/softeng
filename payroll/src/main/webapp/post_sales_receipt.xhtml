@@ -55,7 +55,7 @@
                  <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="post"
-                        action="#{postSalesReceiptBean.post()}"
+                        action="#{postSalesReceiptBean.post(loggedMonthlyBean.empl.id)}"
                         value="Post a sales receipt" styleClass="post" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"

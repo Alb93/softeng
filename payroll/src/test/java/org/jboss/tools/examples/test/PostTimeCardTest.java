@@ -40,6 +40,7 @@ public class PostTimeCardTest extends ArquillianTest {
 		if(found)
 			payrollDAO.removeTimeCard(tmp.getEmp_id());
 	}
+	
 	@Test
 	public void testTimeCardPosting(){
 		TimeCard timeCard = new TimeCard();

@@ -25,15 +25,18 @@ public class PostSalesReceiptBean implements Serializable {
     
     private SalesReceipt r;
     
+    @Inject
+	private CalendarView calendarView;
+    
     @PostConstruct
 	public void init() {
 		r = new SalesReceipt();
 	}
     
-    public String post() {
+    public String post(int id) {
     	if(r.getAmount() != 0){
+    		r.setEmp_id(id);
     		setDate();
-        	setMonthlyId();
         	payrollController.postSalesReceipt(r);
             System.out.println(("posting " + r.getId()+" sales receipt"));
             r = new SalesReceipt();
@@ -44,17 +47,12 @@ public class PostSalesReceiptBean implements Serializable {
     }
 
 	private void setDate() {
-		FacesContext context = FacesContext.getCurrentInstance();
-        CalendarView calendarView = (CalendarView) context.getApplication().evaluateExpressionGet(context, "#{calendarView}", CalendarView.class);
+		
         Date sqldate = new Date(calendarView.getDate().getTime());
         r.setDate(sqldate);
 	}
 
-	private void setMonthlyId() {
-		FacesContext context = FacesContext.getCurrentInstance();
-        LoggedMonthlyBean loggedMonthlyBean = (LoggedMonthlyBean) context.getApplication().evaluateExpressionGet(context, "#{loggedMonthlyBean}", LoggedMonthlyBean.class);
-        r.setEmp_id((loggedMonthlyBean.getEmpl().getId()));
-	}
+	
 	
 	public SalesReceipt getR() {
 		return r;
