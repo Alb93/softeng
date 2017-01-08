@@ -55,6 +55,7 @@ public class PostTimeCardTest extends ArquillianTest {
 		for (TimeCard tc : timeCards) {
 			if(tc.getHours() == hours){
 				found = true;
+				break;
 			}
 		}
 		
