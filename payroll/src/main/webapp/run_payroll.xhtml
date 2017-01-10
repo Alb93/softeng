@@ -11,19 +11,13 @@
 		<p:menubar>
 
 			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
-			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
-			<p:menuitem value="Admin" url="./login_admin.jsf"
-				icon="ui-icon-person" />
-			<p:menuitem value="Union" url="./login_union.jsf"
-				icon="ui-icon-person" />
+			
 
 			<f:facet name="options">
 
 				<h:outputText style="margin-right:10px"
 					value="Admin: #{adminBean.admin.username}" />
-				<p:commandButton id="logout"
-					action="#{sessionBean.performLogout(adminBean)}" value="Logout"
-					styleClass="register" style="margin-right:10px" />
+				
 			</f:facet>
 		</p:menubar>
 

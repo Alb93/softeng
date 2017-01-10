@@ -12,17 +12,11 @@
 		<p:menubar>
 
 			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
-			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
-			<p:menuitem value="Admin" url="./login_admin.jsf"
-				icon="ui-icon-person" />
-			<p:menuitem value="Union" url="./login_union.jsf"
-				icon="ui-icon-person" />
+			
 			<f:facet name="options">
 				<h:outputText style="margin-right:10px"
 					value="Union: #{loggedUnionBean.u.username}" />
-				<p:commandButton id="logout"
-					action="#{sessionBean.performLogout(loggedUnionBean)}"
-					value="Logout" styleClass="register" style="margin-right:10px" />
+				
 			</f:facet>
 		</p:menubar>
 
@@ -32,7 +26,21 @@
 	</div>
 
 	<h:form id="form">
-		<p:panel id="basic" header="Daily employee" style="margin-bottom:20px">
+	<p:growl id="msgs1" showDetail="true" />
+
+		<p:panel header="Select an Employee" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="country" value="Employee: " />
+				<p:selectOneMenu id="country"
+					value="#{postServiceChargeBean.selectedUnion}" style="width:150px">
+					<f:selectItems value="#{postServiceChargeBean.employeesList}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+
+			<p:separator />
+
+		</p:panel>
+		<p:panel id="basic" header="Post service charge" style="margin-bottom:20px">
 	
     	<p:growl id="msgs" showDetail="true" />
 
@@ -70,20 +78,7 @@
 		</p:panel>
 		
 		
-		<p:growl id="msgs1" showDetail="true" />
-
-		<p:panel header="Select an Employee" style="margin-bottom:10px;">
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel for="country" value="Employee: " />
-				<p:selectOneMenu id="country"
-					value="#{postServiceChargeBean.selectedUnion}" style="width:150px">
-					<f:selectItems value="#{postServiceChargeBean.employeesList}" />
-				</p:selectOneMenu>
-			</h:panelGrid>
-
-			<p:separator />
-
-		</p:panel>
+		
 	</h:form>
 </h:body>
 </html>
