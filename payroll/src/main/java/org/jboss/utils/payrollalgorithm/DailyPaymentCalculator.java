@@ -24,9 +24,10 @@ public class DailyPaymentCalculator extends PaymentCalculator<TimeCard> {
 		float payment = 0;
 		Calendar cal = Calendar.getInstance();	
 		cal.setTime(date);
-		if(cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
+		if(cal.get(Calendar.DAY_OF_WEEK) == dayOfTheWeek){
 			float hourlyRate = dailyEmployee.getHourlyRate();
 			for (TimeCard timeCard : cards) {
+				
 				float hoursWorked = timeCard.getHours();
 				if(hoursWorked > 8) {
 					payment += (8 * hourlyRate);

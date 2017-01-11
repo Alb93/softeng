@@ -30,7 +30,7 @@ public class MonthlyPaymentCalculator extends PaymentCalculator<SalesReceipt> {
 		
 		
 		if(monthlyEmployee.getCommissionRate() != 0){
-			if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+			if (cal.get(Calendar.DAY_OF_WEEK) == dayOfTheWeek) {
 				float commissionRate = monthlyEmployee.getCommissionRate();
 				for (SalesReceipt salesReceipt : receipts) {
 					float salesAmount = salesReceipt.getAmount();
@@ -41,9 +41,9 @@ public class MonthlyPaymentCalculator extends PaymentCalculator<SalesReceipt> {
 		
 		if(cal.getActualMaximum(Calendar.DAY_OF_MONTH) == cal.get(Calendar.DAY_OF_MONTH) ||
 		  (cal.getActualMaximum(Calendar.DAY_OF_MONTH) == cal.get(Calendar.DAY_OF_MONTH) + 1 && 
-		  (cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY)) || 
+		  (cal.get(Calendar.DAY_OF_WEEK) == dayOfTheWeek)) || 
 		  (cal.getActualMaximum(Calendar.DAY_OF_MONTH) == cal.get(Calendar.DAY_OF_MONTH) + 2 && 
-		  (cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY))){
+		  (cal.get(Calendar.DAY_OF_WEEK) == dayOfTheWeek))){
 			System.out.println("Funzionaaaa");
 				payment += monthlyEmployee.getSalary();
 				payment -= deductFromPayment(monthlyEmployee.getDueRate());

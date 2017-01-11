@@ -8,6 +8,7 @@ import org.jboss.model.union.ServiceCharge;
 public abstract class PaymentCalculator <T> {
 	
 	private List<ServiceCharge> charges;
+	protected int dayOfTheWeek;
 	
 	public abstract float calculatePayment(Employee emp);
 	public abstract void setPostObject(List<T> object);
@@ -32,4 +33,11 @@ public abstract class PaymentCalculator <T> {
 		return amountToBeDeducted;
 	}
 
+	public void setDayOfTheWeek(int dayOfTheWeek) {
+		this.dayOfTheWeek = dayOfTheWeek;
+	}
+	
+	public int getDayOfTheWeek() {
+		return dayOfTheWeek;
+	}
 }

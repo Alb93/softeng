@@ -55,6 +55,8 @@ public class PayrollPaymentBean implements Serializable {
 		List<ServiceCharge> charges = payrollController.findServiceChargesOfThisEmp(dailyEmployee.getId());
 		List<ServiceCharge> filteredCharges = serviceChargeDailyFilter.filter(date, charges);
 		dailyPaymentCalculator = new DailyPaymentCalculator(date);
+		//6 is the value for friday
+		dailyPaymentCalculator.setDayOfTheWeek(6);
 		dailyPaymentCalculator.setPostObject(filteredCards);
 		dailyPaymentCalculator.setServiceCharges(filteredCharges);
 		return dailyPaymentCalculator.calculatePayment(dailyEmployee);		
@@ -66,6 +68,7 @@ public class PayrollPaymentBean implements Serializable {
 		List<ServiceCharge> charges = payrollController.findServiceChargesOfThisEmp(monthlyEmployee.getId());
 		List<ServiceCharge> filteredCharges = serviceChargeMonthlyFilter.filter(date, charges);
 		monthlyPaymentCalculator = new MonthlyPaymentCalculator(date);
+		monthlyPaymentCalculator.setDayOfTheWeek(6);
 		monthlyPaymentCalculator.setPostObject(filteredReceipts);
 		monthlyPaymentCalculator.setServiceCharges(filteredCharges);
 		return monthlyPaymentCalculator.calculatePayment(monthlyEmployee);		
@@ -102,6 +105,14 @@ public class PayrollPaymentBean implements Serializable {
 	
 	public List<MonthlyEmployeeWithSales> getMonthlyEmployees() {
 		return monthlyEmployees;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	public Date getDate() {
+		return date;
 	}
 
 }

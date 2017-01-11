@@ -10,6 +10,7 @@ import org.jboss.model.union.ServiceCharge;
 public class ServiceChargesForMonthlyFilter implements RecordFilter<ServiceCharge> {
 	
 	
+	
 
 		@Override
 		public List<ServiceCharge> filter(Date date, List<ServiceCharge> charges) {
