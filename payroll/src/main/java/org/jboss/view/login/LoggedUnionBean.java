@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import org.jboss.controller.PayrollController;
 import org.jboss.model.union.Union;
+import org.jboss.view.post.PostServiceChargeBean;
 
 @Named
 @SessionScoped
@@ -19,14 +20,13 @@ public class LoggedUnionBean implements Serializable, ILogout {
 	@Inject
 	private PayrollController payrollController;
 	
+	@Inject
 	private LoginUnionBean login;
+	
+	
 	
     @PostConstruct
 	public void init() {
-    	FacesContext context = FacesContext.getCurrentInstance();
-    	System.out.println("HERE");
-        login = (LoginUnionBean) context.getApplication().evaluateExpressionGet(context, "#{loginUnionBean}", LoginUnionBean.class);
-    	System.out.println("THERE");
 
         u = login.getU();
     }

@@ -10,63 +10,67 @@
 <h:body>
 	<h:form>
 		<p:menubar>
+
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
 			
-			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
-			
+
 			<f:facet name="options">
 				<h:outputText style="margin-right:10px"
-					value="User: #{loggedDailyBean.empl.username}" />
+					value="User: #{loginProxy.username}" />
 			</f:facet>
 		</p:menubar>
 
 	</h:form>
+	<div>
+		<h2></h2>
+
+	</div>
+
+	<h:form id="form">
+		<p:panel id="basic" header="Post time card" style="margin-bottom:20px">
+			<p:growl id="msgs" showDetail="true" />
+
+			<h:panelGrid columns="3" cellpadding="5">
+				<p:outputLabel for="popup" value="Date:" />
+				<p:calendar id="popup" value="#{calendarView.date}" />
+
+			</h:panelGrid>
+
+			<p:dialog modal="true" resizable="false" header="Values"
+				widgetVar="dlg" showEffect="fold">
+				<p:panelGrid id="display" columns="2" columnClasses="label,value">
+
+					<h:outputText value="Calendar:" />
+					<h:outputText value="#{calendarView.date}">
+						<f:convertDateTime pattern="MM/dd/yyyy" />
+					</h:outputText>
 
 
-			<h:form id="form">
-     <p:growl id="msgs" showDetail="true" />
-  
-     <h:panelGrid columns="3" cellpadding="5">
-         <p:outputLabel for="popup" value="Date:" />
-         <p:calendar id="popup" value="#{calendarView.date}"  />
-  
-     </h:panelGrid>
-  
-     <p:dialog modal="true" resizable="false" header="Values"
- 			widgetVar="dlg" showEffect="fold">
-         <p:panelGrid id="display" columns="2"
- 				columnClasses="label,value">
-          
-             <h:outputText value="Calendar:" />
-             <h:outputText value="#{calendarView.date}">
-                 <f:convertDateTime pattern="MM/dd/yyyy" />
-            </h:outputText>
- 
- 
-         </p:panelGrid>
-     </p:dialog>
- 
- 				<p:outputLabel for="hours" value="Hours:" />
- 				<p:inputText id="hours"
- 					value="#{postTimeCardBean.card.hours}" validatorMessage="Hours required" converterMessage="Please enter digits only.">
- 					<f:validateRequired/>
- 				</p:inputText>
- 				<h:message for="hours" errorClass="hours" />
-                 
-                  <p>
-                 <h:panelGrid columns="2">
-                     <h:commandButton id="post"
-                         action="#{postTimeCardBean.post(loggedDailyBean.empl.id)}"
-                         value="Post a time card" styleClass="post" />
-                    <h:messages styleClass="messages"
-                         errorClass="invalid" infoClass="valid"
-                         warnClass="warning" globalOnly="true" />
-                 </h:panelGrid>
-             </p>
-              
- 	</h:form>
-	
+				</p:panelGrid>
+			</p:dialog>
+
+			<p:outputLabel for="hours" value="Hours:" />
+			<p:inputText id="hours" value="#{postTimeCardBean.card.hours}"
+				validatorMessage="Hours required"
+				converterMessage="Please enter digits only.">
+				<f:validateRequired />
+			</p:inputText>
+			<h:message for="hours" errorClass="hours" />
+
+			<p>
+			<h:panelGrid columns="2">
+				<h:commandButton id="post"
+					action="#{postTimeCardBean.post(loggedDailyBean.empl.id)}"
+					value="Post a time card" styleClass="post" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+			</p>
+		</p:panel>
+	</h:form>
 
 
-	
+
+
 </h:body>
 </html>

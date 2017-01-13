@@ -10,9 +10,10 @@
 <h:body>
 	<h:form>
 		<p:menubar>
+
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
 			
-			<p:menuitem value="Employee" url="./login.jsf" icon="ui-icon-person" />
-			
+
 			<f:facet name="options">
 				<h:outputText style="margin-right:10px"
 					value="User: #{loggedMonthlyBean.empl.username}" />
@@ -20,24 +21,30 @@
 		</p:menubar>
 
 	</h:form>
-	
+	<div>
+	<h2></h2>
+
+	</div>
 	<h:form id="form">
-<p:growl id="msgs" showDetail="true" />
+		<p:panel id="basic" header="Post a sales receipt"
+			style="margin-bottom:20px">
+
+
+			<p:growl id="msgs" showDetail="true" />
  
- <h:panelGrid columns="3" cellpadding="5">
- <p:outputLabel for="popup" value="Date:" />
-<p:calendar id="popup" value="#{calendarView.date}" />
+ 		<h:panelGrid columns="3" cellpadding="5">
+ 			<p:outputLabel for="popup" value="Date:" />
+				<p:calendar id="popup" value="#{calendarView.date}" />
  
- </h:panelGrid>
+ 		</h:panelGrid>
  
  
  <p:dialog modal="true" resizable="false" header="Values"
-			widgetVar="dlg" showEffect="fold">
- <p:panelGrid id="display" columns="2"
-				columnClasses="label,value">
+				widgetVar="dlg" showEffect="fold">
+ <p:panelGrid id="display" columns="2" columnClasses="label,value">
  
  <h:outputText value="Calendar:" />
-<h:outputText value="#{calendarView.date}">
+					<h:outputText value="#{calendarView.date}">
  <f:convertDateTime pattern="MM/dd/yyyy" />
  </h:outputText>
 
@@ -45,24 +52,24 @@
  </p:panelGrid>
  </p:dialog>
 
-				<p:outputLabel for="amount" value="Amount:" />
-				<p:inputText id="amount"
-					value="#{postSalesReceiptBean.r.amount}" validatorMessage="Amount required" converterMessage="Please enter digits only.">
- 					<f:validateRequired/>
- 				</p:inputText>
-				<h:message for="amount" errorClass="amount" />
-                
-                 <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="post"
-                        action="#{postSalesReceiptBean.post()}"
-                        value="Post a sales receipt" styleClass="post" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
-             
+			<p:outputLabel for="amount" value="Amount:" />
+			<p:inputText id="amount" value="#{postSalesReceiptBean.r.amount}"
+				validatorMessage="Amount required"
+				converterMessage="Please enter digits only.">
+				<f:validateRequired />
+			</p:inputText>
+			<h:message for="amount" errorClass="amount" />
+
+			<p>
+			<h:panelGrid columns="2">
+				<h:commandButton id="post"
+					action="#{postSalesReceiptBean.post(loggedMonthlyBean.empl.id)}"
+					value="Post a sales receipt" styleClass="post" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+			</p>
+		</p:panel>
 	</h:form>
 
 </h:body>

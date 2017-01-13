@@ -20,6 +20,8 @@ public class Employee {
 	protected float dueRate;
 	
 	protected String union_name;
+	
+	protected String paymentAmount;
 
 	public String getUsername() {
 		return username;
@@ -85,9 +87,12 @@ public class Employee {
 		return id;
 	}
 	
+	public void setPaymentAmount(String paymentAmount) {
+		this.paymentAmount = paymentAmount;
+	}
 	
-	
-	
-	
+	public String getPaymentAmount() {
+		return paymentAmount;
+	}
 
 }

@@ -1,6 +1,5 @@
 package org.jboss.view.login;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -31,6 +29,8 @@ public class LoginProxy implements ILogin, Serializable {
 	
 	@Inject
 	private LoginDailyBean ldb;
+	
+	
 
 	@PostConstruct
 	public void init() {

@@ -6,98 +6,126 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Edit</title>
-	
+
 </h:head>
 <h:body>
-        
-        <h:form id="regD">
-            <h2>Monthly Employee Edit</h2>
-            <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="nameD" value="Name:" />
-                <h:inputText id="nameD" value="#{monthlyEmployeesBean.mEmployee.name}" />
-                <h:message for="nameD" errorClass="invalid" />
+	<h:form>
+		<p:menubar>
 
-                <h:outputLabel for="surnameD" value="Surname:" />
-                <h:inputText id="surnameD" value="#{monthlyEmployeesBean.mEmployee.surname}" />
-                <h:message for="surnameD" errorClass="invalid" />
-                
-                
-                 <h:outputLabel for="salary" value="Salary:" />
-                <h:inputText id="salary"
-                    value="#{monthlyEmployeesBean.mEmployee.salary}" />
-                <h:message for="salary" errorClass="salary" />
-                
-  				<h:outputLabel for="duesRateD" value="Dues rate:" />
-                <h:inputText id="duesRateD"
-                    value="#{monthlyEmployeesBean.mEmployee.dueRate}" />
-                <h:message for="duesRateD" errorClass="duesRate" />
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
+			
 
-                 <h:outputLabel for="usernameD" value="Username:" />
-                <h:inputText id="usernameD"
-                    value="#{monthlyEmployeesBean.mEmployee.username}" />
-                <h:message for="usernameD" errorClass="invalid" />
-                
-                 <h:outputLabel for="passwordD" value="Password:" />
-                <h:inputText id="passwordD"
-                    value="#{monthlyEmployeesBean.mEmployee.password}" />
-                <h:message for="passwordD" errorClass="password" /> 
-                
-                
-            </h:panelGrid>
+			<f:facet name="options">
 
+				<h:outputText style="margin-right:10px"
+					value="Admin: #{adminBean.admin.username}" />
+				
+			</f:facet>
+		</p:menubar>
+
+	</h:form>
+	<div>
+		<h2></h2>
+
+	</div>
+	<h:form id="regD">
+		<p:panel id="basic" header="Monthly Employee Edit"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="nameD" value="Name:" />
+				<h:inputText id="nameD"
+					value="#{monthlyEmployeesBean.mEmployee.name}" />
+				<h:message for="nameD" errorClass="invalid" />
+
+				<h:outputLabel for="surnameD" value="Surname:" />
+				<h:inputText id="surnameD"
+					value="#{monthlyEmployeesBean.mEmployee.surname}" />
+				<h:message for="surnameD" errorClass="invalid" />
+
+
+				<h:outputLabel for="salary" value="Salary:" />
+				<h:inputText id="salary"
+					value="#{monthlyEmployeesBean.mEmployee.salary}" />
+				<h:message for="salary" errorClass="salary" />
+
+
+
+				<h:outputLabel for="usernameD" value="Username:" />
+				<h:inputText id="usernameD"
+					value="#{monthlyEmployeesBean.mEmployee.username}" />
+				<h:message for="usernameD" errorClass="invalid" />
+
+				<h:outputLabel for="passwordD" value="Password:" />
+				<h:inputText id="passwordD"
+					value="#{monthlyEmployeesBean.mEmployee.password}" />
+				<h:message for="passwordD" errorClass="password" />
+
+
+			</h:panelGrid>
+		</p:panel>
 		<p:growl id="msgsD" showDetail="true" />
-		
+
 		<p:panel header="Select a payment method" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Payment" value="Payment: " />
-				<span><p:selectOneMenu id="Payment" value="#{monthlyEmployeesBean.selectedMethod}"
-					style="width:150px">
-					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
-  					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
-  					<f:selectItem itemValue="Bank" itemLabel="Bank" />
-  					<f:ajax render="input" />	
-				</p:selectOneMenu>
-				<h:panelGroup id="input">
-    				<p:inputText  value ="#{monthlyEmployeesBean.mail.mail_address}" rendered="#{monthlyEmployeesBean.selectedMethod == 'Mail'}" required = "true" />		
-    				<p:inputText  value = "#{monthlyEmployeesBean.bank.bank_account}" rendered="#{monthlyEmployeesBean.selectedMethod == 'Bank'}" required = "true"/>
-				</h:panelGroup></span>
+				<span><p:selectOneMenu id="Payment"
+						value="#{monthlyEmployeesBean.selectedMethod}" style="width:150px">
+						<f:selectItem itemValue="Mail" itemLabel="Mail" />
+						<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
+						<f:selectItem itemValue="Bank" itemLabel="Bank" />
+						<f:ajax render="input" />
+					</p:selectOneMenu> <h:panelGroup id="input">
+						<p:inputText value="#{monthlyEmployeesBean.mail.mail_address}"
+							rendered="#{monthlyEmployeesBean.selectedMethod == 'Mail'}"
+							required="true" />
+						<p:inputText value="#{monthlyEmployeesBean.bank.bank_account}"
+							rendered="#{monthlyEmployeesBean.selectedMethod == 'Bank'}"
+							required="true" />
+					</h:panelGroup></span>
 			</h:panelGrid>
 
 			<p:separator />
 
 		</p:panel>
-		
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Union" value="Union: " />
-				<p:selectOneMenu id="Union" value="#{monthlyEmployeesBean.selectedUnion}"
-					style="width:150px">
-					<!--  <f:selectItem itemLabel="#{unionDropdownView.country}" itemValue="#{unionDropdownView.country}"
-						noSelectionOption="false" />-->
-					<f:selectItems value="#{monthlyEmployeesBean.unionNames}" />
-				</p:selectOneMenu>
+				<span><p:selectOneMenu id="Union"
+						value="#{monthlyEmployeesBean.selectedUnion}" style="width:150px">
+						<f:selectItems value="#{monthlyEmployeesBean.unionNames}" />
+						<f:ajax render="unions" />
+					</p:selectOneMenu> <h:panelGroup id="unions">
+						<h:outputLabel value="Dues rate:"
+							rendered="#{monthlyEmployeesBean.selectedUnion != '-'}" />
+						<p:inputText value="#{monthlyEmployeesBean.mEmployee.dueRate}"
+							converterMessage="Please enter digits only."
+							rendered="#{monthlyEmployeesBean.selectedUnion != '-'}"
+							required="true" />
+
+
+					</h:panelGroup></span>
+
+
+
 			</h:panelGrid>
 
 			<p:separator />
 
 		</p:panel>
-            <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="registerD"
-                        action="#{monthlyEmployeesBean.updateMonthlyEmployee()}"
-                        value="Update" styleClass="register"/>
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
-            <h:outputScript rendered="#{monthlyEmployeesBean.usernameAlreadyUsed}">
-    alert("Username already in use.");
-	</h:outputScript>
-        </h:form>
-        
-        
-      
+		<p>
+			<h:panelGrid columns="2">
+				<h:commandButton id="registerD"
+					action="#{monthlyEmployeesBean.updateMonthlyEmployee()}"
+					value="Update" styleClass="register" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		</p>
+
+	</h:form>
+
+
+
 
 
 </h:body>

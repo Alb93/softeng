@@ -207,6 +207,11 @@ public class PayrollDAO {
 			.setParameter("id", id).executeUpdate();
 	}
 	
+	public void removeServiceCharge(int id){
+		em.createQuery("DELETE FROM ServiceCharge s where s.emp_id = :id")
+			.setParameter("id", id).executeUpdate();
+	}
+	
 	public void removeMonthlyEmployee(int id){
 		
 		em.createQuery("DELETE FROM MonthlyEmployeeWithSales d where d.id = :id")
@@ -274,5 +279,33 @@ public class PayrollDAO {
 		.setParameter("username", username).executeUpdate();
 		em.createQuery("DELETE FROM Bank b where b.emp_username = :username")
 		.setParameter("username", username).executeUpdate();
+	}
+	
+	public List<TimeCard> findTimeCardsOfThisEmp(int id){
+
+		List<TimeCard> cards = em
+					.createQuery(
+							"SELECT t FROM TimeCard t where t.emp_id = :id", TimeCard.class)
+					.setParameter("id", id).getResultList();
+			return cards;
+		
+	}
+	
+	public List<ServiceCharge> findServiceChargeOfThisEmp(int id){
+		
+		List<ServiceCharge> charges = em
+				.createQuery(
+						"SELECT s FROM ServiceCharge s where s.emp_id = :id", ServiceCharge.class)
+				.setParameter("id", id).getResultList();
+		return charges;
+	}
+	
+	public List<SalesReceipt> findSalesReceiptOfThisEmp(int id){
+		
+		List<SalesReceipt> receipts = em
+				.createQuery(
+						"SELECT s FROM SalesReceipt s where s.emp_id = :id", SalesReceipt.class)
+				.setParameter("id", id).getResultList();
+		return receipts;		
 	}
 }

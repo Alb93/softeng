@@ -19,6 +19,9 @@ public class LoginMonthlyBean implements Serializable, ILogin {
 
 	@Inject
 	private PayrollController payrollController;
+	
+	@Inject
+	private LoggedMonthlyBean loggedMonthlyBean;
 
 	private MonthlyEmployeeWithSales empl = new MonthlyEmployeeWithSales();
 
@@ -29,6 +32,7 @@ public class LoginMonthlyBean implements Serializable, ILogin {
 			if (payrollController.getEmp() instanceof MonthlyEmployeeWithSales) {
 				System.out.println("mi ha superato instanceof");
 				empl = (MonthlyEmployeeWithSales) payrollController.getEmp();
+				loggedMonthlyBean.setEmpl(empl);
 				if (result.equals(PayrollController.SUCCESS))
 					return PayrollController.SUCCESS_M;
 				else

@@ -121,9 +121,22 @@ public class PayrollController {
 		return payrollDAO.findAllDailyEmployees();
 	}
 	
+	public List<TimeCard> findTimeCardsOfThisEmp(int id){
+		return payrollDAO.findTimeCardsOfThisEmp(id);
+	}
+	
+	public List<ServiceCharge> findServiceChargesOfThisEmp(int id){
+		return payrollDAO.findServiceChargeOfThisEmp(id);
+	}
+	
+	public List<SalesReceipt> findSalesReceiptOfThisEmp(int id){
+		return payrollDAO.findSalesReceiptOfThisEmp(id);
+	}
+	
 	public void removeDailyEmployee(int id){
 		payrollDAO.removeDailyEmployee(id);
 		payrollDAO.removeTimeCard(id);
+		payrollDAO.removeServiceCharge(id);
 	}
 	
 	public List<Union> findAllUnions() {
@@ -177,6 +190,7 @@ public class PayrollController {
 	public void removeMonthlyEmployee(int id) {
 		payrollDAO.removeMonthlyEmployee(id);
 		payrollDAO.removeSalesReceipt(id);
+		payrollDAO.removeServiceCharge(id);
 		
 	}
 	

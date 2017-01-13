@@ -1,12 +1,15 @@
 package org.jboss.view.post;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,7 +17,10 @@ import org.jboss.controller.PayrollController;
 import org.jboss.model.employees.Employee;
 import org.jboss.model.union.ServiceCharge;
 import org.jboss.model.union.Union;
+import org.jboss.view.login.LoggedUnionBean;
 import org.jboss.view.login.LoginUnionBean;
+import org.jboss.view.utils.CalendarView;
+import org.primefaces.context.RequestContext;
 
 @Named
 @SessionScoped
@@ -25,7 +31,10 @@ public class PostServiceChargeBean implements Serializable {
 	private PayrollController payrollController;
 	
 	@Inject
-	private LoginUnionBean loginUnionBean;
+	private LoggedUnionBean loggedUnionBean;
+	
+	@Inject
+	private CalendarView calendarView;
     
     private ServiceCharge r;
 	private Union u;
@@ -36,7 +45,7 @@ public class PostServiceChargeBean implements Serializable {
     @PostConstruct
 	public void init() {
     	System.out.println("init del post ser");
-        u = loginUnionBean.getU();
+        u = loggedUnionBean.getU();
         System.out.println("il nome union è" + u.getName());
     	List<Employee> employees = payrollController.findAllUnionsEmployee(u.getName());
     	employeesList = new HashMap<>();
@@ -49,15 +58,21 @@ public class PostServiceChargeBean implements Serializable {
 	}
     
     public void post() {
-    
-    	r.setEmp_id(Integer.parseInt(selectedUnion));
-    	payrollController.postServiceCharge(r);
-       r = new ServiceCharge();
+    	if(employeesList.isEmpty()){
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "There are no employees in this union");
+    		RequestContext.getCurrentInstance().showMessageInDialog(message);
+    	} else {
+    		r.setEmp_id(Integer.parseInt(selectedUnion));
+    		setDate();
+        	payrollController.postServiceCharge(r);
+        	r = new ServiceCharge();
+    	}
+    	
     }
     
     public void reload(){
         
-        u = loginUnionBean.getU();
+        u = loggedUnionBean.getU();
     	List<Employee> employees = payrollController.findAllUnionsEmployee(u.getName());
     	employeesList = new HashMap<>();
     	for (Employee employee : employees) {
@@ -65,6 +80,12 @@ public class PostServiceChargeBean implements Serializable {
 			System.out.println(employee.getName()+" "+employee.getSurname());
 		}
     }
+    
+    private void setDate() {
+		
+        Date sqldate = new Date(calendarView.getDate().getTime());
+        r.setDate(sqldate);
+	}
 
 	
 

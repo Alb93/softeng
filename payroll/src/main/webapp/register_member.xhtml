@@ -22,14 +22,15 @@
 <h:body>
 	<h:form>
 		<p:menubar>
+
+			<p:menuitem value="Home" url="./index.jsf" icon="ui-icon-home" />
 			
-			<p:menuitem value="Admin" 
-				icon="ui-icon-person" />
-			
+
 			<f:facet name="options">
 				<h:outputText style="margin-right:10px"
 					value="Admin: #{adminBean.admin.username}" />
-					
+				
+
 			</f:facet>
 		</p:menubar>
 
@@ -42,70 +43,76 @@
 		<f:selectItem itemValue="2" itemLabel="Monthly Employee" />
 	</p:selectOneRadio>
 	<h:form id="regD">
-		<h2>Daily Employee Registration</h2>
-		<h:panelGrid columns="3" columnClasses="titleCell">
-			<h:outputLabel for="nameD" value="Name:" />
-			<p:inputText id="nameD" value="#{registerDailyBean.empl.name}"
-				validatorMessage="Name required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="nameD" errorClass="invalid" />
+		<p:panel id="basic" header="Daily Employee Registration"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="nameD" value="Name:" />
+				<p:inputText id="nameD" value="#{registerDailyBean.empl.name}"
+					validatorMessage="Name required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="nameD" errorClass="invalid" />
 
-			<h:outputLabel for="surnameD" value="Surname:" />
-			<p:inputText id="surnameD" value="#{registerDailyBean.empl.surname}"
-				validatorMessage="Surname required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="surnameD" errorClass="invalid" />
-
-
-			<h:outputLabel for="hourlyRateD" value="Hourly rate:" />
-			<p:inputText id="hourlyRateD"
-				value="#{registerDailyBean.empl.hourlyRate}" converterMessage="Please enter digits only."/>
-			<p:message for="hourlyRateD" errorClass="hourlyRate" />
-
-			<h:outputLabel for="duesRateD" value="Dues rate:" />
-			<p:inputText id="duesRateD" value="#{registerDailyBean.empl.dueRate}" converterMessage="Please enter digits only." />
-			<p:message for="duesRateD" errorClass="duesRate" />
-
-			<h:outputLabel for="usernameD" value="Username:" />
-			<p:inputText id="usernameD"
-				value="#{registerDailyBean.empl.username}"
-				validatorMessage="Username required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="usernameD" errorClass="invalid" />
-
-			<h:outputLabel for="passwordD" value="Password:" />
-			<p:inputText id="passwordD"
-				value="#{registerDailyBean.empl.password}"
-				validatorMessage="Password required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="passwordD" errorClass="password" />
+				<h:outputLabel for="surnameD" value="Surname:" />
+				<p:inputText id="surnameD" value="#{registerDailyBean.empl.surname}"
+					validatorMessage="Surname required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="surnameD" errorClass="invalid" />
 
 
-		</h:panelGrid>
 
+
+
+
+				<h:outputLabel for="usernameD" value="Username:" />
+				<p:inputText id="usernameD"
+					value="#{registerDailyBean.empl.username}"
+					validatorMessage="Username required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="usernameD" errorClass="invalid" />
+
+				<h:outputLabel for="passwordD" value="Password:" />
+				<p:inputText id="passwordD"
+					value="#{registerDailyBean.empl.password}"
+					validatorMessage="Password required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="passwordD" errorClass="password" />
+
+				<h:outputLabel for="hourlyRateD" value="Hourly rate:" />
+				<p:inputText id="hourlyRateD"
+					value="#{registerDailyBean.empl.hourlyRate}"
+					converterMessage="Please enter digits only." />
+				<p:message for="hourlyRateD" errorClass="hourlyRate" />
+
+
+			</h:panelGrid>
+		</p:panel>
 		<p:growl id="msgsD" showDetail="true" />
-		
+
 		<p:panel header="Select a payment method" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Payment" value="Payment: " />
-				<span><p:selectOneMenu id="Payment" value="#{registerDailyBean.selectedPaymentMethod}"
-					style="width:150px">
-					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
-  					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
-  					<f:selectItem itemValue="Bank" itemLabel="Bank" />
-  					<f:ajax render="input" />	
-				</p:selectOneMenu>
-				<h:panelGroup id="input">
-    				<p:inputText  value ="#{registerDailyBean.mail.mail_address}" rendered="#{registerDailyBean.selectedPaymentMethod == 'Mail'}" required="true"
-    				validatorMessage="Invalid email format">
-    					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-    				</p:inputText>
-    				<p:inputText  value = "#{registerDailyBean.bank.bank_account}" rendered="#{registerDailyBean.selectedPaymentMethod == 'Bank'}" required="true"/>
-				</h:panelGroup></span>
+				<span><p:selectOneMenu id="Payment"
+						value="#{registerDailyBean.selectedPaymentMethod}"
+						style="width:150px">
+						<f:selectItem itemValue="Mail" itemLabel="Mail" />
+						<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
+						<f:selectItem itemValue="Bank" itemLabel="Bank" />
+						<f:ajax render="input" />
+					</p:selectOneMenu> <h:panelGroup id="input">
+						<p:inputText value="#{registerDailyBean.mail.mail_address}"
+							rendered="#{registerDailyBean.selectedPaymentMethod == 'Mail'}"
+							required="true" validatorMessage="Invalid email format">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:inputText value="#{registerDailyBean.bank.bank_account}"
+							rendered="#{registerDailyBean.selectedPaymentMethod == 'Bank'}"
+							required="true" />
+					</h:panelGroup></span>
 			</h:panelGrid>
 
 			<p:separator />
@@ -115,16 +122,29 @@
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Union" value="Union: " />
-				<p:selectOneMenu id="Union" value="#{registerDailyBean.selectedUnion}"
-					style="width:150px">
-					<f:selectItems value="#{registerDailyBean.unionNames}" />
-				</p:selectOneMenu>
+				<span><p:selectOneMenu id="Union"
+						value="#{registerDailyBean.selectedUnion}" style="width:150px">
+						<f:selectItems value="#{registerDailyBean.unionNames}" />
+						<f:ajax render="unions" />
+					</p:selectOneMenu> <h:panelGroup id="unions">
+						<h:outputLabel value="Dues rate:"
+							rendered="#{registerDailyBean.selectedUnion != '-'}" />
+						<p:inputText value="#{registerDailyBean.empl.dueRate}"
+							converterMessage="Please enter digits only."
+							rendered="#{registerDailyBean.selectedUnion != '-'}"
+							required="true" />
+
+
+					</h:panelGroup></span>
+
+
+
 			</h:panelGrid>
 
 			<p:separator />
 
 		</p:panel>
-		
+
 		<p>
 			<h:panelGrid columns="2">
 				<h:commandButton id="registerD"
@@ -134,84 +154,92 @@
 					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
 		</p>
-		
+
 		<h:outputScript rendered="#{registerDailyBean.usernameAlreadyUsed}">
     alert("Username already in use.");
 	</h:outputScript>
 	</h:form>
 
 	<h:form id="regM" style="display: none">
-		<h2>Monthly Employee Registration</h2>
-		<h:panelGrid columns="3" columnClasses="titleCell">
-			<h:outputLabel for="name" value="Name:" />
-			<p:inputText id="name" value="#{registerMonthlyBean.empl.name}"
-				validatorMessage="Name required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="name" errorClass="invalid" />
+		<p:panel id="basic" header="Monthly Employee Registration"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="name" value="Name:" />
+				<p:inputText id="name" value="#{registerMonthlyBean.empl.name}"
+					validatorMessage="Name required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="name" errorClass="invalid" />
 
-			<h:outputLabel for="surname" value="Surname:" />
-			<p:inputText id="surname" value="#{registerMonthlyBean.empl.surname}"
-				validatorMessage="Surname required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="surname" errorClass="invalid" />
-
-			<h:outputLabel for="salary" value="Salary:" />
-			<p:inputText id="salary" value="#{registerMonthlyBean.empl.salary}">
-			</p:inputText>
-			<p:message for="salary" errorClass="salary" />
-
-			<h:outputLabel for="duesRate" value="Dues rate:" />
-			<p:inputText id="duesRate"
-				value="#{registerMonthlyBean.empl.dueRate}" converterMessage="Please enter digits only.">
-			</p:inputText>
-			<p:message for="duesRate" errorClass="duesRate" />
-
-			<h:outputLabel for="commissionRate" value="Commission rate:" />
-			<p:inputText id="commissionRate"
-				value="#{registerMonthlyBean.empl.commissionRate}" converterMessage="Please enter digits only.">
-			</p:inputText>
-			<p:message for="commissionRate" errorClass="commissionRate" />
-
-			<h:outputLabel for="username" value="Username:" />
-			<p:inputText id="username"
-				value="#{registerMonthlyBean.empl.username}"
-				validatorMessage="Username required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="username" errorClass="invalid" />
-
-			<h:outputLabel for="password" value="Password:" />
-			<p:inputText id="password"
-				value="#{registerMonthlyBean.empl.password}"
-				validatorMessage="Password required">
-				<f:validateRequired />
-			</p:inputText>
-			<p:message for="password" errorClass="password" />
+				<h:outputLabel for="surname" value="Surname:" />
+				<p:inputText id="surname"
+					value="#{registerMonthlyBean.empl.surname}"
+					validatorMessage="Surname required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="surname" errorClass="invalid" />
 
 
-		</h:panelGrid>
 
+
+
+
+
+
+				<h:outputLabel for="username" value="Username:" />
+				<p:inputText id="username"
+					value="#{registerMonthlyBean.empl.username}"
+					validatorMessage="Username required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="username" errorClass="invalid" />
+
+				<h:outputLabel for="password" value="Password:" />
+				<p:inputText id="password"
+					value="#{registerMonthlyBean.empl.password}"
+					validatorMessage="Password required">
+					<f:validateRequired />
+				</p:inputText>
+				<p:message for="password" errorClass="password" />
+
+				<h:outputLabel for="salary" value="Salary:" />
+				<p:inputText id="salary" value="#{registerMonthlyBean.empl.salary}">
+				</p:inputText>
+				<p:message for="salary" errorClass="salary" />
+
+				<h:outputLabel for="commissionRate" value="Commission rate:" />
+				<p:inputText id="commissionRate"
+					value="#{registerMonthlyBean.empl.commissionRate}"
+					converterMessage="Please enter digits only.">
+				</p:inputText>
+				<p:message for="commissionRate" errorClass="commissionRate" />
+
+
+			</h:panelGrid>
+		</p:panel>
 		<p:growl id="msgs1" showDetail="true" />
 
 		<p:panel header="Select a payment method" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="Payment" value="Payment: " />
-				<span><p:selectOneMenu id="Payment" value="#{registerMonthlyBean.selectedPaymentMethod}"
-					style="width:150px">
-					<f:selectItem itemValue="Mail" itemLabel="Mail"/>
-  					<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
-  					<f:selectItem itemValue="Bank" itemLabel="Bank" />
-  					<f:ajax render="input" />	
-				</p:selectOneMenu>
-				<h:panelGroup id="input">
-    				<p:inputText  value ="#{registerMonthlyBean.mail.mail_address}" rendered="#{registerMonthlyBean.selectedPaymentMethod == 'Mail'}" required="true"
-    				validatorMessage="Invalid email format">
-    					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-    				</p:inputText>		
-    				<p:inputText  value = "#{registerMonthlyBean.bank.bank_account}" rendered="#{registerMonthlyBean.selectedPaymentMethod == 'Bank'}" required = "true"/>
-				</h:panelGroup></span>
+				<span><p:selectOneMenu id="Payment"
+						value="#{registerMonthlyBean.selectedPaymentMethod}"
+						style="width:150px">
+						<f:selectItem itemValue="Mail" itemLabel="Mail" />
+						<f:selectItem itemValue="Pickup" itemLabel="Pickup" />
+						<f:selectItem itemValue="Bank" itemLabel="Bank" />
+						<f:ajax render="input" />
+					</p:selectOneMenu> <h:panelGroup id="input">
+						<p:inputText value="#{registerMonthlyBean.mail.mail_address}"
+							rendered="#{registerMonthlyBean.selectedPaymentMethod == 'Mail'}"
+							required="true" validatorMessage="Invalid email format">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:inputText value="#{registerMonthlyBean.bank.bank_account}"
+							rendered="#{registerMonthlyBean.selectedPaymentMethod == 'Bank'}"
+							required="true" />
+					</h:panelGroup></span>
 			</h:panelGrid>
 
 			<p:separator />
@@ -220,16 +248,29 @@
 		<p:panel header="Select a Union" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="country" value="Union: " />
-				<p:selectOneMenu id="country" value="#{registerMonthlyBean.selectedUnion}"
-					style="width:150px">
-					<f:selectItems value="#{registerMonthlyBean.unionNames}" />
-				</p:selectOneMenu>
+				<span><p:selectOneMenu id="country"
+						value="#{registerMonthlyBean.selectedUnion}" style="width:150px">
+						<f:selectItems value="#{registerMonthlyBean.unionNames}" />
+						<f:ajax render="unions" />
+					</p:selectOneMenu> <h:panelGroup id="unions">
+						<h:outputLabel value="Dues rate:"
+							rendered="#{registerMonthlyBean.selectedUnion != '-'}" />
+						<p:inputText value="#{registerMonthlyBean.empl.dueRate}"
+							converterMessage="Please enter digits only."
+							rendered="#{registerMonthlyBean.selectedUnion != '-'}"
+							required="true" />
+
+
+					</h:panelGroup></span>
+
 			</h:panelGrid>
+
+
 
 			<p:separator />
 
 		</p:panel>
-		
+
 
 
 		<p>
@@ -246,7 +287,7 @@
 	</h:outputScript>
 
 	</h:form>
-	
+
 
 
 </h:body>

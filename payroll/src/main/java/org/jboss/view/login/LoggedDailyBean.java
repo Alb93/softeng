@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.model.employees.DailyEmployee;
@@ -15,13 +16,11 @@ import org.jboss.model.employees.DailyEmployee;
 public class LoggedDailyBean implements Serializable, ILogout {
 	
 	
-	
+	@Inject
 	private LoginProxy loginProxy;
 	
     @PostConstruct
 	public void init() {
-    	FacesContext context = FacesContext.getCurrentInstance();
-        loginProxy = (LoginProxy) context.getApplication().evaluateExpressionGet(context, "#{loginProxy}", LoginProxy.class);
         showEmp();
     }
     
