@@ -27,6 +27,7 @@ public class LoginDailyBean implements Serializable, ILogin {
 	public String checkLogin() {
 
 		String result = payrollController.checkLogin(empl.getUsername(), empl.getPassword());
+		System.out.println("RES= "+result);
 		if(payrollController.isEmpSetted()){
 			if (payrollController.getEmp() instanceof DailyEmployee) {
 				empl = (DailyEmployee) payrollController.getEmp();
@@ -69,6 +70,10 @@ public class LoginDailyBean implements Serializable, ILogin {
 	@Override
 	public void setPasswordI(String password) {
 		empl.setPassword(password);
+	}
+	
+	public LoggedDailyBean getLoggedDailyBean() {
+		return loggedDailyBean;
 	}
 
 }
