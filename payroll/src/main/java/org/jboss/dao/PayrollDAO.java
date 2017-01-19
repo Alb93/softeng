@@ -248,7 +248,7 @@ public class PayrollDAO {
 		
 		Query q = em.createQuery("UPDATE MonthlyEmployeeWithSales m SET m.name = :name, m.surname = :surname, m.dueRate = :rate, "
 				+ "m.password = :password, m.paymentMethod = :payment, m.username = :username, m.union_name = :union,"
-				+ "m.salary = :salary WHERE m.id = :id");
+				+ "m.salary = :salary, m.commissionRate = :commissionRate WHERE m.id = :id");
 		q.setParameter("id", m.getId());
 		q.setParameter("name", m.getName());
 		q.setParameter("surname", m.getSurname());
@@ -258,6 +258,7 @@ public class PayrollDAO {
 		q.setParameter("username", m.getUsername());
 		q.setParameter("union", m.getUnion_name());
 		q.setParameter("salary", m.getSalary());
+		q.setParameter("commissionRate", m.getCommissionRate());
 		
 		q.executeUpdate();
 	

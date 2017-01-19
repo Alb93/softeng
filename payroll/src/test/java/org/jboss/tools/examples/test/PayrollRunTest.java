@@ -169,7 +169,7 @@ public class PayrollRunTest extends ArquillianTest {
 		m.setId(empId);
 
 
-		float monthlyPayment = salary - dueRate;
+		float monthlyPayment = salary - 4*(dueRate);
 
 		Assert.assertEquals(monthlyPayment, payrollPaymentBean.calculateMonthlyPayment(m));
 
@@ -228,7 +228,7 @@ public class PayrollRunTest extends ArquillianTest {
 		postSalesReceiptBean.post(empId);
 
 
-		float monthlyPayment = salary + (amount * commissionRate) - dueRate;
+		float monthlyPayment = salary + (amount * commissionRate) -  4*(dueRate);
 
 		Assert.assertEquals(monthlyPayment, payrollPaymentBean.calculateMonthlyPayment(m));
 

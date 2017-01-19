@@ -46,7 +46,8 @@ public class MonthlyPaymentCalculator extends PaymentCalculator<SalesReceipt> {
 		  (cal.get(Calendar.DAY_OF_WEEK) == dayOfTheWeek))){
 			System.out.println("Funzionaaaa");
 				payment += monthlyEmployee.getSalary();
-				payment -= deductFromPayment(monthlyEmployee.getDueRate());
+				//we multiply by 4 because the dues rate are weekly and in a month there are 4 weeks
+				payment -= 4*(deductFromPayment(monthlyEmployee.getDueRate()));
 		}	
 
 		return payment;

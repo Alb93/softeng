@@ -104,6 +104,7 @@ public class MonthlyEmployeesBean implements Serializable {
 	public String updateMonthlyEmployee(){
 		
 		mEmployee.setUnion_name(selectedUnion);
+		System.out.println("il comm rate è" + mEmployee.getCommissionRate());
 		if(selectedUnion.equals("-")){
 			mEmployee.setDueRate(0);
 		}
