@@ -58,7 +58,7 @@ public class LoginDailyTest extends ArquillianTest {
 			registerDailyBean.register();
 			empD = d;
 		}
-		loginProxy.setActualLogin(1);
+		loginProxy.setActualLogin(javax.enterprise.inject.spi.CDI.current().select(LoginDailyBean.class).get());
 	//	loginDailyBean.getLoggedDailyBean().getLoginProxy().setActualLogin(1);
 
 				
@@ -70,8 +70,8 @@ public class LoginDailyTest extends ArquillianTest {
 		// Set an element in the bean
 		//loginDailyBean.getLoggedDailyBean().getLoginProxy().setActualLogin(1);
 
-		loginProxy.getLdb().setEmpl(empD);
-		String loggedString = loginProxy.getLdb().checkLogin();
+		((LoginDailyBean)loginProxy.getActualLogin()).setEmpl(empD);
+		String loggedString = ((LoginDailyBean)loginProxy.getActualLogin()).checkLogin();
 		
 		// Now we assert that the entry has indeed be found
 		System.out.println("CCC "+loggedString.equals(PayrollController.SUCCESS_D));

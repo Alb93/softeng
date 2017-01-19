@@ -9,6 +9,8 @@ import org.jboss.controller.PayrollController;
 import org.jboss.dao.PayrollDAO;
 import org.jboss.model.employees.DailyEmployee;
 import org.jboss.model.employees.MonthlyEmployeeWithSales;
+import org.jboss.view.login.LoginDailyBean;
+import org.jboss.view.login.LoginMonthlyBean;
 import org.jboss.view.login.LoginProxy;
 import org.jboss.view.registration.RegisterMonthlyBean;
 import org.junit.Assert;
@@ -54,20 +56,21 @@ public class LoginMonthlyTest extends ArquillianTest {
 			registerMonthlyBean.register();
 			empD = d;
 		}
-		loginProxy.setActualLogin(0);
+		
+		loginProxy.setActualLogin(javax.enterprise.inject.spi.CDI.current().select(LoginMonthlyBean.class).get());
 	//	loginDailyBean.getLoggedDailyBean().getLoginProxy().setActualLogin(1);
 
 				
 	}
 	
 	@Test
-	public void testLoginDaily() {
+	public void testLoginMonthly() {
 		
 		// Set an element in the bean
 		//loginDailyBean.getLoggedDailyBean().getLoginProxy().setActualLogin(1);
 
-		loginProxy.getLmb().setEmpl(empD);
-		String loggedString = loginProxy.getLmb().checkLogin();
+		((LoginMonthlyBean)loginProxy.getActualLogin()).setEmpl(empD);
+		String loggedString = ((LoginMonthlyBean)loginProxy.getActualLogin()).checkLogin();
 		
 		// Now we assert that the entry has indeed be found
 		System.out.println("CCC "+loggedString.equals(PayrollController.SUCCESS_M));

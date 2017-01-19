@@ -18,28 +18,15 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class LoginProxy implements ILogin, Serializable {
 
-	private List<ILogin> logins = new LinkedList<>();
+	private ILogin iLogin;
 	private int i;
 
 	private String username;
 	private String password;
 	
-	@Inject
-	private LoginMonthlyBean lmb;
-	
-	@Inject
-	private LoginDailyBean ldb;
 	
 	
 
-	@PostConstruct
-	public void init() {
-		if (logins.size() == 0) {
-			logins.add(lmb);
-			logins.add(ldb);
-		}
-		// lack of open-closed, TODO
-	}
 	
 	public String performLogin(){
 		if(username != null){
@@ -57,19 +44,15 @@ public class LoginProxy implements ILogin, Serializable {
 
 	@Override
 	public String checkLogin() {
-		init();
 		//i = 0;
 		setUsernameI(username);
 		setPasswordI(password);
-		for (ILogin iLogin : logins) {
-			System.out.println("Login numero" + i + iLogin.getEmployee().getUsername());
-			if (iLogin.checkLogin().equals(iLogin.getSuccessfulString())) {
+		if (iLogin.checkLogin().equals(iLogin.getSuccessfulString())) {
 				System.out.println("successo" + iLogin.getSuccessfulString() + iLogin.getEmployee().getUsername());
 				return iLogin.getSuccessfulString();
 			}
-			i++;
-		}
-		return null;
+		
+		return "";
 	}
 
 	@Override
@@ -85,27 +68,24 @@ public class LoginProxy implements ILogin, Serializable {
 	}
 
 	public ILogin getActualLogin() {
-		System.out.println("GET ACT = "+i);
-		return logins.get(i);
+	
+		return iLogin;
 	}
-	/**
-	 * @param i 0 for monthly, 1 for daily
-	 **/
-	public void setActualLogin(int i) {
-		this.i = i;
+	
+	
+	public void setActualLogin(ILogin ilogin) {
+		this.iLogin = ilogin;
 	}
 	@Override
 	public void setUsernameI(String username) {
-		for (ILogin iLogin : logins) {
 			iLogin.setUsernameI(username);
-		}
+		
 	}
 
 	@Override
 	public void setPasswordI(String password) {
-		for (ILogin iLogin : logins) {
 			iLogin.setPasswordI(password);
-		}
+		
 	}
 
 	public String getUsername() {
@@ -123,15 +103,6 @@ public class LoginProxy implements ILogin, Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public LoginDailyBean getLdb() {
-		return ldb;
-	}
-	
-	public LoginMonthlyBean getLmb() {
-		return lmb;
-	}
-	
 	
 
 }

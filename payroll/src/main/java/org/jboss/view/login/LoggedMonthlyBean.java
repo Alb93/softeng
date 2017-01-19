@@ -24,6 +24,7 @@ public class LoggedMonthlyBean implements Serializable, ILogout {
 	
     @PostConstruct
 	public void init() {
+		loginProxy.setActualLogin(javax.enterprise.inject.spi.CDI.current().select(LoginMonthlyBean.class).get());
     	showEmp();
     }
     
@@ -44,7 +45,7 @@ public class LoggedMonthlyBean implements Serializable, ILogout {
 
 	@Override
 	public String logout() {
-		loginProxy.getLmb().setEmpl(new MonthlyEmployeeWithSales());
+		((LoginMonthlyBean)loginProxy.getActualLogin()).setEmpl(new MonthlyEmployeeWithSales());
 		return "success";
 	}
     

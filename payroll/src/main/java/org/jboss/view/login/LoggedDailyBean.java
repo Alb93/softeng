@@ -20,6 +20,7 @@ public class LoggedDailyBean implements Serializable, ILogout {
 	
     @PostConstruct
 	public void init() {
+		loginProxy.setActualLogin(javax.enterprise.inject.spi.CDI.current().select(LoginDailyBean.class).get());
         showEmp();
     }
     
@@ -40,7 +41,7 @@ public class LoggedDailyBean implements Serializable, ILogout {
 
 	@Override
 	public String logout() {
-		loginProxy.getLdb().setEmpl(new DailyEmployee());
+		((LoginDailyBean) loginProxy.getActualLogin()).setEmpl(new DailyEmployee());
 		return "success";
 	}
 	
