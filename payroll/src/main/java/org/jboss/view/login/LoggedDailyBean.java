@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -43,6 +42,10 @@ public class LoggedDailyBean implements Serializable, ILogout {
 	public String logout() {
 		loginProxy.getLdb().setEmpl(new DailyEmployee());
 		return "success";
+	}
+	
+	public LoginProxy getLoginProxy() {
+		return loginProxy;
 	}
     
     

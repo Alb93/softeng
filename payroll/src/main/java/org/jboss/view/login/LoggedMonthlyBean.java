@@ -19,14 +19,12 @@ public class LoggedMonthlyBean implements Serializable, ILogout {
 	
 	@Inject
 	private PayrollController payrollController;
-	
+	@Inject
 	private LoginProxy loginProxy;
 	
     @PostConstruct
 	public void init() {
-    	FacesContext context = FacesContext.getCurrentInstance();
-        loginProxy = (LoginProxy) context.getApplication().evaluateExpressionGet(context, "#{loginProxy}", LoginProxy.class);
-        showEmp();
+    	showEmp();
     }
     
     private MonthlyEmployeeWithSales empl;

@@ -58,7 +58,7 @@ public class LoginProxy implements ILogin, Serializable {
 	@Override
 	public String checkLogin() {
 		init();
-		i = 0;
+		//i = 0;
 		setUsernameI(username);
 		setPasswordI(password);
 		for (ILogin iLogin : logins) {
@@ -88,7 +88,12 @@ public class LoginProxy implements ILogin, Serializable {
 		System.out.println("GET ACT = "+i);
 		return logins.get(i);
 	}
-
+	/**
+	 * @param i 0 for monthly, 1 for daily
+	 **/
+	public void setActualLogin(int i) {
+		this.i = i;
+	}
 	@Override
 	public void setUsernameI(String username) {
 		for (ILogin iLogin : logins) {
