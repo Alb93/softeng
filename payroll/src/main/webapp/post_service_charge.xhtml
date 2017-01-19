@@ -16,7 +16,9 @@
 			<f:facet name="options">
 				<h:outputText style="margin-right:10px"
 					value="Union: #{loggedUnionBean.u.username}" />
-				
+				<p:commandButton id="logout"
+					action="#{sessionBean.performLogout(loggedUnionBean)}" value="Logout"
+					styleClass="register" style="margin-right:10px"/>
 			</f:facet>
 		</p:menubar>
 
